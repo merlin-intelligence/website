@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merlin Intelligence — Building knowledge agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── Tokens ─────────────────────────────────────── */
+:root {
+  --bg:     #F0ECE6;
+  --ink:    #14120F;
+  --gold:   #A27844;
+  --rule:   #C3B9AC;
+  --light:  #8A7F74;
+  --pale:   #F7F4F0;
+  --dark:   #1E1A16;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ─────────────────────────────────────── */
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.wrap--wide {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ── Nav ────────────────────────────────────────── */
+nav {
+  padding: 1.6rem 0 1.4rem;
+  border-bottom: 0.5px solid var(--rule);
+}
+
+nav .wrap--wide {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--light);
+  letter-spacing: 0.04em;
+}
+
+/* ── Hero ───────────────────────────────────────── */
+.hero {
+  padding: 6rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle diagonal thread lines — the signature element */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -62deg,
+    transparent,
+    transparent 80px,
+    rgba(162,120,68,0.055) 80px,
+    rgba(162,120,68,0.055) 80.5px
+  );
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--gold);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  margin-bottom: 1.8rem;
+}
+
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.14;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+  max-width: 640px;
+}
+
+.hero-headline em {
+  font-style: italic;
+  color: var(--ink);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--light);
+  max-width: 520px;
+  line-height: 1.65;
+  margin-bottom: 2.8rem;
+}
+
+.hero-rule {
+  width: 48px;
+  height: 1.5px;
+  background: var(--gold);
+  margin-bottom: 2.8rem;
+}
+
+/* ── Section label system ───────────────────────── */
+.sec-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.9rem;
+  display: block;
+}
+
+/* ── Sections ───────────────────────────────────── */
+section {
+  padding: 4.5rem 0;
+  border-top: 0.5px solid var(--rule);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.55rem, 3vw, 2.0rem);
+  font-weight: 400;
+  line-height: 1.22;
+  margin-bottom: 1.6rem;
+  color: var(--ink);
+}
+
+.section-title em { font-style: italic; }
+
+p { margin-bottom: 1.1rem; }
+p:last-child { margin-bottom: 0; }
+
+/* ── Pull quote / sidecard ──────────────────────── */
+.sidecard {
+  border-left: 2px solid var(--gold);
+  padding: 0.8rem 0 0.8rem 1.4rem;
+  margin: 2rem 0;
+  color: var(--ink);
+  font-style: italic;
+  font-size: 1.0rem;
+  line-height: 1.65;
+}
+
+.sidecard strong { font-style: normal; }
+
+/* ── References list ─────────────────────────────── */
+.refs {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.74rem;
+  color: var(--light);
+  line-height: 1.9;
+}
+
+.refs li {
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+}
+
+.refs em { font-style: italic; color: var(--ink); }
+
+/* ── Three-layer diagram ────────────────────────── */
+.layers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  margin: 2.4rem 0;
+  border: 0.5px solid var(--rule);
+}
+
+.layer {
+  padding: 1.6rem 1.4rem;
+  border-right: 0.5px solid var(--rule);
+  position: relative;
+}
+
+.layer:last-child { border-right: none; }
+
+.layer-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.layer-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  color: var(--ink);
+}
+
+.layer-body {
+  font-size: 0.88rem;
+  color: var(--light);
+  line-height: 1.58;
+  margin: 0;
+}
+
+/* ── Eigenmind block ────────────────────────────── */
+.eigenmind-block {
+  background: var(--dark);
+  padding: 2.8rem 3rem;
+  margin: 2.4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.eigenmind-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -62deg,
+    transparent,
+    transparent 60px,
+    rgba(162,120,68,0.07) 60px,
+    rgba(162,120,68,0.07) 60.5px
+  );
+}
+
+.eigenmind-block .sec-label { color: var(--gold); position: relative; }
+
+.eigenmind-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #F0ECE6;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.eigenmind-title em { font-style: italic; }
+
+.eigenmind-body {
+  color: #A89E94;
+  font-size: 0.95rem;
+  line-height: 1.68;
+  max-width: 560px;
+  position: relative;
+  margin-bottom: 1.6rem;
+}
+
+.eigenmind-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.70rem;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  position: relative;
+  border-bottom: 0.5px solid var(--gold);
+  padding-bottom: 0.1rem;
+  transition: opacity 0.2s;
+}
+
+.eigenmind-link:hover { opacity: 0.72; }
+
+/* ── Team grid ──────────────────────────────────── */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 2rem;
+  border: 0.5px solid var(--rule);
+}
+
+.team-member {
+  padding: 1.6rem 1.4rem;
+  border-right: 0.5px solid var(--rule);
+}
+
+.team-member:last-child { border-right: none; }
+
+.member-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.0rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--ink);
+}
+
+.member-role {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.member-bio {
+  font-size: 0.85rem;
+  color: var(--light);
+  line-height: 1.58;
+  margin: 0;
+}
+
+/* ── Engagement terms ───────────────────────────── */
+.terms-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 0;
+  border-top: 0.5px solid var(--rule);
+  padding: 1.0rem 0;
+  align-items: baseline;
+}
+
+.terms-row:last-child { border-bottom: 0.5px solid var(--rule); }
+
+.terms-key {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding-right: 1.5rem;
+}
+
+.terms-val {
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.58;
+}
+
+/* ── Contact ────────────────────────────────────── */
+.contact-section {
+  background: var(--dark);
+  padding: 5rem 0;
+}
+
+.contact-section .sec-label { color: var(--gold); }
+
+.contact-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 400;
+  color: #F0ECE6;
+  line-height: 1.2;
+  margin-bottom: 1.4rem;
+  max-width: 500px;
+}
+
+.contact-headline em { font-style: italic; }
+
+.contact-email {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  border-bottom: 0.5px solid var(--gold);
+  padding-bottom: 0.15rem;
+  transition: opacity 0.2s;
+}
+
+.contact-email:hover { opacity: 0.72; }
+
+/* ── Footer ─────────────────────────────────────── */
+footer {
+  background: var(--dark);
+  border-top: 0.5px solid rgba(195,185,172,0.2);
+  padding: 1.6rem 0;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem;
+  color: #5A544E;
+  letter-spacing: 0.04em;
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 640px) {
+  .layers { grid-template-columns: 1fr; }
+  .layer { border-right: none; border-bottom: 0.5px solid var(--rule); }
+  .layer:last-child { border-bottom: none; }
+
+  .team-grid { grid-template-columns: 1fr; }
+  .team-member { border-right: none; border-bottom: 0.5px solid var(--rule); }
+  .team-member:last-child { border-bottom: none; }
+
+  .terms-row { grid-template-columns: 1fr; gap: 0.3rem; }
+
+  .eigenmind-block { padding: 2rem 1.4rem; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="wrap--wide">
+    <a href="#" class="nav-brand">Merlin Intelligence</a>
+    <span class="nav-sub">operated by praXvalue</span>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="wrap">
+    <span class="hero-eyebrow">— Human insight · Structured knowledge · Decisive advantage</span>
+    <h1 class="hero-headline">
+      Building <em>knowledge agency</em><br>
+      for the agentic economy.
+    </h1>
+    <p class="hero-sub">
+      Firms that grow beyond their founding team face an irreducible problem:
+      the judgement that made them exceptional lives in a small number of heads.
+      We build the infrastructure that makes it transferable, scalable,
+      and resilient to the inevitable mobility of people.
+    </p>
+    <div class="hero-rule"></div>
+  </div>
+</div>
+
+<!-- ── §01 The problem ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">§ 01 · The problem</span>
+    <h2 class="section-title">Your knowledge<br><em>walks out the door.</em></h2>
+
+    <p>
+      Every firm that grows beyond its founding team confronts the same structural problem.
+      The Rolodex stays in the CRM. The analyses stay in the archive. What leaves is the
+      mental model — the taxonomy of situations, the pattern library, the sense of what
+      matters and why, the way of reading a client or a market before the numbers confirm it.
+    </p>
+
+    <div class="sidecard">
+      AI can accelerate retrieval of what is documented.
+      It cannot reconstruct what was never written down —
+      <strong>unless you build the infrastructure that captures it first.</strong>
+    </div>
+
+    <p>
+      Standard RAG systems make the archive more accessible. They do not make
+      the firm's accumulated interpretive framework transmissible. An AI that
+      has read your documents reasons from the market average. An AI that has
+      internalised your framework reasons like you.
+    </p>
+  </div>
+</section>
+
+<!-- ── §02 What we build ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">§ 02 · What we build</span>
+    <h2 class="section-title">Three layers.<br><em>One compounding asset.</em></h2>
+
+    <p>
+      Merlin Intelligence builds the knowledge infrastructure that transforms
+      a firm's accumulated expertise into a governed, living system that AI
+      can reason over — not just retrieve from.
+    </p>
+  </div>
+
+  <div class="wrap--wide">
+    <div class="layers">
+      <div class="layer">
+        <span class="layer-num">01 · CORPUS</span>
+        <div class="layer-title">What the firm has witnessed</div>
+        <p class="layer-body">
+          Documents, analyses, client materials, voice transcripts.
+          The raw material of everything else. Without it, there is
+          nothing to reason over. With it alone, there is only retrieval.
+        </p>
+      </div>
+      <div class="layer">
+        <span class="layer-num">02 · ONTOLOGY</span>
+        <div class="layer-title">What the firm knows how to think</div>
+        <p class="layer-body">
+          The causal structure of the domain — what leads to what,
+          under which conditions, in which regimes. The layer that
+          transforms a generic LLM into a firm-specific reasoning system.
+        </p>
+      </div>
+      <div class="layer">
+        <span class="layer-num">03 · REASONING</span>
+        <div class="layer-title">What the firm is learning right now</div>
+        <p class="layer-body">
+          Experiential knowledge captured continuously, feeding the
+          ontology from the inside. The layer that ensures the
+          system never stops growing — and never stops being yours.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p>
+      Ontologies are the threads that stitch together the different fabrics of an
+      organisation — contexts, teams, generations, geographies — and allow a wave
+      of strategic coherence to propagate across the whole firm without passing
+      through the hierarchy. A distributed C2 system where command is shared
+      meaning and control is encoded in the structure of knowledge itself.
+    </p>
+  </div>
+</section>
+
+<!-- ── §03 eigenmind ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">§ 03 · Open-source engine</span>
+    <h2 class="section-title"><em>eigenmind</em></h2>
+    <p>
+      Our open-source semantic intelligence engine. Built for organisations
+      that need to move beyond standard retrieval and into structured reasoning —
+      without dependency on closed AI infrastructure.
+    </p>
+  </div>
+
+  <div class="wrap--wide">
+    <div class="eigenmind-block">
+      <span class="sec-label">eigenmind · open source</span>
+      <div class="eigenmind-title">Singularities. Ontologies.<br><em>Sovereign AI.</em></div>
+      <p class="eigenmind-body">
+        eigenmind detects the concepts a corpus keeps returning to from different
+        directions — the structurally unusual, informationally dense nodes that
+        standard search misses. It extracts ontologies from text, weights
+        edges by semantic proximity, and surfaces the knowledge singularities
+        that precede change: in markets, in organisations, in domains.
+        Delivered as transferable source code under MIT licence.
+      </p>
+      <a href="https://github.com/merlin-intelligence/eigenmind"
+         class="eigenmind-link" target="_blank" rel="noopener">
+        github.com/merlin-intelligence/eigenmind →
+      </a>
+    </div>
+  </div>
+
+
+</section>
+
+<!-- ── §04 Singularities ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">§ 04 · Singularities</span>
+    <h2 class="section-title">A mathematics<br><em>of weak signals.</em></h2>
+
+    <p>
+      Most of what determines whether an organisation thrives or is blindsided
+      does not live in its dominant narrative. It lives at the margins —
+      in the small number of concepts that keep reappearing from unrelated
+      directions, that connect domains nobody thought were connected, that
+      carry disproportionate structural weight relative to how often they
+      are mentioned. We call these <strong>singularities</strong>: the
+      relevant-but-not-obvious nodes of a knowledge structure.
+    </p>
+
+    <p>
+      A singularity is not a prediction. It is a structural property —
+      computable, auditable, and falsifiable — of the graph that represents
+      what an organisation knows.
+    </p>
+  </div>
+
+  <div class="wrap--wide">
+    <div class="layers">
+      <div class="layer">
+        <span class="layer-num">A · SEMANTIC GRAPH</span>
+        <div class="layer-title">Where the corpus speaks</div>
+        <p class="layer-body">
+          Documents, transcripts and notes embedded and connected by
+          semantic proximity. Singularities here are nodes that bridge
+          otherwise disconnected clusters of meaning — ideas that keep
+          surfacing across unrelated conversations without ever being
+          named as a single concept.
+        </p>
+      </div>
+      <div class="layer">
+        <span class="layer-num">B · ONTOLOGY GRAPH</span>
+        <div class="layer-title">Where causality lives</div>
+        <p class="layer-body">
+          Typed entities and causal relations — what triggers what, under
+          which regime. Singularities here are causal pivots: nodes whose
+          position governs how a shock propagates through the rest of
+          the structure, often invisible until the regime that activates
+          them occurs.
+        </p>
+      </div>
+      <div class="layer">
+        <span class="layer-num">A ∪ B · COMBINED</span>
+        <div class="layer-title">Where both align</div>
+        <p class="layer-body">
+          The union graph carries both semantic proximity and causal
+          typing on its edges. Singularities computed here are the
+          strongest signal class: structurally marginal in the corpus,
+          yet causally central in the domain model — exactly the
+          combination that precedes regime shifts.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p>
+      Computing singularities is a graph-theoretic problem. We use spectral
+      methods — the eigenvectors of the graph Laplacian decompose a corpus
+      into clusters at multiple scales — combined with information-centrality
+      measures such as the Lovász number and ℓ<sup>∞</sup> bottleneck geometry,
+      which identify nodes that are simultaneously marginal in degree and
+      critical in connectivity. In financial terms: the events that connect
+      markets which are not normally correlated, before the correlation
+      becomes obvious to everyone.
+    </p>
+
+    <div class="sidecard">
+      A singularity is not where the crowd is looking.
+      <strong>It is where the structure says the crowd will end up looking.</strong>
+    </div>
+
+    <p>
+      This is what makes the approach relevant to two concepts that have
+      become central to risk thinking over the last two decades: the
+      <strong>Black Swan</strong> — a high-impact event so far outside the
+      model that it was, by construction, unforeseeable — and the
+      <strong>Grey Rhino</strong> — a high-probability, high-impact threat
+      that is visible, well-documented, and persistently ignored until it
+      is unavoidable.
+    </p>
+
+    <p>
+      Eigenmind does not claim to predict Black Swans — by definition,
+      a genuine Black Swan sits outside any model, including this one.
+      What it does is shrink the space of events that <em>feel</em> like
+      Black Swans but are, on inspection, Grey Rhinos that the
+      organisation's own knowledge already contained the means to see.
+      A singularity that has been visible in the graph for months,
+      connecting domains an organisation already has expertise in,
+      is a Grey Rhino made computable — and therefore actionable,
+      while there is still time to act.
+    </p>
+
+    <ul class="refs">
+      <li>Taleb, N. N. (2007). <em>The Black Swan: The Impact of the Highly Improbable.</em> Random House.</li>
+      <li>Wucker, M. (2016). <em>The Gray Rhino: How to Recognize and Act on the Obvious Dangers We Ignore.</em> St. Martin's Press.</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ── §05 How we work ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">§ 05 · Engagement model</span>
+    <h2 class="section-title">Embedded partnership,<br><em>not consulting.</em></h2>
+
+    <p>
+      MI works alongside organisations as an embedded AI and knowledge R&amp;D
+      partner. We transfer capability iteratively — code, know-how, and methodology —
+      rather than producing reports. At the end of an engagement, the client owns
+      the ontology, the source code, and the intellectual architecture. Not a dependency.
+    </p>
+
+    <div class="terms-row">
+      <span class="terms-key">Weekly cadence</span>
+      <span class="terms-val">Structured review session + dedicated technical transfer time</span>
+    </div>
+    <div class="terms-row">
+      <span class="terms-key">Deliverables</span>
+      <span class="terms-val">Open-source code (MIT), domain ontologies, knowledge maps, monthly technical notes</span>
+    </div>
+    <div class="terms-row">
+      <span class="terms-key">Infrastructure</span>
+      <span class="terms-val">Sovereign — deployed on client systems, open-source LLMs, no US hyperscaler dependency for sensitive data</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<div class="contact-section">
+  <div class="wrap">
+    <span class="sec-label">§ 06 · Get in touch</span>
+    <h2 class="contact-headline">
+      Build the knowledge<br><em>infrastructure your firm deserves.</em>
+    </h2>
+    <a href="mailto:marion.schaeffer@merlin-intelligence.eu" class="contact-email">
+      marion.schaeffer@merlin-intelligence.eu
+    </a>
+    <br><br>
+    <a href="mailto:francois.oustry@merlin-intelligence.eu" class="contact-email">
+      francois.oustry@merlin-intelligence.eu
+    </a>
+  </div>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="wrap--wide">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Merlin Intelligence — operated by praXvalue</span>
+      <span class="footer-copy">
+        <a href="https://github.com/merlin-intelligence/eigenmind"
+           style="color: #5A544E; text-decoration: none;"
+           target="_blank" rel="noopener">
+          github / eigenmind
+        </a>
+        &nbsp;|&nbsp;
+        <a href="legal-notice.html"
+           style="color: #5A544E; text-decoration: none;">
+          legal notice
+        </a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
