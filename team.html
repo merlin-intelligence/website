@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Merlin Intelligence — Founding Team. Marion Schaeffer, François Oustry, Margaux Lherron-Desnos.">
+<title>Merlin Intelligence — Founding Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:     #F0ECE6;
+  --ink:    #14120F;
+  --gold:   #A27844;
+  --rule:   #C3B9AC;
+  --light:  #8A7F74;
+  --pale:   #F7F4F0;
+  --dark:   #1E1A16;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap      { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+.wrap--wide{ max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+
+/* Nav */
+nav {
+  padding: 1.6rem 0 1.4rem;
+  border-bottom: 0.5px solid var(--rule);
+}
+nav .wrap--wide {
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.nav-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; color: var(--ink);
+  text-decoration: none; text-transform: uppercase;
+}
+.nav-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--light); letter-spacing: 0.04em;
+}
+
+/* Hero */
+.hero {
+  padding: 6.5rem 0 5.5rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -62deg,
+    transparent, transparent 80px,
+    rgba(162,120,68,0.055) 80px,
+    rgba(162,120,68,0.055) 80.5px
+  );
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; color: var(--gold);
+  letter-spacing: 0.10em; text-transform: uppercase;
+  margin-bottom: 2rem; display: block;
+}
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 400; line-height: 1.12;
+  color: var(--ink); margin-bottom: 1.4rem;
+  max-width: 680px;
+}
+.hero-headline em { font-style: italic; }
+.hero-sub {
+  font-size: 1.0rem; color: var(--light);
+  max-width: 520px; line-height: 1.68;
+  margin-bottom: 2.8rem;
+}
+.hero-rule {
+  width: 48px; height: 1.5px;
+  background: var(--gold);
+}
+.back-link {
+  display: inline-flex; align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--light);
+  text-decoration: none; letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 0.5px solid var(--rule);
+  padding-bottom: 0.1rem;
+  margin-bottom: 2.8rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.back-link:hover { color: var(--gold); border-color: var(--gold); }
+
+/* Person sections */
+.person {
+  padding: 4.5rem 0;
+  border-top: 0.5px solid var(--rule);
+}
+.person-meta {
+  margin-bottom: 2rem;
+}
+.person-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.7rem, 3.5vw, 2.2rem);
+  font-weight: 400; line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 0.55rem;
+}
+.person-name em { font-style: italic; }
+.person-role {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--gold);
+  letter-spacing: 0.09em; text-transform: uppercase;
+}
+.person-links {
+  margin-top: 0.7rem;
+}
+.li-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; color: var(--light);
+  text-decoration: none; letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.li-link:hover { color: var(--gold); }
+.li-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+.person-rule {
+  width: 32px; height: 1px;
+  background: var(--gold);
+  margin: 1.2rem 0 0;
+}
+
+p { margin-bottom: 1.1rem; }
+p:last-child { margin-bottom: 0; }
+
+/* Sidecard */
+.sidecard {
+  border-left: 2px solid var(--gold);
+  padding: 0.8rem 0 0.8rem 1.4rem;
+  margin: 2.4rem 0; color: var(--ink);
+  font-style: italic; font-size: 1.0rem;
+  line-height: 1.65;
+}
+.sidecard strong { font-style: normal; }
+
+/* Footer */
+.page-footer {
+  background: var(--dark);
+  border-top: 0.5px solid rgba(195,185,172,0.15);
+  padding: 4rem 0;
+}
+.footer-back {
+  display: inline-flex; align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--gold);
+  text-decoration: none; letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 0.5px solid var(--gold);
+  padding-bottom: 0.1rem;
+  margin-top: 1.4rem;
+  transition: opacity 0.2s;
+}
+.footer-back:hover { opacity: 0.72; }
+.footer-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem; color: #5A544E;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap--wide">
+    <a href="index.html" class="nav-brand">Merlin Intelligence</a>
+    <span class="nav-sub">operated by praXvalue</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="wrap">
+    <a href="index.html" class="back-link">← merlin-intelligence.eu</a>
+    <span class="hero-eyebrow">— The people behind the work</span>
+    <h1 class="hero-headline">
+      Founding<br><em>Team</em>
+    </h1>
+    <p class="hero-sub">
+      Merlin Intelligence holds that value resides primarily in people —
+      in their experience, their discernment, and their capacity to act
+      together. This is who we are.
+    </p>
+    <div class="hero-rule"></div>
+  </div>
+</div>
+
+<!-- Marion Schaeffer -->
+<section class="person">
+  <div class="wrap">
+    <div class="person-meta">
+      <div class="person-name">Marion Schaeffer</div>
+      <div class="person-role">Co-founder · Knowledge Architecture &amp; AI</div>
+      <div class="person-links">
+        <a href="https://www.linkedin.com/in/marion-schaeffer-33618810b/" class="li-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="person-rule"></div>
+    </div>
+
+    <p>
+      Marion works at the intersection of applied mathematics, artificial intelligence,
+      and cognitive science. She holds an engineering degree in Applied Mathematics
+      and a PhD in Artificial Intelligence, complemented by academic training in
+      cognitive sciences.
+    </p>
+
+    <p>
+      Her work is concerned with a question that sits at the heart of Merlin
+      Intelligence: how does knowledge acquire structure? This leads her to
+      knowledge representation — graphs, ontologies, the formal architectures
+      through which meaning becomes computable — and to the modern systems that
+      operate within those architectures: large language models, retrieval-augmented
+      generation, agentic pipelines. She is interested in where these two traditions
+      meet, and where they diverge.
+    </p>
+
+    <p>
+      A particular focus of her research is Ontology Learning — the methods
+      by which conceptual structure can be extracted, induced, and refined
+      directly from data and language, rather than authored by hand. It is
+      this line of work that allows cognitive assets to be built and enriched
+      at the pace experiential knowledge actually demands.
+    </p>
+
+    <p>
+      She pays particular attention to questions of explainability — to the conditions
+      under which an AI system can be understood, audited, and held to account.
+      This is not a constraint she works around. It is a design principle.
+    </p>
+
+    <p>
+      Her career spans academic research, including publications through public
+      and private collaborations, and applied industry work supporting organisations
+      in designing and delivering AI-driven projects. She brings both the rigour
+      of the researcher and the practical judgment of the practitioner.
+    </p>
+
+    <div class="sidecard">
+      The question is not whether a system produces the right answer.
+      <strong>The question is whether we can understand why —
+      and correct it when we cannot.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- François Oustry -->
+<section class="person">
+  <div class="wrap">
+    <div class="person-meta">
+      <div class="person-name">François Oustry</div>
+      <div class="person-role">Co-founder · Decision Intelligence &amp; Sovereign AI</div>
+      <div class="person-links">
+        <a href="https://fr.linkedin.com/in/oustry" class="li-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="person-rule"></div>
+    </div>
+
+    <p>
+      François is an applied mathematician and entrepreneur. His formation is in
+      optimisation — convex, robust, and spectral — trained at ENSTA Paris,
+      with a PhD funded by the DGA (French Defence Procurement Agency) and a
+      postdoctoral fellowship at NYU's Courant Institute. He was then recruited
+      as a researcher at INRIA before turning toward practice.
+    </p>
+
+    <p>
+      Over three decades, he has designed analytical systems for institutions
+      operating in conditions of genuine uncertainty: global financial
+      institutions, sovereign organisations, strategic operators navigating
+      complex geopolitical environments. He founded Raise Partner, a financial
+      risk-management technology firm, and later co-founded Suzugia, a
+      quantitative and NLP-driven hedge fund acquired by AllianceBernstein.
+    </p>
+
+    <p>
+      What connects these engagements is a consistent preoccupation: decision-making
+      when the model is incomplete, the environment is adversarial, and the cost
+      of error is asymmetric. The answer is never more data. It is better
+      structure — tighter representations, more honest uncertainty, and the
+      capacity to act on weak signals before they become legible to everyone.
+    </p>
+
+    <p>
+      He is currently CEO of praXvalue. <em>Eigenmind</em>, the open-source
+      intelligence engine he originated, has since grown into a fully
+      independent, open-source resource — and a key capability within Merlin
+      Intelligence — supporting negotiators, defence communities, and
+      organisations facing heightened geopolitical uncertainty.
+    </p>
+
+    <p>
+      He is also in charge of the "AI Do It Yourself" practice at Orson.ai,
+      a strategic advisory firm — extending the same conviction that drives
+      his work at Merlin Intelligence: that organisations gain the most when
+      they are equipped to build and own their own intelligence, rather than
+      rent it.
+    </p>
+
+    <div class="sidecard">
+      A system designed for uncertainty does not eliminate it.
+      <strong>It makes the cost of being wrong survivable —
+      and the advantage of being early computable.</strong>
+    </div>
+  </div>
+</section>
+
+
+<div class="page-footer">
+  <div class="wrap">
+    <p class="footer-label">Merlin Intelligence · Founding Team · 2026</p>
+    <a href="index.html" class="footer-back">← Back to merlin-intelligence.eu</a>
+  </div>
+</div>
+
+</body>
+</html>

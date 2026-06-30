@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Merlin Intelligence — Singularities, Cognitive Assets and Value Creation. A founding position paper on experiential knowledge, push prospection, and the architecture of cognitive representations.">
+<title>Merlin Intelligence — Singularities, Cognitive Assets and Value Creation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:     #F0ECE6;
+  --ink:    #14120F;
+  --gold:   #A27844;
+  --rule:   #C3B9AC;
+  --light:  #8A7F74;
+  --pale:   #F7F4F0;
+  --dark:   #1E1A16;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+.wrap--wide { max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+nav {
+  padding: 1.6rem 0 1.4rem;
+  border-bottom: 0.5px solid var(--rule);
+}
+nav .wrap--wide {
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.nav-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; color: var(--ink);
+  text-decoration: none; text-transform: uppercase;
+}
+.nav-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--light); letter-spacing: 0.04em;
+}
+.hero {
+  padding: 6.5rem 0 5.5rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -62deg,
+    transparent, transparent 80px,
+    rgba(162,120,68,0.055) 80px,
+    rgba(162,120,68,0.055) 80.5px
+  );
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; color: var(--gold);
+  letter-spacing: 0.10em; text-transform: uppercase;
+  margin-bottom: 2rem; display: block;
+}
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 400; line-height: 1.12;
+  color: var(--ink); margin-bottom: 1.4rem;
+  max-width: 680px;
+}
+.hero-headline em { font-style: italic; }
+.hero-rule {
+  width: 48px; height: 1.5px;
+  background: var(--gold);
+  margin-top: 2rem;
+}
+.back-link {
+  display: inline-flex; align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--light);
+  text-decoration: none; letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 0.5px solid var(--rule);
+  padding-bottom: 0.1rem;
+  margin-bottom: 2.8rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.back-link:hover { color: var(--gold); border-color: var(--gold); }
+section {
+  padding: 4.5rem 0;
+  border-top: 0.5px solid var(--rule);
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.55rem, 3vw, 2.0rem);
+  font-weight: 400; line-height: 1.22;
+  margin-bottom: 1.6rem; color: var(--ink);
+}
+.subsection-title {
+  font-family: 'Lora', serif;
+  font-size: 1.05rem; font-style: italic;
+  color: var(--gold);
+  margin: 2.2rem 0 1rem;
+}
+p { margin-bottom: 1.1rem; }
+p:last-child { margin-bottom: 0; }
+ul.mi-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.2rem;
+}
+ul.mi-list li {
+  padding: 0.25rem 0 0.25rem 1.4rem;
+  position: relative;
+  font-size: 0.97rem;
+  line-height: 1.65;
+}
+ul.mi-list li::before {
+  content: '•';
+  position: absolute; left: 0;
+  color: var(--gold);
+}
+.sidecard {
+  border-left: 2px solid var(--gold);
+  padding: 0.8rem 0 0.8rem 1.4rem;
+  margin: 2.4rem 0; color: var(--ink);
+  font-style: italic; font-size: 1.0rem;
+  line-height: 1.65;
+}
+.math-line {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.80rem; color: var(--ink);
+  margin: 1.8rem 0;
+  padding: 1.0rem 1.4rem;
+  border-left: 2px solid var(--gold);
+  background: var(--pale);
+  overflow-x: auto;
+  line-height: 1.8;
+}
+.math-caption {
+  font-size: 0.92rem;
+  color: var(--light);
+  margin-top: -0.8rem;
+  margin-bottom: 1.2rem;
+}
+.manifesto-footer {
+  background: var(--dark);
+  border-top: 0.5px solid rgba(195,185,172,0.15);
+  padding: 4rem 0;
+}
+.footer-back {
+  display: inline-flex; align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--gold);
+  text-decoration: none; letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 0.5px solid var(--gold);
+  padding-bottom: 0.1rem;
+  margin-top: 1.4rem;
+  transition: opacity 0.2s;
+}
+.footer-back:hover { opacity: 0.72; }
+.footer-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem; color: #5A544E;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+@media (max-width: 640px) {
+  .math-line { font-size: 0.68rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap--wide">
+    <a href="index.html" class="nav-brand">Merlin Intelligence</a>
+    <span class="nav-sub">operated by praXvalue</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="wrap">
+    <a href="index.html" class="back-link">← merlin-intelligence.eu</a>
+    <span class="hero-eyebrow">— Position paper · Merlin Intelligence · 2026</span>
+    <h1 class="hero-headline">
+      Singularities, Cognitive Assets<br><em>and Value Creation</em>
+    </h1>
+    <div class="hero-rule"></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">A Founding Hypothesis</h2>
+    <p>Most organisations consider that their primary assets reside in their data, processes, technologies, or intellectual property.</p>
+    <p>Merlin Intelligence explores a different hypothesis.</p>
+    <p>We believe that an essential share of value creation and differentiation lies in a double singularity, both human and informational:</p>
+    <ul class="mi-list">
+      <li>the <strong>human singularity</strong>, anchored in experiential knowledge, tacit know-how, intuition, and the capacity for discernment that individuals and teams develop at the contact of reality;</li>
+      <li>the <strong>informational singularity</strong>, consisting of proprietary representations, unique knowledge configurations, and signals captured by the organisation, which escape generalist models and public databases.</li>
+    </ul>
+    <p>This double singularity forms a primary cognitive and economic asset in the emerging agentic economy. It is the real source of strategic differentiation, resilience, and adaptability for organisations.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Structuring Experiential Knowledge</h2>
+    <p>The role of Merlin Intelligence is to help organisations identify, structure, and activate this knowledge.</p>
+    <p>To this end, we develop cognitive assets:</p>
+    <ul class="mi-list">
+      <li>ontologies;</li>
+      <li>corpora;</li>
+      <li>graphs;</li>
+      <li>methods;</li>
+      <li>representation systems;</li>
+      <li>software tools.</li>
+    </ul>
+    <p>These assets make it possible to aggregate, connect, and activate knowledge for both humans and AI agents.</p>
+    <p>They also enable the identification of singularities, weak signals, and emerging configurations that often remain invisible in approaches based solely on structured data, statistics, or historical models.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Focusing Attention and Reducing Cognitive Fatigue</h2>
+    <p>In a saturated environment, human decision-making faces a new kind of cognitive fatigue, arising from two distinct sources:</p>
+    <ul class="mi-list">
+      <li>on one hand, the continuous exposure to undifferentiated streams of information to which decision-makers and citizens expose themselves;</li>
+      <li>on the other hand, the cognitive overload generated by the very use of large language models. By facilitating the launch of multiple complex tasks in parallel, these tools saturate human and discretionary decision processes with deliverables, analyses, and options. In systems that are not fully automated or systematic, this saturation becomes a risk factor in itself.</li>
+    </ul>
+    <p>Faced with this saturation, approaches based exclusively on "pull" (such as classic querying or RAG) show their limits. Although pull remains indispensable for extracting precise knowledge on demand, it carries the risk of confining the user within their existing frame of thought, without broadening their horizon, thus keeping them in their own blind spots.</p>
+    <p>The ambition of Merlin Intelligence is to structure cognitive assets to enable a selective "push" on points of attention. Rather than suffering the noise of continuous streams or relying solely on active search, the goal is to focus attention on singularities: what is highly relevant but not obvious.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">A Hierarchy of Cognitive Representations and Semantic Immersion</h2>
+    <p>Merlin Intelligence does not view ontologies, knowledge graphs and semantic graphs as competing technologies, but as complementary layers of cognitive representation.</p>
+    <p>Rather than formal set-theoretic inclusions, they represent successive levels of cognitive organization, increasing in semantic richness, connectivity and cognitive expressiveness. This graduation is formalised by the relation:</p>
+    <div class="math-line">Ontology ≺ Knowledge Graph ≺ Semantic Graph ≺ Experiential Cognitive Asset</div>
+    <p class="math-caption">where the first three levels represent formal, computable graph structures, and the fourth represents the living, non-graph cognitive envelope that encompasses and activates them.</p>
+    <ul class="mi-list">
+      <li><strong>Ontology</strong> provides the conceptual vocabulary, categories and semantic constraints that make a domain intelligible. It is the logical skeleton of knowledge.</li>
+      <li><strong>Knowledge Graph</strong> instantiates this ontology by connecting entities, facts and relationships into an explicit representation of knowledge.</li>
+      <li><strong>Semantic Graph</strong> extends these explicit relationships by integrating multiple representations, contexts, provenance, documents, reasoning patterns and heterogeneous sources of meaning.</li>
+      <li><strong>Experiential Cognitive Asset</strong> encompasses the living cognitive capability that continuously creates, enriches and interprets these representations through human experience, judgment, tacit knowledge and collective practice.</li>
+    </ul>
+    <p>These layers should therefore not be interpreted as a hierarchy of efficiency or absolute power, as they are deployed in different contexts and serve distinct purposes. Rather, they represent successive levels of cognitive organization, where the graduation is defined by the increasing cardinality of their embedded coverage — each level encompassing and integrating a broader scope of meaning, from the conceptual constraints of the ontology to the living experience of the collective.</p>
+
+    <h3 class="subsection-title">Semantic Immersion</h3>
+    <p>The semantic immersion of these structures relies on a precise mechanism: each entity or concept of the ontology and the knowledge graph has a detailed textual description. This description is vectorized (via embedding techniques) and then connected by semantic proximity to the corresponding nodes of the large global semantic graph that encompasses the others.</p>
+    <p>Thus, the ontology and the knowledge graph are not isolated structures, but subgraphs topologically immersed within the global semantic graph. This coupling allows the logical rigour of the ontology to radiate through the richness and fluidity of semantic flows.</p>
+
+    <h3 class="subsection-title">Singularity Calculation and Projective Discernment</h3>
+    <p>This architecture allows for rigorous mathematical singularity calculations (spectral, topological, and centrality-based) to be executed autonomously across the three graph layers, with their outputs ultimately projected into the experiential layer to guide human collective judgment:</p>
+    <ul class="mi-list">
+      <li><strong>At the Ontology level</strong>, the calculation identifies conceptual pivots and strategic causal variables.</li>
+      <li><strong>At the Knowledge Graph level</strong>, it reveals unusual connections, critical flows, and pivotal actors.</li>
+      <li><strong>At the Semantic Graph level</strong>, it detects weak signals and emerging themes at the periphery of the corpus.</li>
+      <li><strong>At the Experiential Cognitive Asset level</strong>, these computed topological singularities are integrated into the collective practice. They do not undergo mathematical calculation, but are translated into human discernment, focusing attention on what is highly relevant but not obvious.</li>
+    </ul>
+    <p>Finally, the cross-calculation on the union of these nested graphs makes it possible to identify the most robust class of signals: concepts that are simultaneously semantically marginal in the large global semantic graph, yet ontologically critical in the causal model.</p>
+    <p>Within Merlin Intelligence, the enduring source of value does not reside in the graphs themselves, but in the human capacity to create, interpret and continuously evolve these cognitive assets in response to an ever-changing world.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Singularities and Weak Signals</h2>
+    <p>A central conviction of Merlin Intelligence is that sustainable strategic advantages often emerge at the periphery of established systems.</p>
+    <p>Organisations, individuals, territories, or sectors develop singularities over time: unique combinations of experience, know-how, relationships, representations, and capabilities for action.</p>
+    <p>These singularities frequently constitute the real source of their differentiation, resilience, and capacity for adaptation.</p>
+    <p>By structuring experiential knowledge in the form of cognitive assets, it becomes possible to detect disruptions, opportunities, vulnerabilities, or emerging configurations earlier.</p>
+    <p>Merlin Intelligence thus seeks to develop tools and methods to make weak signals visible, which are still faint but potentially carry major strategic impacts.</p>
+    <p>The ambition is not to predict the future, but to improve our collective capacity to perceive what is emerging.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Experiential Singularities and Artificial Intelligence</h2>
+    <p>Another source of value lies in the singularities arising from experiential knowledge that has never been captured by large language models.</p>
+    <p>Generalist artificial intelligence models excel at exploiting widely distributed and publicly accessible knowledge. They possess an extremely rich representation of explicit knowledge but remain largely blind to a significant part of human and organisational experience.</p>
+    <p>The trade-offs made over the years, tacit reasoning, failures, intuitions, accumulated know-how, relationships built over time, or representations specific to an organisation often constitute sources of strategic differentiation that have never been published or integrated into large models.</p>
+    <p>Merlin Intelligence considers these experiential singularities to represent a primary cognitive asset.</p>
+    <p>One of Merlin's roles is to identify, structure, and activate this knowledge before it is lost, diluted, or reduced to more generic representations.</p>
+    <p>The ambition is not to oppose large language models but to complement them by giving them access, through adapted ontologies, graphs, corpora, and representation systems, to hitherto implicit experiential knowledge.</p>
+    <p>Thus, knowledge initially carried by individuals or collectives can become actionable by both humans and AI agents, while preserving the richness of the singularities from which they originate.</p>
+
+    <div class="sidecard">
+      Value does not reside solely in the information we possess,
+      but in our collective capacity to give it meaning,
+      to reveal the singularities it contains
+      and to transform them into action.
+    </div>
+  </div>
+</section>
+
+<div class="manifesto-footer">
+  <div class="wrap">
+    <p class="footer-label">Merlin Intelligence · Position paper · 2026</p>
+    <a href="index.html" class="footer-back">← Back to merlin-intelligence.eu</a>
+  </div>
+</div>
+
+</body>
+</html>
