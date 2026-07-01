@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Merlin Intelligence — Signal series. Qatar's structural position in the Gulf order, and what it reveals about how monetary transitions are actually read.">
+<title>Merlin Intelligence — Qatar and the Geometry of Gulf Order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:     #F0ECE6;
+  --ink:    #14120F;
+  --gold:   #A27844;
+  --rule:   #C3B9AC;
+  --light:  #8A7F74;
+  --pale:   #F7F4F0;
+  --dark:   #1E1A16;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap       { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+.wrap--wide { max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+
+nav {
+  padding: 1.6rem 0 1.4rem;
+  border-bottom: 0.5px solid var(--rule);
+}
+nav .wrap--wide {
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.nav-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; color: var(--ink);
+  text-decoration: none; text-transform: uppercase;
+}
+.nav-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--light); letter-spacing: 0.04em;
+}
+.nav-sub a { color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem; }
+
+.hero {
+  padding: 5.5rem 0 4rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -62deg,
+    transparent, transparent 80px,
+    rgba(162,120,68,0.055) 80px,
+    rgba(162,120,68,0.055) 80.5px
+  );
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; color: var(--gold);
+  letter-spacing: 0.10em; text-transform: uppercase;
+  margin-bottom: 2rem; display: block;
+}
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.0rem, 4.6vw, 3.0rem);
+  font-weight: 400; line-height: 1.16;
+  color: var(--ink); margin-bottom: 1.4rem;
+  max-width: 620px;
+}
+.hero-headline em { font-style: italic; }
+.hero-sub {
+  font-size: 1.0rem; color: var(--light);
+  max-width: 540px; line-height: 1.68;
+  margin-bottom: 1.8rem;
+}
+.hero-meta {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; color: var(--light);
+  letter-spacing: 0.04em; text-transform: uppercase;
+  margin-bottom: 1.6rem;
+}
+.hero-rule { width: 48px; height: 1.5px; background: var(--gold); }
+.back-link {
+  display: inline-flex; align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--light);
+  text-decoration: none; letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 0.5px solid var(--rule);
+  padding-bottom: 0.1rem;
+  margin-bottom: 2.4rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.back-link:hover { color: var(--gold); border-color: var(--gold); }
+
+section { padding: 3.2rem 0; }
+section + section { border-top: 0.5px solid var(--rule); }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 2.6vw, 1.6rem);
+  font-weight: 400; line-height: 1.25;
+  margin-bottom: 1.3rem; color: var(--ink);
+}
+p { margin-bottom: 1.05rem; }
+p:last-child { margin-bottom: 0; }
+p a, .statdesc a {
+  color: var(--miblue, #14120F);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 2px;
+}
+p a:hover, .statdesc a:hover { text-decoration-color: var(--gold); }
+.statsource a {
+  color: var(--light);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+}
+.statsource a:hover { color: var(--gold); }
+
+.sidecard {
+  border-left: 2px solid var(--gold);
+  padding: 0.8rem 0 0.8rem 1.4rem;
+  margin: 2.2rem 0; color: var(--ink);
+  font-style: italic; font-size: 1.0rem;
+  line-height: 1.65;
+}
+.sidecard strong { font-style: normal; }
+
+.statbox {
+  border: 0.5px solid var(--rule);
+  margin: 2rem 0;
+}
+.statrow {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0;
+  border-bottom: 0.5px solid var(--rule);
+  padding: 1rem 1.3rem;
+  align-items: baseline;
+}
+.statrow:last-child { border-bottom: none; }
+.statnum {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.15rem; font-weight: 700;
+  color: var(--gold);
+}
+.statdesc {
+  font-size: 0.88rem; color: var(--light); line-height: 1.55;
+}
+.statsource {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem; color: var(--light);
+  letter-spacing: 0.02em; margin-top: 0.3rem; display: block;
+}
+
+.disclosure {
+  font-size: 0.86rem; color: var(--light);
+  border-top: 0.5px solid var(--rule);
+  padding-top: 1.6rem; margin-top: 0.5rem;
+  line-height: 1.6;
+}
+
+.diagram-box {
+  margin: 2.4rem 0;
+}
+.diagram-caption {
+  font-size: 0.88rem; color: var(--light);
+  line-height: 1.6; margin-top: 1.1rem;
+}
+
+.page-footer {
+  background: var(--dark);
+  border-top: 0.5px solid rgba(195,185,172,0.15);
+  padding: 4rem 0;
+}
+.footer-back {
+  display: inline-flex; align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--gold);
+  text-decoration: none; letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 0.5px solid var(--gold);
+  padding-bottom: 0.1rem;
+  margin-top: 1.4rem;
+  transition: opacity 0.2s;
+}
+.footer-back:hover { opacity: 0.72; }
+.footer-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem; color: #5A544E;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .statrow { grid-template-columns: 1fr; gap: 0.3rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap--wide">
+    <a href="index.html" class="nav-brand">Merlin Intelligence</a>
+    <span class="nav-sub"><a href="signals.html">Signal Series</a> &nbsp;·&nbsp; operated by praXvalue</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="wrap">
+    <a href="index.html" class="back-link">← merlin-intelligence.eu</a>
+    <span class="hero-eyebrow">— Signal Series · No. 1 · Gulf Order</span>
+    <h1 class="hero-headline">
+      Qatar and the<br><em>Geometry of Gulf Order</em>
+    </h1>
+    <p class="hero-sub">
+      On 11 June 2026, Qatari mediators were stranded on a Tehran tarmac,
+      attempting to halt an escalating US-Iran exchange of strikes.
+      That scene is a window into something structural — a position no
+      other Gulf state currently holds, and what it reveals about how
+      power in the region is actually organised.
+    </p>
+    <div class="hero-meta">Merlin Intelligence · June 2026</div>
+    <div class="hero-rule"></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">On 11 June 2026, a Plane Was Stranded on a Tehran Tarmac</h2>
+
+    <p>
+      As the United States and Iran exchanged escalating strikes on 11 June
+      2026, a plane carrying Qatari mediators sat on the tarmac at Tehran
+      airport. The delegation had been working through the night, attempting
+      to halt what looked like a return to all-out war. The scene, reported
+      by PBS News and corroborated by diplomatic sources briefed on the
+      talks, captured something in a single image: <a href="https://www.pbs.org/newshour/world/mediators-worked-through-threats-and-strikes-to-broker-the-u-s-iran-deal-and-challenges-remain" target="_blank" rel="noopener">Qatar, under direct
+      fire from Iran, was still the indispensable interlocutor between
+      Washington and Tehran</a>.
+    </p>
+
+    <p>
+      Qatar had publicly said it would not mediate while Iranian strikes
+      continued on its territory. Yet in mid-May, when both sides needed
+      the deadlock broken, they turned to Doha. Working alongside Pakistan,
+      Qatari officials resumed quiet travel to Tehran. On 17 June 2026, the
+      US-Iran Memorandum of Understanding was signed — with Qatar listed,
+      alongside Pakistan, as a co-mediator. An August deadline has since
+      been set for the broader nuclear agreement, with Qatar central to its
+      implementation. On 30 June, Qatar's prime minister met US envoys
+      Steve Witkoff and Jared Kushner in Doha to review the state of the
+      negotiations (<a href="https://www.bbc.com/news/articles/cpd38x1dy4no" target="_blank" rel="noopener">BBC</a>;
+      <a href="https://www.cnn.com/2026/06/30/world/live-news/iran-war-trump" target="_blank" rel="noopener">CNN</a>).
+    </p>
+
+    <p>
+      The financial dimension is no less striking. Approximately $6 billion
+      in frozen Iranian assets — linked to Iranian oil sales to South Korea
+      and moved to Qatari accounts under a 2023 prisoner swap — sit at the
+      centre of the negotiation over sanctions relief
+      (<a href="https://www.iranintl.com/en/202605252488" target="_blank" rel="noopener">Iran International</a>).
+      The Strait of Hormuz, closed by Iran at the start of the conflict,
+      choked Qatar's own LNG exports — and yet Qatar continued mediating.
+      Qatar's constitution enshrines mediation as a pillar of its foreign
+      policy; its emir has stated publicly that Qatar will never regret
+      being a mediator
+      (<a href="https://www.csmonitor.com/World/Middle-East/2026/0518/qatar-diplomacy-mediation-iran-war-lng" target="_blank" rel="noopener">Christian Science Monitor</a>).
+    </p>
+
+    <p>
+      These events are not coincidental. They are the latest expression of
+      a structural position Qatar has built and maintained for decades —
+      one that sits at the intersection of energy markets, great-power
+      diplomacy, and regional security in a way no other Gulf state
+      currently replicates. Understanding why requires stepping back from
+      the immediate crisis and asking how Qatar came to occupy this role
+      in the first place.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">A Realignment Already Underway</h2>
+
+    <p>
+      Since 2024, the Gulf's relationship to the global monetary system has
+      been shifting in ways worth understanding precisely. In June 2024, the
+      US-Saudi Joint Commission on Economic Cooperation — established on
+      8 June 1974 to coordinate military and economic cooperation in the
+      wake of the OPEC oil embargo, and instrumental in building the
+      recycling of petrodollars into US Treasuries —
+      lapsed without renewal
+      (<a href="https://history.state.gov/milestones/1969-1976/oil-embargo" target="_blank" rel="noopener">US Department of State, Office of the Historian</a>). Saudi Arabia has since signalled openness to pricing
+      some transactions in currencies other than the dollar, joined the
+      BRICS group of major emerging economies, and become a participant in
+      Project mBridge, a multi-country initiative exploring cross-border
+      settlement using central bank digital currencies
+      (<a href="https://www.bis.org/about/bisih/topics/cbdc/mcbdc_bridge.htm" target="_blank" rel="noopener">Bank for International Settlements</a>).
+      Saudi oil sales continue to be priced predominantly in dollars in
+      practice.
+    </p>
+
+    <p>
+      This sits inside a longer and well-documented trend. The US dollar's
+      share of global central bank reserves has declined from roughly 72%
+      in 2001 to about 57–58% today, while the share of reserves held in
+      gold has more than doubled since 2015
+      (<a href="https://www.federalreserve.gov/econres/notes/feds-notes/the-international-role-of-the-u-s-dollar-2025-edition-20250718.html" target="_blank" rel="noopener">US Federal Reserve, 2025</a>).
+      In 2024–2025, central bank gold holdings overtook US Treasury
+      holdings as a share of global reserves for the first time in roughly
+      three decades — a genuine shift in how monetary authorities are
+      hedging geopolitical risk, even as the dollar remains, by a wide
+      margin, the dominant reserve and trade-settlement currency
+      (<a href="https://www.gold.org/goldhub/data/gold-reserves-by-country" target="_blank" rel="noopener">World Gold Council</a>).
+    </p>
+
+    <p>
+      Gulf states — Saudi Arabia foremost among them — are navigating this
+      landscape by signalling diversification and building alternative
+      settlement infrastructure, while remaining deeply embedded in
+      dollar-denominated markets that show no sign of disappearing. Most
+      public commentary on this landscape concentrates on the largest, most
+      visible actors making the most visible moves. That focus, reasonable
+      as it is, can obscure actors whose importance lies less in what they
+      say than in where they sit.
+    </p>
+
+    <p>Qatar is such a case.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">A Role Without a Substitute</h2>
+
+    <p>
+      Qatar occupies a configuration in the Gulf order that none of its
+      neighbours currently replicate. It was the first Gulf state to leave
+      OPEC, in 2018 — a precedent that has since made the UAE's own 2026
+      departure from the cartel appear less anomalous, part of a pattern
+      rather than an isolated act. It has, alongside Oman, sustained a
+      working diplomatic channel to Iran that the larger Gulf states do not
+      hold in the same form. And it remains one of the world's two or three
+      largest exporters of liquefied natural gas, a position that gives it
+      a different relationship to energy markets than its oil-exporting
+      neighbours.
+    </p>
+
+    <div class="statbox">
+      <div class="statrow">
+        <div class="statnum">~20%</div>
+        <div class="statdesc">
+          of global LNG exports came from Qatar in 2025 (around 81–85 million
+          tonnes), making it the world's second-largest LNG supplier after
+          the United States, ahead of Australia.
+          <span class="statsource">Sources: <a href="https://www.iea.org/data-and-statistics/data-tools/global-lng-capacity-tracker" target="_blank" rel="noopener">International Energy Agency</a>; <a href="https://www.aljazeera.com/economy/2026/3/2/why-qatarenergys-lng-production-halt-could-shake-up-global-gas-markets" target="_blank" rel="noopener">Al Jazeera, March 2026</a></span>
+        </div>
+      </div>
+      <div class="statrow">
+        <div class="statnum">~82%</div>
+        <div class="statdesc">
+          of Qatar's LNG exports go to Asian buyers — China, Japan, India,
+          South Korea, and others — making Qatar a structurally important
+          counterparty to the same Asian economies most discussed in
+          de-dollarization scenarios.
+          <span class="statsource">Source: <a href="https://www.aljazeera.com/economy/2026/3/2/why-qatarenergys-lng-production-halt-could-shake-up-global-gas-markets" target="_blank" rel="noopener">Al Jazeera, March 2026</a></span>
+        </div>
+      </div>
+      <div class="statrow">
+        <div class="statnum">~58%</div>
+        <div class="statdesc">
+          is the US dollar's current share of global disclosed foreign
+          exchange reserves, down from roughly 72% in 2001 — the slow-moving
+          backdrop against which Gulf signalling on currency diversification
+          is taking place.
+          <span class="statsource">Sources: <a href="https://www.federalreserve.gov/econres/notes/feds-notes/the-international-role-of-the-u-s-dollar-2025-edition-20250718.html" target="_blank" rel="noopener">US Federal Reserve, 2025</a>; <a href="https://data.imf.org/en/datasets/IMF.STA:COFER" target="_blank" rel="noopener">IMF COFER</a></span>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      Individually, each of these facts is reasonably well known. Read
+      together, they describe something less commonly stated: Qatar
+      functions as a structural bridge between domains that most analytical
+      frameworks treat separately — energy markets, regional diplomacy, and
+      the precedent-setting logic of institutional exit. It is, in effect,
+      the quiet condition under which several other actors' more visible
+      moves become legible.
+    </p>
+
+    <p>
+      That position is real but not invulnerable. In March 2026, strikes on
+      Qatar's Ras Laffan LNG complex during the regional escalation forced
+      a temporary halt to roughly a fifth of the world's LNG export
+      capacity in a single event — a reminder that Qatar's energy weight
+      is also, in moments of acute regional conflict, a point of exposure
+      rather than only of advantage
+      (<a href="https://www.iea.org/data-and-statistics/data-tools/global-lng-capacity-tracker" target="_blank" rel="noopener">International Energy Agency</a>).
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Where the Method Comes In</h2>
+
+    <p>
+      This is the kind of finding that an ontology-grounded approach to
+      knowledge is built to surface. An ontology gives explicit structure
+      to a domain — the entities, the relationships, the causal links that
+      analysts and institutions formally agree matter. A semantic graph,
+      built alongside it, captures the broader and looser texture of how a
+      topic is actually discussed across sources — including connections
+      that exist in the underlying material but have not yet been named as
+      a formal relationship by anyone's model.
+    </p>
+
+    <p>
+      What makes Qatar's position striking is precisely this gap. In a
+      well-constructed knowledge graph of the Gulf monetary and security
+      landscape, Qatar's mediatory role and its LNG position are present
+      in the source material — but they are only weakly connected, if at
+      all, to the central narrative of monetary transition that dominates
+      formal analysis. The semantic layer, built from how the underlying
+      documents actually discuss the region, places Qatar much closer to
+      the centre of the picture than the formal structure does. That
+      distance — between where an actor sits in the explicit model and
+      where it sits in the evidence — is itself a signal worth taking
+      seriously.
+    </p>
+
+    <div class="diagram-box">
+      <svg width="100%" viewBox="0 0 680 460" role="img" aria-labelledby="diag-title diag-desc">
+        <title id="diag-title">Qatar as one node plugging a small ontology into a wider semantic graph</title>
+        <desc id="diag-desc">On the left, a small bounded structure represents the ontology: a Qatar node connected to four formal relations — Gulf Region, GCC, Strait of Hormuz, and LNG exports. A golden funnel extends from this Qatar node toward a much larger, open constellation on the right, representing the semantic graph. There, the same Qatar node sits at the centre, connected to six facts: the 2018 OPEC exit; the Oman channel facilitating US-Iran talks; the Qatar channel that co-mediated the US-Iran MoU of June 2026; six billion dollars in Iranian assets held in Qatar; roughly twenty percent of global LNG exports; and roughly eighty-two percent of those exports going to Asian buyers.</desc>
+
+        <rect x="10" y="10" width="660" height="440" rx="18" fill="var(--pale)" stroke="var(--rule)" stroke-width="0.75"/>
+
+        <text x="340" y="40" text-anchor="middle" font-family="'Space Mono', monospace" font-size="11" letter-spacing="0.08em" fill="var(--gold)">ONE NODE, TWO STRUCTURES</text>
+
+        <!-- THE FUNNEL: ontology plugging into the semantic graph -->
+        <polygon points="225,224 225,236 460,310 460,150" fill="var(--gold)" opacity="0.10"/>
+        <line x1="228" y1="230" x2="452" y2="230" stroke="var(--gold)" stroke-width="0.75" stroke-dasharray="1 4" opacity="0.7"/>
+        <text x="342" y="218" text-anchor="middle" font-family="'Lora', serif" font-style="italic" font-size="9.5" fill="var(--light)">the same entity</text>
+
+        <!-- LEFT: the ontology, small and bounded -->
+        <circle cx="150" cy="230" r="75" fill="none" stroke="var(--rule)" stroke-width="0.75" stroke-dasharray="2 4"/>
+
+        <line x1="150" y1="230" x2="188.9" y2="191.1" stroke="var(--ink)" stroke-width="0.6" opacity="0.6"/>
+        <text x="178" y="204" text-anchor="middle" font-family="'Lora', serif" font-style="italic" font-size="7.5" fill="var(--light)">memberOf</text>
+
+        <line x1="150" y1="230" x2="111.1" y2="191.1" stroke="var(--ink)" stroke-width="0.6" opacity="0.6"/>
+        <text x="120" y="204" text-anchor="middle" font-family="'Lora', serif" font-style="italic" font-size="7.5" fill="var(--light)">locatedIn</text>
+
+        <line x1="150" y1="230" x2="111.1" y2="268.9" stroke="var(--ink)" stroke-width="0.6" opacity="0.6"/>
+        <text x="116" y="258" text-anchor="middle" font-family="'Lora', serif" font-style="italic" font-size="7.5" fill="var(--light)">uses</text>
+
+        <line x1="150" y1="230" x2="188.9" y2="268.9" stroke="var(--ink)" stroke-width="0.6" opacity="0.6"/>
+        <text x="178" y="258" text-anchor="middle" font-family="'Lora', serif" font-style="italic" font-size="7.5" fill="var(--light)">exports</text>
+
+        <circle cx="188.9" cy="191.1" r="3.5" fill="var(--ink)"/>
+        <text x="199" y="184" text-anchor="start" font-family="'Lora', serif" font-size="8.5" fill="var(--ink)">GCC</text>
+
+        <circle cx="111.1" cy="191.1" r="3.5" fill="var(--ink)"/>
+        <text x="101" y="184" text-anchor="end" font-family="'Lora', serif" font-size="8.5" fill="var(--ink)">Gulf Region</text>
+
+        <circle cx="111.1" cy="268.9" r="3.5" fill="var(--ink)"/>
+        <text x="101" y="282" text-anchor="end" font-family="'Lora', serif" font-size="8.5" fill="var(--ink)">Strait of Hormuz</text>
+
+        <circle cx="188.9" cy="268.9" r="3.5" fill="var(--ink)"/>
+        <text x="199" y="282" text-anchor="start" font-family="'Lora', serif" font-size="8.5" fill="var(--ink)">LNG</text></text>
+
+        <circle cx="150" cy="230" r="7" fill="var(--gold)" stroke="var(--ink)" stroke-width="0.75"/>
+        <text x="150" y="214" text-anchor="middle" font-family="'Lora', serif" font-size="9.5" font-weight="700" fill="var(--ink)">Qatar</text>
+
+        <text x="150" y="336" text-anchor="middle" font-family="'Space Mono', monospace" font-size="9.5" letter-spacing="0.05em" fill="var(--light)">THE ONTOLOGY</text>
+
+        <!-- RIGHT: the semantic graph, open and dense -->
+        <circle cx="520" cy="230" r="24" fill="var(--gold)" opacity="0.10"/>
+        <circle cx="520" cy="230" r="16" fill="var(--gold)" opacity="0.18"/>
+
+        <line x1="520" y1="230" x2="520" y2="118" stroke="var(--gold)" stroke-width="0.9" opacity="0.6"/>
+        <line x1="520" y1="230" x2="600" y2="158" stroke="var(--gold)" stroke-width="0.9" opacity="0.6"/>
+        <line x1="520" y1="230" x2="590" y2="280" stroke="var(--gold)" stroke-width="0.9" opacity="0.6"/>
+        <line x1="520" y1="230" x2="520" y2="352" stroke="var(--gold)" stroke-width="0.9" opacity="0.6"/>
+        <line x1="520" y1="230" x2="445" y2="283" stroke="var(--gold)" stroke-width="0.9" opacity="0.6"/>
+        <line x1="520" y1="230" x2="435" y2="152" stroke="var(--gold)" stroke-width="0.9" opacity="0.6"/>
+
+        <circle cx="520" cy="118" r="4" fill="var(--ink)"/>
+        <text x="520" y="130" text-anchor="middle" font-family="'Lora', serif" font-size="9" fill="var(--ink)">OPEC exit, 2018</text>
+
+        <circle cx="600" cy="158" r="4" fill="var(--ink)"/>
+        <text text-anchor="middle" font-family="'Lora', serif" font-size="9" fill="var(--ink)">
+          <tspan x="600" y="170">Oman channel</tspan>
+          <tspan x="600" dy="11">(US↔Iran talks)</tspan>
+        </text>
+
+        <circle cx="590" cy="280" r="4" fill="var(--ink)"/>
+        <text text-anchor="middle" font-family="'Lora', serif" font-size="9" fill="var(--ink)">
+          <tspan x="590" y="292">Qatar channel</tspan>
+          <tspan x="590" dy="11">(US↔Iran MoU)</tspan>
+        </text>
+
+        <circle cx="520" cy="352" r="4" fill="var(--ink)"/>
+        <text text-anchor="middle" font-family="'Lora', serif" font-size="9" fill="var(--ink)">
+          <tspan x="520" y="364">$6bn Iranian assets</tspan>
+          <tspan x="520" dy="11">held in Qatar</tspan>
+        </text>
+
+        <circle cx="445" cy="283" r="4" fill="var(--ink)"/>
+        <text x="445" y="295" text-anchor="middle" font-family="'Lora', serif" font-size="9" fill="var(--ink)">~82% to Asia</text>
+
+        <circle cx="435" cy="152" r="4" fill="var(--ink)"/>
+        <text x="435" y="164" text-anchor="middle" font-family="'Lora', serif" font-size="9" fill="var(--ink)">~20% of LNG exports</text>
+
+        <circle cx="520" cy="230" r="9" fill="var(--gold)" stroke="var(--ink)" stroke-width="0.75"/>
+        <text x="520" y="248" text-anchor="middle" font-family="'Lora', serif" font-size="10.5" font-weight="700" fill="var(--ink)">Qatar</text>
+
+        <text x="520" y="405" text-anchor="middle" font-family="'Space Mono', monospace" font-size="9.5" letter-spacing="0.05em" fill="var(--light)">THE SEMANTIC GRAPH</text>
+
+        <text x="340" y="435" text-anchor="middle" font-family="'Playfair Display', serif" font-style="italic" font-size="12.5" fill="var(--ink)">What the ontology already encodes, and what additional evidence reveals</text>
+      </svg>
+      <p class="diagram-caption">
+        On the left, the ontology as formally constructed for this domain:
+        a bounded structure in which Qatar connects to four explicit
+        relations — its location in the Gulf (<em>locatedIn</em>), its GCC
+        membership (<em>memberOf</em>), its use of the Strait of Hormuz
+        (<em>uses</em>), and its export of LNG (<em>exports</em>). Nothing
+        in this formal structure links Qatar to its 2018 OPEC exit or to
+        its mediating roles with Iran; those facts are simply absent from
+        the graph. The golden funnel marks the point where that same,
+        narrowly-defined node opens onto the semantic graph on the right —
+        built from how the reporting actually documents Qatar. There, the
+        identical node becomes a hub. Two distinct diplomatic channels
+        radiate from it: the Oman channel, which facilitated the initial
+        rounds of US-Iran nuclear talks, and the Qatar channel, which
+        co-mediated the Memorandum of Understanding signed on 17 June 2026
+        — two parallel lines of access that no other Gulf state holds
+        simultaneously. Also visible: the $6 billion in Iranian assets held
+        in Qatari accounts, a financial dimension that makes Qatar
+        indispensable not only diplomatically but economically to the
+        sanctions-relief negotiation; and Qatar's structural weight in
+        global LNG markets, with roughly 20% of world exports flowing
+        predominantly to the Asian economies most active in
+        de-dollarization. Nothing about Qatar has changed between the two
+        structures. What changes is which one was ever built to notice it.
+      </p>
+    </div>
+
+
+    <div class="sidecard">
+      A singularity is not where the crowd is looking.
+      <strong>It is where the structure says the crowd
+      will end up looking.</strong>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">Why It Matters</h2>
+
+    <p>
+      The practical implication is not a forecast. It is a recalibration
+      of attention. Any assessment of how Gulf states might navigate the
+      slow-moving monetary realignment now under way — and of how durable
+      regional stability might prove under pressure — is incomplete if it
+      treats Qatar as a secondary actor defined mainly by its size. Qatar's
+      tripartite position means that developments elsewhere in the region
+      — a shift in OPEC membership, a change in the diplomatic temperature
+      with Iran, a disruption to LNG supply — pass through Qatar's
+      structural position before they reach their full effect elsewhere.
+      A state with no equivalent role among its neighbours is, by that fact
+      alone, worth weighting more heavily than its formal profile in most
+      analytical frameworks suggests.
+    </p>
+
+    <p>
+      This is the kind of insight that conventional analysis, organised
+      around the largest and loudest actors, is structurally disposed to
+      under-weight. It is also the kind of insight that a knowledge
+      architecture explicitly built to connect formal structure with the
+      fuller texture of underlying evidence is built to surface — not as
+      a prediction, but as a more accurate map of where attention belongs.
+    </p>
+
+    <p class="disclosure">
+      This article is drawn from a longer Merlin Intelligence research
+      memorandum on de-dollarization dynamics and Saudi Arabia's structural
+      position in the Gulf monetary order. It reflects analysis current as
+      of June 2026 and is intended as commentary, not investment, policy,
+      or legal advice.
+    </p>
+  </div>
+</section>
+
+<div class="page-footer">
+  <div class="wrap">
+    <p class="footer-label">Merlin Intelligence · Signal Series · 2026</p>
+    <a href="index.html" class="footer-back">← Back to merlin-intelligence.eu</a>
+  </div>
+</div>
+
+</body>
+</html>
