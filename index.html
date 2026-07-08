@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Merlin Intelligence — Geoeconomic intelligence and knowledge infrastructure. Detecting relevant but not obvious signals across macro, energy, trade, defence and climate.">
 <title>Merlin Intelligence — What matters before it becomes obvious</title>
+<link rel="icon" type="image/png" href="MI-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -39,17 +40,34 @@ body {
 
 /* ── Nav ────────────────────────────────────────── */
 nav {
-  padding: 1.6rem 0 1.4rem;
+  padding: 1.2rem 0 1.0rem;
   border-bottom: 0.5px solid var(--rule);
 }
 nav .wrap--wide {
-  display: flex; align-items: baseline; justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between;
 }
 .nav-brand {
   font-family: 'Space Mono', monospace;
   font-size: 0.72rem; font-weight: 700;
   letter-spacing: 0.08em; color: var(--ink);
   text-decoration: none; text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.nav-logo {
+  height: 38px;
+  width: 38px;
+  object-fit: cover;
+  display: block;
+  border: 0.5px solid var(--rule);
+  border-radius: 50%;
+  padding: 2px;
+  background: var(--pale);
+  transition: transform 0.2s ease;
+}
+.nav-logo:hover {
+  transform: scale(1.08);
 }
 .nav-sub {
   font-family: 'Space Mono', monospace;
@@ -71,6 +89,15 @@ nav .wrap--wide {
     rgba(162,120,68,0.055) 80.5px
   );
   pointer-events: none;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: center;
+}
+.hero-content {
+  position: relative;
 }
 .hero-eyebrow {
   font-family: 'Space Mono', monospace;
@@ -94,6 +121,41 @@ nav .wrap--wide {
 .hero-rule {
   width: 48px; height: 1.5px;
   background: var(--gold);
+}
+.hero-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-logo-img {
+  max-width: 100%;
+  height: auto;
+  border: 0.5px solid var(--rule);
+  padding: 1.5rem;
+  background: var(--pale);
+  box-shadow: 0 12px 32px rgba(20, 18, 15, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hero-logo-img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(20, 18, 15, 0.07);
+}
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .hero-image-container {
+    order: -1;
+    margin-bottom: 1rem;
+    justify-content: flex-start;
+  }
+  .hero-logo-img {
+    max-width: 240px;
+    padding: 1rem;
+  }
 }
 
 /* ── Section label ──────────────────────────────── */
@@ -328,22 +390,32 @@ footer {
 <!-- ── Nav ── -->
 <nav>
   <div class="wrap--wide">
-    <a href="#" class="nav-brand">Merlin Intelligence</a>
+    <a href="index.html" class="nav-brand">
+      <img src="MI-icon.png" alt="Merlin Intelligence Logo" class="nav-logo">
+      <span>Merlin Intelligence</span>
+    </a>
     <span class="nav-sub"><a href="manifesto.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Manifesto</a> &nbsp;·&nbsp; <a href="team.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Founding Team</a> &nbsp;·&nbsp; <a href="article_qatar.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Signal Series</a> &nbsp;·&nbsp; operated by praXvalue</span>
   </div>
 </nav>
 
 <!-- ── Hero ── -->
 <div class="hero">
-  <div class="wrap">
-    <span class="hero-eyebrow">— Geoeconomic intelligence · Structured knowledge · Decisive signals</span>
-    <h1 class="hero-headline">
-      What matters<br><em>before it becomes</em><br>obvious.
-    </h1>
-    <p class="hero-sub">
-      Merlin Intelligence is an open-source collective dedicated to geoeconomic intelligence and knowledge infrastructure. We uncover relevant but non-obvious signals across macroeconomics, energy, trade, defence, climate, business growth, and innovation, then translate them into analytical engines that organisations can adapt, reproduce, and extend
-    </p>
-    <div class="hero-rule"></div>
+  <div class="wrap--wide">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <span class="hero-eyebrow">— Human insight · Structured knowledge · Decisive signals</span>
+        <h1 class="hero-headline">
+          What matters<br><em>before it becomes</em><br>obvious.
+        </h1>
+        <p class="hero-sub">
+          Merlin Intelligence is an open-source collective dedicated to geoeconomic intelligence and knowledge infrastructure. We uncover relevant but non-obvious signals across macroeconomics, energy, trade, defence, climate, business growth, and innovation, then translate them into analytical engines that organisations can adapt, reproduce, and extend
+        </p>
+        <div class="hero-rule"></div>
+      </div>
+      <div class="hero-image-container">
+        <img src="MI-logo3.png" alt="Merlin Intelligence Logo" class="hero-logo-img">
+      </div>
+    </div>
   </div>
 </div>
 
