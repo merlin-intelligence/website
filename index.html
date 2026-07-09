@@ -265,36 +265,46 @@ p:last-child { margin-bottom: 0; }
   line-height: 1.58; margin: 0;
 }
 
-/* ── Eigenmind dark block ───────────────────────── */
-.eigenmind-block {
-  background: var(--dark);
-  padding: 2.8rem 3rem;
+/* ── Open-source repos grid ─────────────────────── */
+.repos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.6rem;
   margin: 2.4rem 0;
-  position: relative; overflow: hidden;
 }
-.eigenmind-block::before {
+.repo-block {
+  background: var(--dark);
+  padding: 2.5rem 2.5rem;
+  position: relative; overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 350px;
+}
+.repo-block::before {
   content: '';
   position: absolute; inset: 0;
   background-image: repeating-linear-gradient(
     -62deg,
     transparent, transparent 60px,
-    rgba(162,120,68,0.07) 60px,
-    rgba(162,120,68,0.07) 60.5px
+    rgba(162,120,68,0.05) 60px,
+    rgba(162,120,68,0.05) 60.5px
   );
+  pointer-events: none;
 }
-.eigenmind-block .sec-label { color: var(--gold); position: relative; }
-.eigenmind-title {
+.repo-block .sec-label { color: var(--gold); position: relative; margin-bottom: 0.8rem; }
+.repo-title {
   font-family: 'Playfair Display', serif;
   font-size: 1.6rem; font-weight: 400;
   color: #F0ECE6; margin-bottom: 1rem; position: relative;
 }
-.eigenmind-title em { font-style: italic; }
-.eigenmind-body {
-  color: #A89E94; font-size: 0.95rem;
-  line-height: 1.68; max-width: 560px;
-  position: relative; margin-bottom: 1.6rem;
+.repo-title em { font-style: italic; }
+.repo-body {
+  color: #A89E94; font-size: 0.92rem;
+  line-height: 1.6; position: relative; margin-bottom: 1.6rem;
+  flex-grow: 1;
 }
-.eigenmind-link {
+.repo-link {
   display: inline-flex; align-items: center; gap: 0.5rem;
   font-family: 'Space Mono', monospace;
   font-size: 0.70rem; color: var(--gold);
@@ -302,8 +312,9 @@ p:last-child { margin-bottom: 0; }
   position: relative;
   border-bottom: 0.5px solid var(--gold);
   padding-bottom: 0.1rem; transition: opacity 0.2s;
+  width: fit-content;
 }
-.eigenmind-link:hover { opacity: 0.72; }
+.repo-link:hover { opacity: 0.72; }
 
 /* ── Terms ──────────────────────────────────────── */
 .terms-row {
@@ -381,7 +392,8 @@ footer {
   .output-cell     { border-right: none; border-bottom: 0.5px solid var(--rule); }
   .output-cell:last-child { border-bottom: none; }
   .terms-row       { grid-template-columns: 1fr; gap: 0.3rem; }
-  .eigenmind-block { padding: 2rem 1.4rem; }
+  .repos-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+  .repo-block { min-height: auto; padding: 2rem 1.8rem; }
 }
 </style>
 </head>
@@ -616,36 +628,54 @@ footer {
   </div>
 </section>
 
-<!-- ── §04 eigenmind ── -->
+<!-- ── §04 Open-source framework ── -->
 <section>
   <div class="wrap">
-    <span class="sec-label">§ 04 · Open-source engine</span>
-    <h2 class="section-title"><em>eigenmind</em></h2>
+    <span class="sec-label">§ 04 · Open-source framework</span>
+    <h2 class="section-title"><em>eigenmind</em> &amp; <em>olaf</em></h2>
     <p>
-      The analytical practice required an engine. eigenmind is the
-      open-source system MI built to make geoeconomic signal detection
-      computable, reproducible, and transferable — without dependency
-      on closed AI infrastructure.
+      The analytical practice required a robust, open codebase. We open-source our core systems under the MIT license to allow organizations to build, replicate, and extend their own geoeconomic reasoning layers without proprietary dependencies.
     </p>
   </div>
 
   <div class="wrap--wide">
-    <div class="eigenmind-block">
-      <span class="sec-label">eigenmind · open source · MIT licence</span>
-      <div class="eigenmind-title">Singularities. Ontologies.<br><em>Sovereign AI.</em></div>
-      <p class="eigenmind-body">
-        eigenmind detects the concepts a corpus keeps returning to from
-        different directions — the structurally unusual, informationally
-        dense nodes that standard search misses. It extracts ontologies
-        from text, weights edges by semantic proximity and causal type,
-        and surfaces the knowledge singularities that precede change:
-        in markets, in geopolitics, in organisations.
-        Delivered as transferable source code under MIT licence.
-      </p>
-      <a href="https://github.com/merlin-intelligence/eigenmind"
-         class="eigenmind-link" target="_blank" rel="noopener">
-        github.com/merlin-intelligence/eigenmind →
-      </a>
+    <div class="repos-grid">
+      
+      <!-- eigenmind repo -->
+      <div class="repo-block">
+        <div>
+          <span class="sec-label">eigenmind · open source · MIT licence</span>
+          <div class="repo-title">Singularities. Ontologies.<br><em>Sovereign AI.</em></div>
+          <p class="repo-body">
+            eigenmind detects the concepts a corpus keeps returning to from
+            different directions — the structurally unusual, informationally
+            dense nodes that standard search misses. It extracts ontologies
+            from text, weights edges by semantic proximity and causal type,
+            and surfaces the knowledge singularities that precede change:
+            in markets, in geopolitics, in organisations.
+          </p>
+        </div>
+        <a href="https://github.com/merlin-intelligence/eigenmind"
+           class="repo-link" target="_blank" rel="noopener">
+          github.com/merlin-intelligence/eigenmind →
+        </a>
+      </div>
+
+      <!-- olaf repo -->
+      <div class="repo-block">
+        <div>
+          <span class="sec-label">olaf · open source · MIT licence</span>
+          <div class="repo-title">Ontology Learning.<br><em>Agentic Framework.</em></div>
+          <p class="repo-body">
+            olaf (Ontology Learning Agentic Framework) is an MCP server designed to build OWL/RDFS ontologies from unstructured text chunks incrementally and collaboratively with LLMs. By combining Oxigraph for triplestore operations and Qdrant for semantic chunk indexing, it exposes tools that allow LLM agents to map concepts, check duplicates, and construct structured domain knowledge graphs.
+          </p>
+        </div>
+        <a href="https://github.com/merlin-intelligence/olaf"
+           class="repo-link" target="_blank" rel="noopener">
+          github.com/merlin-intelligence/olaf →
+        </a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -751,8 +781,8 @@ footer {
         &nbsp;|&nbsp;
         <a href="#research">research</a>
         &nbsp;|&nbsp;
-        <a href="https://github.com/merlin-intelligence/eigenmind"
-           target="_blank" rel="noopener">github / eigenmind</a>
+        <a href="https://github.com/merlin-intelligence"
+           target="_blank" rel="noopener">github / merlin-intelligence</a>
         &nbsp;|&nbsp;
         <a href="legal-notice.html">legal notice</a>
       </span>
