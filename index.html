@@ -394,7 +394,7 @@ footer {
       <img src="MI-icon.png" alt="Merlin Intelligence Logo" class="nav-logo">
       <span>Merlin Intelligence</span>
     </a>
-    <span class="nav-sub"><a href="manifesto.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Manifesto</a> &nbsp;·&nbsp; <a href="team.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Founding Team</a> &nbsp;·&nbsp; <a href="article_qatar.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Signal Series</a> &nbsp;·&nbsp; operated by praXvalue</span>
+    <span class="nav-sub"><a href="manifesto.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Manifesto</a> &nbsp;·&nbsp; <a href="team.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Founding Team</a> &nbsp;·&nbsp; <a href="signals.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Signal Series</a> &nbsp;·&nbsp; <a href="#research" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Research</a> &nbsp;·&nbsp; operated by praXvalue</span>
   </div>
 </nav>
 
@@ -466,7 +466,9 @@ footer {
 </section>
 
 <!-- ── §02 Output ── -->
-<section>
+<section id="output" style="position: relative;">
+  <div id="signals" style="position: absolute; top: -60px;"></div>
+  <div id="research" style="position: absolute; top: -60px;"></div>
   <div class="wrap">
     <span class="sec-label">§ 02 · Intelligence output</span>
     <h2 class="section-title">Public analysis.<br><em>Private missions.</em></h2>
@@ -489,7 +491,14 @@ footer {
           analysis, not noise — identifying the relevant-but-not-obvious
           before it becomes consensus.
         </p>
-        <span class="forthcoming">→ Forthcoming Q3 2026</span>
+        <div class="publication-links" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <a href="article_qatar.html" style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem; width: fit-content;">
+            Signal Series · No. 1 · Qatar and the Geometry of Gulf Order
+          </a>
+          <a href="article_green_finance_resilience.html" style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem; width: fit-content;">
+            Signal Series · No. 2 · Green Finance Is Europe’s Next Capital-Market Reform
+          </a>
+        </div>
       </div>
       <div class="output-cell">
         <span class="output-label">Private</span>
@@ -738,7 +747,9 @@ footer {
         &nbsp;|&nbsp;
         <a href="team.html">founding team</a>
         &nbsp;|&nbsp;
-        <a href="article_qatar.html">signal series</a>
+        <a href="signals.html">signal series</a>
+        &nbsp;|&nbsp;
+        <a href="#research">research</a>
         &nbsp;|&nbsp;
         <a href="https://github.com/merlin-intelligence/eigenmind"
            target="_blank" rel="noopener">github / eigenmind</a>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Merlin Intelligence — Signal Series. Strategic geoeconomic insights on global corridors, supply chains, energy security, and capital-market reforms.">
+<title>Signal Series — Merlin Intelligence</title>
+<link rel="icon" type="image/png" href="MI-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:     #F0ECE6;
+  --ink:    #14120F;
+  --gold:   #A27844;
+  --rule:   #C3B9AC;
+  --light:  #8A7F74;
+  --pale:   #F7F4F0;
+  --dark:   #1E1A16;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap      { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+.wrap--wide{ max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+
+/* ── Nav ────────────────────────────────────────── */
+nav {
+  padding: 1.2rem 0 1.0rem;
+  border-bottom: 0.5px solid var(--rule);
+}
+nav .wrap--wide {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; color: var(--ink);
+  text-decoration: none; text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.nav-logo {
+  height: 38px;
+  width: 38px;
+  object-fit: cover;
+  display: block;
+  border: 0.5px solid var(--rule);
+  border-radius: 50%;
+  padding: 2px;
+  background: var(--pale);
+  transition: transform 0.2s ease;
+}
+.nav-logo:hover {
+  transform: scale(1.08);
+}
+.nav-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--light); letter-spacing: 0.04em;
+  text-decoration: none;
+}
+.nav-sub:hover { color: var(--gold); }
+
+/* ── Hero ───────────────────────────────────────── */
+.hero {
+  padding: 5.5rem 0 4rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -62deg,
+    transparent, transparent 80px,
+    rgba(162,120,68,0.055) 80px,
+    rgba(162,120,68,0.055) 80.5px
+  );
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; color: var(--gold);
+  letter-spacing: 0.10em; text-transform: uppercase;
+  margin-bottom: 1.5rem; display: block;
+}
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 400; line-height: 1.10;
+  color: var(--ink); margin-bottom: 1.2rem;
+  max-width: 680px;
+}
+.hero-headline em { font-style: italic; }
+.hero-sub {
+  font-size: 1.05rem; color: var(--light);
+  max-width: 560px; line-height: 1.68;
+  margin-bottom: 2rem;
+}
+.hero-rule {
+  width: 48px; height: 1.5px;
+  background: var(--gold);
+}
+
+/* ── TOC List ───────────────────────────────────── */
+.toc-section {
+  padding: 4rem 0 6rem;
+  border-top: 0.5px solid var(--rule);
+}
+.toc-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+.toc-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2rem;
+  padding: 2.2rem 0;
+  border-bottom: 0.5px solid var(--rule);
+  align-items: start;
+}
+.toc-item:first-child {
+  padding-top: 0;
+}
+.toc-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.toc-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.toc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--light);
+  margin-bottom: 0.8rem;
+}
+.toc-date {
+  color: var(--light);
+}
+.toc-tag {
+  color: var(--gold);
+  border: 0.5px solid var(--gold);
+  padding: 0.15rem 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+}
+.toc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.65rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 0.8rem;
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s ease;
+}
+.toc-title:hover {
+  color: var(--gold);
+}
+.toc-title em {
+  font-style: italic;
+}
+.toc-teaser {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--light);
+  margin-bottom: 1.2rem;
+  max-width: 600px;
+}
+.toc-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem; font-weight: 700;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 0.5px solid var(--gold);
+  padding-bottom: 0.15rem;
+  transition: opacity 0.2s ease;
+  width: fit-content;
+  display: inline-block;
+}
+.toc-link:hover {
+  opacity: 0.75;
+}
+
+/* ── Footer ─────────────────────────────────────── */
+footer {
+  background: var(--dark);
+  border-top: 0.5px solid rgba(195,185,172,0.2);
+  padding: 3rem 0;
+}
+.footer-inner {
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 1rem;
+}
+.footer-copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem; color: #5A544E; letter-spacing: 0.04em;
+}
+.footer-copy a { color: #5A544E; text-decoration: none; border-bottom: 0.5px solid transparent; transition: border-color 0.2s; }
+.footer-copy a:hover { border-color: #5A544E; }
+
+@media (max-width: 640px) {
+  .toc-item {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 1.8rem 0;
+  }
+  .toc-number {
+    margin-bottom: 0.2rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="wrap--wide">
+    <a href="index.html" class="nav-brand">
+      <img src="MI-icon.png" alt="Merlin Intelligence Logo" class="nav-logo">
+      <span>Merlin Intelligence</span>
+    </a>
+    <span class="nav-sub"><a href="manifesto.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Manifesto</a> &nbsp;·&nbsp; <a href="team.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Founding Team</a> &nbsp;·&nbsp; <a href="index.html#research" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Research</a> &nbsp;·&nbsp; operated by praXvalue</span>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="wrap">
+    <span class="hero-eyebrow">— Signal Series · Output</span>
+    <h1 class="hero-headline">
+      The <em>Signal Series</em>
+    </h1>
+    <p class="hero-sub">
+      Bespoke intelligence briefings tracking geoeconomic structural pivots. We map evolved state actions, supply-chain bottlenecks, and financial architectures before they consolidate into consensus.
+    </p>
+    <div class="hero-rule"></div>
+  </div>
+</div>
+
+<!-- ── Table of Contents ── -->
+<section class="toc-section">
+  <div class="wrap">
+    <span class="hero-eyebrow" style="margin-bottom: 0.8rem;">Table of Contents</span>
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 2rem;">Available Briefings</h2>
+    
+    <div class="toc-grid">
+      
+      <!-- Item 01 -->
+      <div class="toc-item">
+        <div class="toc-number">No. 01</div>
+        <div class="toc-content">
+          <div class="toc-meta">
+            <span class="toc-date">June 2026</span>
+            <span class="toc-tag">Gulf Order</span>
+            <span class="toc-tag">Geopolitics</span>
+          </div>
+          <a href="article_qatar.html" class="toc-title">Qatar and the <em>Geometry of Gulf Order</em></a>
+          <p class="toc-teaser">
+            Qatar's enduring influence in the Gulf stems not from its size, but from its ability to shape the region's strategic geometry. Rather than aligning exclusively with any single bloc, Doha has built resilience through multidirectional relationships—simultaneously engaging the United States, Iran, Türkiye, and its Gulf neighbours while positioning itself as an indispensable mediator.
+          </p>
+          <a href="article_qatar.html" class="toc-link">Read briefing →</a>
+        </div>
+      </div>
+
+      <!-- Item 02 -->
+      <div class="toc-item">
+        <div class="toc-number">No. 02</div>
+        <div class="toc-content">
+          <div class="toc-meta">
+            <span class="toc-date">July 2026</span>
+            <span class="toc-tag">Sustainable Finance</span>
+            <span class="toc-tag">EU Reform</span>
+          </div>
+          <a href="article_green_finance_resilience.html" class="toc-title">Green Finance Is Europe’s <em>Next Capital-Market Reform</em></a>
+          <p class="toc-teaser">
+            Europe has spent a decade building the world’s most sophisticated sustainable-finance framework. Whether it becomes a genuine engine of growth depends on one simple test: does it mobilise more private capital than it costs to regulate? This note maps out the three systems underlying European transition finance.
+          </p>
+          <a href="article_green_finance_resilience.html" class="toc-link">Read briefing →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="wrap--wide">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Merlin Intelligence — operated by praXvalue</span>
+      <span class="footer-copy">
+        <a href="index.html">home</a>
+        &nbsp;|&nbsp;
+        <a href="manifesto.html">manifesto</a>
+        &nbsp;|&nbsp;
+        <a href="team.html">founding team</a>
+        &nbsp;|&nbsp;
+        <a href="index.html#research">research</a>
+        &nbsp;|&nbsp;
+        <a href="https://github.com/merlin-intelligence/eigenmind"
+           target="_blank" rel="noopener">github / eigenmind</a>
+        &nbsp;|&nbsp;
+        <a href="legal-notice.html">legal notice</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
