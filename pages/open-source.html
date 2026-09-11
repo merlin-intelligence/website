@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Merlin Intelligence — Open-Source Framework. Sovereign AI engines: eigenmind for knowledge singularity detection via graph computation, olaf (Ontology Learning Agentic Framework) MCP server, and CogMaps, the visual interface unifying both over Qdrant-stored documents with RAG, graph metrics, and ontological overlay.">
+<title>Open Source — Merlin Intelligence</title>
+<link rel="icon" type="image/png" href="../assets/images/MI-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+
+<style>
+:root {
+  --code-bg:#15120F;
+}
+
+.wrap       { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+.wrap--wide { max-width: 980px; margin: 0 auto; padding: 0 2rem; }
+
+.nav-sub a {
+  color: inherit; text-decoration: none;
+  border-bottom: 0.5px solid var(--rule);
+  padding-bottom: 0.1rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-sub a:hover {
+  color: var(--gold); border-color: var(--gold);
+}
+.nav-sub a.active {
+  color: var(--gold); border-color: var(--gold); font-weight: 700;
+}
+
+/* ── Hero ───────────────────────────────────────── */
+.hero {
+  padding: 5.5rem 0 3.5rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -62deg,
+    transparent, transparent 80px,
+    rgba(162,120,68,0.055) 80px,
+    rgba(162,120,68,0.055) 80.5px
+  );
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; color: var(--gold);
+  letter-spacing: 0.10em; text-transform: uppercase;
+  margin-bottom: 1.5rem; display: block;
+}
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 400; line-height: 1.10;
+  color: var(--ink); margin-bottom: 1.2rem;
+  max-width: 720px;
+}
+.hero-headline em { font-style: italic; }
+.hero-sub {
+  font-size: 1.05rem; color: var(--light);
+  max-width: 620px; line-height: 1.68;
+  margin-bottom: 2rem;
+}
+.hero-rule {
+  width: 48px; height: 1.5px;
+  background: var(--gold);
+}
+
+/* ── Tab Selector ───────────────────────────────── */
+.tabs-container {
+  margin: 2.5rem 0 3.5rem;
+}
+.tab-nav {
+  display: flex;
+  gap: 0.8rem;
+  border-bottom: 0.5px solid var(--rule);
+  padding-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--light);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+.tab-btn:hover {
+  color: var(--ink);
+}
+.tab-btn.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+  font-weight: 700;
+}
+
+/* ── Architecture Pipeline ──────────────────────── */
+.pipeline-box {
+  background: var(--pale);
+  border: 0.5px solid var(--rule);
+  padding: 2.2rem;
+  margin: 3rem 0 4rem;
+  position: relative;
+}
+.pipeline-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--gold);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  display: block;
+}
+.pipeline-flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+.pipeline-step {
+  border-left: 2px solid var(--gold);
+  padding-left: 1.2rem;
+}
+.pipeline-step-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--light);
+  margin-bottom: 0.3rem;
+  display: block;
+}
+.pipeline-step-head {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+.pipeline-step-desc {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--light);
+}
+
+/* ── Repo Cards ─────────────────────────────────── */
+.repo-card {
+  background: var(--dark);
+  color: #F0ECE6;
+  padding: 3rem;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+  border: 0.5px solid rgba(195,185,172,0.15);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.repo-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -62deg,
+    transparent, transparent 60px,
+    rgba(162,120,68,0.06) 60px,
+    rgba(162,120,68,0.06) 60.5px
+  );
+  pointer-events: none;
+}
+.repo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+.repo-badges {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.repo-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 0.5px solid var(--gold);
+  padding: 0.2rem 0.6rem;
+}
+.repo-tag--alt {
+  color: #A89E94;
+  border-color: rgba(195,185,172,0.3);
+}
+.repo-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.1rem;
+  font-weight: 400;
+  color: #F0ECE6;
+  margin-bottom: 0.4rem;
+  position: relative;
+}
+.repo-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+.repo-subtitle {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.repo-lead {
+  font-size: 1.05rem;
+  line-height: 1.68;
+  color: #DDD6CD;
+  margin-bottom: 2rem;
+  position: relative;
+  max-width: 820px;
+}
+.repo-grid-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin: 2rem 0;
+  border-top: 0.5px solid rgba(195,185,172,0.15);
+  padding-top: 2rem;
+  position: relative;
+}
+.spec-block h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+.spec-list {
+  list-style: none;
+}
+.spec-list li {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #A89E94;
+  margin-bottom: 0.6rem;
+  position: relative;
+  padding-left: 1.2rem;
+}
+.spec-list li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+.repo-footer-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 2.2rem;
+  padding-top: 1.8rem;
+  border-top: 0.5px solid rgba(195,185,172,0.15);
+  position: relative;
+}
+.repo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--bg);
+  background: var(--gold);
+  text-decoration: none;
+  padding: 0.75rem 1.4rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.repo-cta:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+.repo-meta-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: #7E7469;
+  letter-spacing: 0.04em;
+}
+
+/* ── Sovereign Principles Callout ───────────────── */
+.principles-section {
+  padding: 4.5rem 0;
+  border-top: 0.5px solid var(--rule);
+}
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.principle-item {
+  border-top: 1.5px solid var(--gold);
+  padding-top: 1.2rem;
+}
+.principle-item h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+  color: var(--ink);
+}
+.principle-item p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--light);
+}
+
+/* ── Footer ─────────────────────────────────────── */
+footer {
+  background: var(--dark);
+  border-top: 0.5px solid rgba(195,185,172,0.2);
+  padding: 3rem 0;
+}
+.footer-inner {
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 1rem;
+}
+.footer-copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem; color: #5A544E; letter-spacing: 0.04em;
+}
+.footer-copy a { color: #5A544E; text-decoration: none; border-bottom: 0.5px solid transparent; transition: border-color 0.2s; }
+.footer-copy a:hover { border-color: #5A544E; }
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 800px) {
+  .pipeline-flow { grid-template-columns: 1fr; gap: 1.4rem; }
+  .repo-card { padding: 2rem 1.6rem; }
+  .repo-grid-specs { grid-template-columns: 1fr; gap: 1.4rem; }
+  .principles-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="wrap--wide">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/images/MI-icon.png" alt="Merlin Intelligence Logo" class="nav-logo">
+      <span>Merlin Intelligence</span>
+    </a>
+    <span class="nav-sub">
+      <a href="manifesto.html">Manifesto</a> &nbsp;·&nbsp;
+      <a href="team.html">Founding Team</a> &nbsp;·&nbsp;
+      <a href="signals.html">Signal Series</a> &nbsp;·&nbsp;
+      <a href="open-source.html" class="active">Open Source</a> &nbsp;·&nbsp;
+      <a href="../index.html#research">Research</a> &nbsp;·&nbsp;
+      operated by praXvalue
+    </span>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="wrap--wide">
+    <span class="hero-eyebrow">— Sovereign AI · Open-Source Infrastructure</span>
+    <h1 class="hero-headline">
+      The Open-Source<br><em>Analytical Stack</em>
+    </h1>
+    <p class="hero-sub">
+      Geoeconomic intelligence requires verifiable foundations. Merlin Intelligence open-sources its core reasoning systems under the MIT licence—enabling practitioners, institutions, and autonomous agents to detect knowledge singularities, map cognitive structures, and construct formal domain ontologies without dependency on closed AI models.
+    </p>
+    <div class="hero-rule"></div>
+
+    <!-- ── Interactive Tab Bar ── -->
+    <div class="tabs-container">
+      <div class="tab-nav" role="tablist">
+        <button class="tab-btn active" id="tab-all" onclick="filterRepos('all')">All Repositories</button>
+        <button class="tab-btn" id="tab-eigenmind" onclick="filterRepos('eigenmind')">eigenmind · Core Engine</button>
+        <button class="tab-btn" id="tab-olaf" onclick="filterRepos('olaf')">olaf · Agentic Framework (MCP)</button>
+        <button class="tab-btn" id="tab-cogmaps" onclick="filterRepos('cogmaps')">CogMaps · Visual Interface</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap--wide">
+
+  <!-- ── Architecture Pipeline Overview ── -->
+  <div class="pipeline-box" id="pipeline-section">
+    <span class="pipeline-title">How the Stack Operates · Triple Engine Workflow</span>
+    <div class="pipeline-flow">
+      <div class="pipeline-step">
+        <span class="pipeline-step-num">Step 01</span>
+        <div class="pipeline-step-head">Heterogeneous Corpora</div>
+        <div class="pipeline-step-desc">Primary treaties, regulatory frameworks, central-bank statements, and trade flow data aggregated into chunked corpora.</div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-step-num">Step 02 · eigenmind</span>
+        <div class="pipeline-step-head">Singularity Extraction</div>
+        <div class="pipeline-step-desc">Computes eigenvector centrality and spectral graph decomposition to identify high-density conceptual nodes and expose structural pivots before market consensus.</div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-step-num">Step 03 · olaf (MCP)</span>
+        <div class="pipeline-step-head">Formal Ontology Construction</div>
+        <div class="pipeline-step-desc">Orchestrates LLM agents via 22 MCP tools to assert verifiable OWL/RDFS triples backed by Oxigraph and Qdrant.</div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-step-num">Step 04 · CogMaps</span>
+        <div class="pipeline-step-head">Unified Visual Interface</div>
+        <div class="pipeline-step-desc">Brings eigenmind and olaf together in one workspace over the Qdrant-stored corpus, blending classic RAG with graph-based metrics and ontological overlay.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Card 1: eigenmind ── -->
+  <article class="repo-card" id="card-eigenmind">
+    <div class="repo-header">
+      <div class="repo-badges">
+        <span class="repo-tag">eigenmind</span>
+        <span class="repo-tag repo-tag--alt">MIT Licence</span>
+        <span class="repo-tag repo-tag--alt">Python</span>
+        <span class="repo-tag repo-tag--alt">Graph Spectral Analysis</span>
+      </div>
+    </div>
+
+    <h2 class="repo-title">Singularities. Structural Pivots. <em>Sovereign AI.</em></h2>
+    <div class="repo-subtitle">Autonomous Knowledge Singularity Detection Engine</div>
+
+    <p class="repo-lead">
+      Standard generative AI models excel at summarising widely distributed explicit knowledge, but remain blind to tacit trade-offs, inflection points, and structural contradictions. <code>eigenmind</code> identifies singularities through graph computation—isolating the structurally unusual, high-density nodes that standard search overlooks by computing eigenvector centrality and spectral density across the corpus graph.
+    </p>
+
+    <div class="repo-grid-specs">
+      <div class="spec-block">
+        <h4>Core Capabilities</h4>
+        <ul class="spec-list">
+          <li><strong>Singularity Mapping:</strong> Computes topological density to reveal latent regime changes in geopolitics, trade, and financial corridors.</li>
+          <li><strong>Eigen-Decomposition Core:</strong> Derives eigenvector centrality and Laplacian spectral embeddings to surface nodes that are structurally load-bearing across multiple analytical framings.</li>
+          <li><strong>Causal Edge Weighting:</strong> Evaluates edge significance by semantic proximity and verifiable causal taxonomy rather than superficial word co-occurrence.</li>
+          <li><strong>Reproducible & Transferable:</strong> Complete source code delivered under MIT license with no external cloud lock-in.</li>
+        </ul>
+      </div>
+      <div class="spec-block">
+        <h4>Technical Architecture</h4>
+        <ul class="spec-list">
+          <li><strong>Algorithmic Base:</strong> Graph spectral analysis (eigenvector centrality, Laplacian embeddings), semantic embedding projections, and causal dependency graphs.</li>
+          <li><strong>Primary Output:</strong> Ranked singularity scores, structural pivot maps, and early warning radar metrics consumed by <code>CogMaps</code> for hybrid ranking.</li>
+          <li><strong>Target Environments:</strong> Sovereign intelligence units, risk analysis desks, and quantitative strategy research.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="repo-footer-bar">
+      <a href="https://github.com/merlin-intelligence/eigenmind" class="repo-cta" target="_blank" rel="noopener">
+        View eigenmind on GitHub →
+      </a>
+      <span class="repo-meta-text">github.com/merlin-intelligence/eigenmind</span>
+    </div>
+  </article>
+
+  <!-- ── Card 2: olaf ── -->
+  <article class="repo-card" id="card-olaf">
+    <div class="repo-header">
+      <div class="repo-badges">
+        <span class="repo-tag">olaf</span>
+        <span class="repo-tag repo-tag--alt">MIT Licence</span>
+        <span class="repo-tag repo-tag--alt">MCP Server</span>
+        <span class="repo-tag repo-tag--alt">OWL / RDFS</span>
+        <span class="repo-tag repo-tag--alt">Oxigraph + Qdrant</span>
+      </div>
+    </div>
+
+    <h2 class="repo-title">Ontology Learning <em>Agentic Framework</em></h2>
+    <div class="repo-subtitle">Model Context Protocol (MCP) Server for Collaborative Knowledge Engineering</div>
+
+    <p class="repo-lead">
+      <code>olaf</code> bridges generative LLM agents with formal knowledge representation. Rather than generating fragile one-shot graphs, <code>olaf</code> exposes a standardized Model Context Protocol (MCP) server that empowers agents to read text chunks incrementally, identify candidate concepts, query existing graphs, resolve semantic duplicates, and assert formal OWL/RDFS triples with persistent validation.
+    </p>
+
+    <div class="repo-grid-specs">
+      <div class="spec-block">
+        <h4>Dual-Storage Architecture</h4>
+        <ul class="spec-list">
+          <li><strong>Oxigraph RDF Triplestore:</strong> Native HTTP triplestore managing formal OWL/RDFS statements, named graphs, SPARQL queries, and transitive reasoning.</li>
+          <li><strong>Qdrant Vector Engine:</strong> Manages document chunk ingestion with status tracking alongside dedicated <code>olaf_concepts_{id}</code> collections for real-time concept semantic search.</li>
+          <li><strong>FastEmbed Embedding Layer:</strong> Automated multi-lingual embedding pipelines for high-precision concept matching.</li>
+        </ul>
+      </div>
+      <div class="spec-block">
+        <h4>Agent Integration & Tools</h4>
+        <ul class="spec-list">
+          <li><strong>22 Native MCP Tools:</strong> Complete tool suite for chunk inspection, concept creation, synonym linking, relation assertion, and hierarchy validation.</li>
+          <li><strong>Stateful & Resumable:</strong> Agents can pause, refine, or resume ontology construction across distinct sessions without context loss.</li>
+          <li><strong>Client Compatibility:</strong> Direct plug-and-play support for Claude Desktop, Claude Code, Cursor, and any MCP-compliant agent host.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="repo-footer-bar">
+      <a href="https://github.com/merlin-intelligence/olaf" class="repo-cta" target="_blank" rel="noopener">
+        View olaf on GitHub →
+      </a>
+      <span class="repo-meta-text">github.com/merlin-intelligence/olaf</span>
+    </div>
+  </article>
+
+  <!-- ── Card 3: CogMaps ── -->
+  <article class="repo-card" id="card-cogmaps">
+    <div class="repo-header">
+      <div class="repo-badges">
+        <span class="repo-tag">CogMaps</span>
+        <span class="repo-tag repo-tag--alt">MIT Licence</span>
+        <span class="repo-tag repo-tag--alt">Qdrant</span>
+        <span class="repo-tag repo-tag--alt">RAG + Graph + Ontology</span>
+      </div>
+    </div>
+
+    <h2 class="repo-title">One Interface. <em>Two Engines.</em></h2>
+    <div class="repo-subtitle">Visual Interface Unifying eigenmind and olaf</div>
+
+    <p class="repo-lead">
+      <code>CogMaps</code> is the visual interface that brings <code>eigenmind</code> and <code>olaf</code> together into a single analytical workspace. Documents are stored and indexed in Qdrant, and every query combines classic retrieval-augmented generation with <code>eigenmind</code>'s graph-based centrality metrics and <code>olaf</code>'s formal ontology as a live overlay—so results are ranked by relevance, structural significance, and verified conceptual relations at once.
+    </p>
+
+    <div class="repo-grid-specs">
+      <div class="spec-block">
+        <h4>Core Capabilities</h4>
+        <ul class="spec-list">
+          <li><strong>Unified Workspace:</strong> A single interface over <code>eigenmind</code>'s singularity graph and <code>olaf</code>'s formal ontology—no switching between tools to move from a document to its structural context.</li>
+          <li><strong>Hybrid Retrieval:</strong> Blends classic RAG over Qdrant-stored document chunks with graph-based ranking driven by <code>eigenmind</code>'s eigenvector centrality and singularity scores.</li>
+          <li><strong>Ontological Overlay:</strong> Superimposes <code>olaf</code>'s OWL/RDFS concept hierarchies directly onto retrieved documents and graph views, grounding every answer in verified formal relations.</li>
+          <li><strong>Reproducible & Transferable:</strong> Complete source code delivered under MIT license with no external cloud lock-in.</li>
+        </ul>
+      </div>
+      <div class="spec-block">
+        <h4>Technical Architecture</h4>
+        <ul class="spec-list">
+          <li><strong>Document Store:</strong> Qdrant vector store shared with <code>olaf</code> for chunk ingestion, embeddings, and semantic search.</li>
+          <li><strong>Retrieval Engine:</strong> Hybrid pipeline combining semantic similarity search with graph-based metrics pulled from <code>eigenmind</code>.</li>
+          <li><strong>Ontology Integration:</strong> Queries <code>olaf</code>'s Oxigraph triplestore to overlay formal concept relations on retrieved results.</li>
+          <li><strong>Primary Output:</strong> Ranked, ontology-annotated answers alongside interactive graph and concept visualizations.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="repo-footer-bar">
+      <a href="https://github.com/merlin-intelligence/cog-maps" class="repo-cta" target="_blank" rel="noopener">
+        View CogMaps on GitHub →
+      </a>
+      <span class="repo-meta-text">github.com/merlin-intelligence/cog-maps</span>
+    </div>
+  </article>
+
+</main>
+
+<!-- ── Principles Section ── -->
+<section class="principles-section">
+  <div class="wrap--wide">
+    <span class="hero-eyebrow">Our Methodology</span>
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; margin-bottom: 1.2rem;">Why Open-Source Infrastructure?</h2>
+    <p style="font-size: 1.05rem; color: var(--light); max-width: 680px; line-height: 1.68;">
+      Geoeconomic decisions in energy corridors, capital reforms, and strategic supply chains cannot rely on black-box heuristics. Our open-source commitment guarantees three pillars:
+    </p>
+
+    <div class="principles-grid">
+      <div class="principle-item">
+        <h3>1. Sovereign Reproducibility</h3>
+        <p>No external API dependencies or proprietary vendor lock-in. Code, ontologies, and reasoning graphs remain entirely within the custody of the institution.</p>
+      </div>
+      <div class="principle-item">
+        <h3>2. Verifiable Evidence Chains</h3>
+        <p>Every asserted relation and discovered singularity links back to primary legislative, financial, or spatial source data through formal RDF triples.</p>
+      </div>
+      <div class="principle-item">
+        <h3>3. Human-Machine Complementarity</h3>
+        <p>Large models provide broad lexical extraction; human experts and formal ontology protocols validate decisive strategic insights.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="wrap--wide">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Merlin Intelligence — operated by praXvalue</span>
+      <span class="footer-copy">
+        <a href="../index.html">home</a>
+        &nbsp;|&nbsp;
+        <a href="manifesto.html">manifesto</a>
+        &nbsp;|&nbsp;
+        <a href="team.html">founding team</a>
+        &nbsp;|&nbsp;
+        <a href="signals.html">signal series</a>
+        &nbsp;|&nbsp;
+        <a href="open-source.html">open source</a>
+        &nbsp;|&nbsp;
+        <a href="../index.html#research">research</a>
+        &nbsp;|&nbsp;
+        <a href="https://github.com/merlin-intelligence"
+           target="_blank" rel="noopener">github / merlin-intelligence</a>
+        &nbsp;|&nbsp;
+        <a href="legal-notice.html">legal notice</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function filterRepos(target) {
+  const cardEigenmind = document.getElementById('card-eigenmind');
+  const cardOlaf = document.getElementById('card-olaf');
+  const cardCogmaps = document.getElementById('card-cogmaps');
+  const cards = { eigenmind: cardEigenmind, olaf: cardOlaf, cogmaps: cardCogmaps };
+  const btns = document.querySelectorAll('.tab-btn');
+
+  btns.forEach(btn => btn.classList.remove('active'));
+
+  if (target === 'all') {
+    document.getElementById('tab-all').classList.add('active');
+    Object.values(cards).forEach(card => card.style.display = 'block');
+  } else {
+    document.getElementById('tab-' + target).classList.add('active');
+    Object.entries(cards).forEach(([key, card]) => {
+      card.style.display = key === target ? 'block' : 'none';
+    });
+  }
+}
+</script>
+
+</body>
+</html>

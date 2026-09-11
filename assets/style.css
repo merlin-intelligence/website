@@ -1,0 +1,59 @@
+/* ── Shared tokens & base ───────────────────────── */
+:root {
+  --bg:     #F0ECE6;
+  --ink:    #14120F;
+  --gold:   #A27844;
+  --rule:   #C3B9AC;
+  --light:  #8A7F74;
+  --pale:   #F7F4F0;
+  --dark:   #1E1A16;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Nav (identical on every page) ─────────────────── */
+nav {
+  padding: 1.2rem 0 1.0rem;
+  border-bottom: 0.5px solid var(--rule);
+}
+nav .wrap--wide {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.08em; color: var(--ink);
+  text-decoration: none; text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.nav-logo {
+  height: 38px;
+  width: 38px;
+  object-fit: cover;
+  display: block;
+  border: 0.5px solid var(--rule);
+  border-radius: 50%;
+  padding: 2px;
+  background: var(--pale);
+  transition: transform 0.2s ease;
+}
+.nav-logo:hover {
+  transform: scale(1.08);
+}
+.nav-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--light); letter-spacing: 0.04em;
+  text-decoration: none;
+}

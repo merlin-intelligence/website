@@ -5,74 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Merlin Intelligence — Geoeconomic intelligence and knowledge infrastructure. Detecting relevant but not obvious signals across macro, energy, trade, defence and climate.">
 <title>Merlin Intelligence — What matters before it becomes obvious</title>
-<link rel="icon" type="image/png" href="MI-icon.png">
+<link rel="icon" type="image/png" href="assets/images/MI-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 
 <style>
-/* ── Tokens ─────────────────────────────────────── */
-:root {
-  --bg:     #F0ECE6;
-  --ink:    #14120F;
-  --gold:   #A27844;
-  --rule:   #C3B9AC;
-  --light:  #8A7F74;
-  --pale:   #F7F4F0;
-  --dark:   #1E1A16;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Lora', Georgia, serif;
-  font-size: 17px;
-  line-height: 1.72;
-  -webkit-font-smoothing: antialiased;
-}
-
 /* ── Layout ─────────────────────────────────────── */
 .wrap      { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
 .wrap--wide{ max-width: 960px; margin: 0 auto; padding: 0 2rem; }
-
-/* ── Nav ────────────────────────────────────────── */
-nav {
-  padding: 1.2rem 0 1.0rem;
-  border-bottom: 0.5px solid var(--rule);
-}
-nav .wrap--wide {
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-brand {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 0.08em; color: var(--ink);
-  text-decoration: none; text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-.nav-logo {
-  height: 38px;
-  width: 38px;
-  object-fit: cover;
-  display: block;
-  border: 0.5px solid var(--rule);
-  border-radius: 50%;
-  padding: 2px;
-  background: var(--pale);
-  transition: transform 0.2s ease;
-}
-.nav-logo:hover {
-  transform: scale(1.08);
-}
-.nav-sub {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem; color: var(--light); letter-spacing: 0.04em;
-}
 
 /* ── Hero ───────────────────────────────────────── */
 .hero {
@@ -403,10 +345,10 @@ footer {
 <nav>
   <div class="wrap--wide">
     <a href="index.html" class="nav-brand">
-      <img src="MI-icon.png" alt="Merlin Intelligence Logo" class="nav-logo">
+      <img src="assets/images/MI-icon.png" alt="Merlin Intelligence Logo" class="nav-logo">
       <span>Merlin Intelligence</span>
     </a>
-    <span class="nav-sub"><a href="manifesto.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Manifesto</a> &nbsp;·&nbsp; <a href="team.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Founding Team</a> &nbsp;·&nbsp; <a href="signals.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Signal Series</a> &nbsp;·&nbsp; <a href="#research" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Research</a> &nbsp;·&nbsp; operated by praXvalue</span>
+    <span class="nav-sub"><a href="pages/manifesto.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Manifesto</a> &nbsp;·&nbsp; <a href="pages/team.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Founding Team</a> &nbsp;·&nbsp; <a href="pages/signals.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Signal Series</a> &nbsp;·&nbsp; <a href="pages/open-source.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Open Source</a> &nbsp;·&nbsp; <a href="#research" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Research</a> &nbsp;·&nbsp; operated by praXvalue</span>
   </div>
 </nav>
 
@@ -425,7 +367,7 @@ footer {
         <div class="hero-rule"></div>
       </div>
       <div class="hero-image-container">
-        <img src="MI-logo3.png" alt="Merlin Intelligence Logo" class="hero-logo-img">
+        <img src="assets/images/MI-logo3.png" alt="Merlin Intelligence Logo" class="hero-logo-img">
       </div>
     </div>
   </div>
@@ -504,11 +446,14 @@ footer {
           before it becomes consensus.
         </p>
         <div class="publication-links" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
-          <a href="article_qatar.html" style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem; width: fit-content;">
+          <a href="articles/article_qatar.html" style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem; width: fit-content;">
             Signal Series · No. 1 · Qatar and the Geometry of Gulf Order
           </a>
-          <a href="article_green_finance_resilience.html" style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem; width: fit-content;">
+          <a href="articles/article_green_finance_resilience.html" style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem; width: fit-content;">
             Signal Series · No. 2 · Green Finance Is Europe’s Next Capital-Market Reform
+          </a>
+          <a href="articles/merlin_signal_03_asymmetric_shock.html" style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem; width: fit-content;">
+            Signal Series · No. 3 · The Asymmetric Shock
           </a>
         </div>
       </div>
@@ -645,14 +590,15 @@ footer {
       <div class="repo-block">
         <div>
           <span class="sec-label">eigenmind · open source · MIT licence</span>
-          <div class="repo-title">Singularities. Ontologies.<br><em>Sovereign AI.</em></div>
+          <div class="repo-title">Singularities. Structural Pivots.<br><em>Sovereign AI.</em></div>
           <p class="repo-body">
             eigenmind detects the concepts a corpus keeps returning to from
             different directions — the structurally unusual, informationally
-            dense nodes that standard search misses. It extracts ontologies
-            from text, weights edges by semantic proximity and causal type,
-            and surfaces the knowledge singularities that precede change:
-            in markets, in geopolitics, in organisations.
+            dense nodes that standard search misses. It computes eigenvector
+            centrality and spectral graph decomposition to weight edges by
+            semantic proximity and causal type, surfacing the knowledge
+            singularities that precede change: in markets, in geopolitics,
+            in organisations.
           </p>
         </div>
         <a href="https://github.com/merlin-intelligence/eigenmind"
@@ -676,6 +622,11 @@ footer {
         </a>
       </div>
 
+    </div>
+    <div style="margin-top: 1.8rem; text-align: center;">
+      <a href="pages/open-source.html" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--gold); padding-bottom: 0.15rem; letter-spacing: 0.05em; text-transform: uppercase;">
+        Explore Full Architecture &amp; Documentation in the Dedicated Open Source Tab →
+      </a>
     </div>
   </div>
 </section>
@@ -773,18 +724,20 @@ footer {
     <div class="footer-inner">
       <span class="footer-copy">© 2026 Merlin Intelligence — operated by praXvalue</span>
       <span class="footer-copy">
-        <a href="manifesto.html">manifesto</a>
+        <a href="pages/manifesto.html">manifesto</a>
         &nbsp;|&nbsp;
-        <a href="team.html">founding team</a>
+        <a href="pages/team.html">founding team</a>
         &nbsp;|&nbsp;
-        <a href="signals.html">signal series</a>
+        <a href="pages/signals.html">signal series</a>
+        &nbsp;|&nbsp;
+        <a href="pages/open-source.html">open source</a>
         &nbsp;|&nbsp;
         <a href="#research">research</a>
         &nbsp;|&nbsp;
         <a href="https://github.com/merlin-intelligence"
            target="_blank" rel="noopener">github / merlin-intelligence</a>
         &nbsp;|&nbsp;
-        <a href="legal-notice.html">legal notice</a>
+        <a href="pages/legal-notice.html">legal notice</a>
       </span>
     </div>
   </div>
