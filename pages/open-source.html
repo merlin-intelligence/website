@@ -3,76 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Merlin Intelligence — Open-Source Framework. Sovereign AI engines: eigenmind for knowledge singularity detection, and olaf (Ontology Learning Agentic Framework) MCP server.">
+<meta name="description" content="Merlin Intelligence — Open-Source Framework. Sovereign AI engines: eigenmind for knowledge singularity detection via graph computation, olaf (Ontology Learning Agentic Framework) MCP server, and CogMaps, the visual interface unifying both over Qdrant-stored documents with RAG, graph metrics, and ontological overlay.">
 <title>Open Source — Merlin Intelligence</title>
-<link rel="icon" type="image/png" href="MI-icon.png">
+<link rel="icon" type="image/png" href="../assets/images/MI-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
 
 <style>
 :root {
-  --bg:     #F0ECE6;
-  --ink:    #14120F;
-  --gold:   #A27844;
-  --rule:   #C3B9AC;
-  --light:  #8A7F74;
-  --pale:   #F7F4F0;
-  --dark:   #1E1A16;
   --code-bg:#15120F;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Lora', Georgia, serif;
-  font-size: 17px;
-  line-height: 1.72;
-  -webkit-font-smoothing: antialiased;
 }
 
 .wrap       { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
 .wrap--wide { max-width: 980px; margin: 0 auto; padding: 0 2rem; }
 
-/* ── Nav ────────────────────────────────────────── */
-nav {
-  padding: 1.2rem 0 1.0rem;
-  border-bottom: 0.5px solid var(--rule);
-}
-nav .wrap--wide {
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-brand {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 0.08em; color: var(--ink);
-  text-decoration: none; text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-.nav-logo {
-  height: 38px;
-  width: 38px;
-  object-fit: cover;
-  display: block;
-  border: 0.5px solid var(--rule);
-  border-radius: 50%;
-  padding: 2px;
-  background: var(--pale);
-  transition: transform 0.2s ease;
-}
-.nav-logo:hover {
-  transform: scale(1.08);
-}
-.nav-sub {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem; color: var(--light); letter-spacing: 0.04em;
-  text-decoration: none;
-}
 .nav-sub a {
   color: inherit; text-decoration: none;
   border-bottom: 0.5px solid var(--rule);
@@ -414,8 +360,8 @@ footer {
 <!-- ── Nav ── -->
 <nav>
   <div class="wrap--wide">
-    <a href="index.html" class="nav-brand">
-      <img src="MI-icon.png" alt="Merlin Intelligence Logo" class="nav-logo">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/images/MI-icon.png" alt="Merlin Intelligence Logo" class="nav-logo">
       <span>Merlin Intelligence</span>
     </a>
     <span class="nav-sub">
@@ -423,7 +369,7 @@ footer {
       <a href="team.html">Founding Team</a> &nbsp;·&nbsp;
       <a href="signals.html">Signal Series</a> &nbsp;·&nbsp;
       <a href="open-source.html" class="active">Open Source</a> &nbsp;·&nbsp;
-      <a href="index.html#research">Research</a> &nbsp;·&nbsp;
+      <a href="../index.html#research">Research</a> &nbsp;·&nbsp;
       operated by praXvalue
     </span>
   </div>
@@ -437,7 +383,7 @@ footer {
       The Open-Source<br><em>Analytical Stack</em>
     </h1>
     <p class="hero-sub">
-      Geoeconomic intelligence requires verifiable foundations. Merlin Intelligence open-sources its core reasoning systems under the MIT licence—enabling practitioners, institutions, and autonomous agents to detect knowledge singularities and construct formal domain ontologies without dependency on closed AI models.
+      Geoeconomic intelligence requires verifiable foundations. Merlin Intelligence open-sources its core reasoning systems under the MIT licence—enabling practitioners, institutions, and autonomous agents to detect knowledge singularities, map cognitive structures, and construct formal domain ontologies without dependency on closed AI models.
     </p>
     <div class="hero-rule"></div>
 
@@ -447,6 +393,7 @@ footer {
         <button class="tab-btn active" id="tab-all" onclick="filterRepos('all')">All Repositories</button>
         <button class="tab-btn" id="tab-eigenmind" onclick="filterRepos('eigenmind')">eigenmind · Core Engine</button>
         <button class="tab-btn" id="tab-olaf" onclick="filterRepos('olaf')">olaf · Agentic Framework (MCP)</button>
+        <button class="tab-btn" id="tab-cogmaps" onclick="filterRepos('cogmaps')">CogMaps · Visual Interface</button>
       </div>
     </div>
   </div>
@@ -456,7 +403,7 @@ footer {
 
   <!-- ── Architecture Pipeline Overview ── -->
   <div class="pipeline-box" id="pipeline-section">
-    <span class="pipeline-title">How the Stack Operates · Dual Engine Workflow</span>
+    <span class="pipeline-title">How the Stack Operates · Triple Engine Workflow</span>
     <div class="pipeline-flow">
       <div class="pipeline-step">
         <span class="pipeline-step-num">Step 01</span>
@@ -466,12 +413,17 @@ footer {
       <div class="pipeline-step">
         <span class="pipeline-step-num">Step 02 · eigenmind</span>
         <div class="pipeline-step-head">Singularity Extraction</div>
-        <div class="pipeline-step-desc">Identifies high-density conceptual nodes, weights relational edges, and exposes structural pivots before market consensus.</div>
+        <div class="pipeline-step-desc">Computes eigenvector centrality and spectral graph decomposition to identify high-density conceptual nodes and expose structural pivots before market consensus.</div>
       </div>
       <div class="pipeline-step">
         <span class="pipeline-step-num">Step 03 · olaf (MCP)</span>
         <div class="pipeline-step-head">Formal Ontology Construction</div>
         <div class="pipeline-step-desc">Orchestrates LLM agents via 22 MCP tools to assert verifiable OWL/RDFS triples backed by Oxigraph and Qdrant.</div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-step-num">Step 04 · CogMaps</span>
+        <div class="pipeline-step-head">Unified Visual Interface</div>
+        <div class="pipeline-step-desc">Brings eigenmind and olaf together in one workspace over the Qdrant-stored corpus, blending classic RAG with graph-based metrics and ontological overlay.</div>
       </div>
     </div>
   </div>
@@ -483,15 +435,15 @@ footer {
         <span class="repo-tag">eigenmind</span>
         <span class="repo-tag repo-tag--alt">MIT Licence</span>
         <span class="repo-tag repo-tag--alt">Python</span>
-        <span class="repo-tag repo-tag--alt">Graph Reasoning</span>
+        <span class="repo-tag repo-tag--alt">Graph Spectral Analysis</span>
       </div>
     </div>
 
-    <h2 class="repo-title">Singularities. Ontologies. <em>Sovereign AI.</em></h2>
+    <h2 class="repo-title">Singularities. Structural Pivots. <em>Sovereign AI.</em></h2>
     <div class="repo-subtitle">Autonomous Knowledge Singularity Detection Engine</div>
 
     <p class="repo-lead">
-      Standard generative AI models excel at summarising widely distributed explicit knowledge, but remain blind to tacit trade-offs, inflection points, and structural contradictions. <code>eigenmind</code> is designed to detect what a corpus keeps returning to from multiple analytical angles—isolating the structurally unusual, high-density nodes that standard search overlooks.
+      Standard generative AI models excel at summarising widely distributed explicit knowledge, but remain blind to tacit trade-offs, inflection points, and structural contradictions. <code>eigenmind</code> identifies singularities through graph computation—isolating the structurally unusual, high-density nodes that standard search overlooks by computing eigenvector centrality and spectral density across the corpus graph.
     </p>
 
     <div class="repo-grid-specs">
@@ -499,7 +451,7 @@ footer {
         <h4>Core Capabilities</h4>
         <ul class="spec-list">
           <li><strong>Singularity Mapping:</strong> Computes topological density to reveal latent regime changes in geopolitics, trade, and financial corridors.</li>
-          <li><strong>Automated Ontology Extraction:</strong> Derives conceptual hierarchies and causal links directly from raw corpora.</li>
+          <li><strong>Eigen-Decomposition Core:</strong> Derives eigenvector centrality and Laplacian spectral embeddings to surface nodes that are structurally load-bearing across multiple analytical framings.</li>
           <li><strong>Causal Edge Weighting:</strong> Evaluates edge significance by semantic proximity and verifiable causal taxonomy rather than superficial word co-occurrence.</li>
           <li><strong>Reproducible & Transferable:</strong> Complete source code delivered under MIT license with no external cloud lock-in.</li>
         </ul>
@@ -507,8 +459,8 @@ footer {
       <div class="spec-block">
         <h4>Technical Architecture</h4>
         <ul class="spec-list">
-          <li><strong>Algorithmic Base:</strong> Graph spectral analysis, semantic embedding projections, and causal dependency graphs.</li>
-          <li><strong>Primary Output:</strong> Structured cognitive assets, entity relationship maps, and early warning radar metrics.</li>
+          <li><strong>Algorithmic Base:</strong> Graph spectral analysis (eigenvector centrality, Laplacian embeddings), semantic embedding projections, and causal dependency graphs.</li>
+          <li><strong>Primary Output:</strong> Ranked singularity scores, structural pivot maps, and early warning radar metrics consumed by <code>CogMaps</code> for hybrid ranking.</li>
           <li><strong>Target Environments:</strong> Sovereign intelligence units, risk analysis desks, and quantitative strategy research.</li>
         </ul>
       </div>
@@ -568,6 +520,53 @@ footer {
     </div>
   </article>
 
+  <!-- ── Card 3: CogMaps ── -->
+  <article class="repo-card" id="card-cogmaps">
+    <div class="repo-header">
+      <div class="repo-badges">
+        <span class="repo-tag">CogMaps</span>
+        <span class="repo-tag repo-tag--alt">MIT Licence</span>
+        <span class="repo-tag repo-tag--alt">Qdrant</span>
+        <span class="repo-tag repo-tag--alt">RAG + Graph + Ontology</span>
+      </div>
+    </div>
+
+    <h2 class="repo-title">One Interface. <em>Two Engines.</em></h2>
+    <div class="repo-subtitle">Visual Interface Unifying eigenmind and olaf</div>
+
+    <p class="repo-lead">
+      <code>CogMaps</code> is the visual interface that brings <code>eigenmind</code> and <code>olaf</code> together into a single analytical workspace. Documents are stored and indexed in Qdrant, and every query combines classic retrieval-augmented generation with <code>eigenmind</code>'s graph-based centrality metrics and <code>olaf</code>'s formal ontology as a live overlay—so results are ranked by relevance, structural significance, and verified conceptual relations at once.
+    </p>
+
+    <div class="repo-grid-specs">
+      <div class="spec-block">
+        <h4>Core Capabilities</h4>
+        <ul class="spec-list">
+          <li><strong>Unified Workspace:</strong> A single interface over <code>eigenmind</code>'s singularity graph and <code>olaf</code>'s formal ontology—no switching between tools to move from a document to its structural context.</li>
+          <li><strong>Hybrid Retrieval:</strong> Blends classic RAG over Qdrant-stored document chunks with graph-based ranking driven by <code>eigenmind</code>'s eigenvector centrality and singularity scores.</li>
+          <li><strong>Ontological Overlay:</strong> Superimposes <code>olaf</code>'s OWL/RDFS concept hierarchies directly onto retrieved documents and graph views, grounding every answer in verified formal relations.</li>
+          <li><strong>Reproducible & Transferable:</strong> Complete source code delivered under MIT license with no external cloud lock-in.</li>
+        </ul>
+      </div>
+      <div class="spec-block">
+        <h4>Technical Architecture</h4>
+        <ul class="spec-list">
+          <li><strong>Document Store:</strong> Qdrant vector store shared with <code>olaf</code> for chunk ingestion, embeddings, and semantic search.</li>
+          <li><strong>Retrieval Engine:</strong> Hybrid pipeline combining semantic similarity search with graph-based metrics pulled from <code>eigenmind</code>.</li>
+          <li><strong>Ontology Integration:</strong> Queries <code>olaf</code>'s Oxigraph triplestore to overlay formal concept relations on retrieved results.</li>
+          <li><strong>Primary Output:</strong> Ranked, ontology-annotated answers alongside interactive graph and concept visualizations.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="repo-footer-bar">
+      <a href="https://github.com/merlin-intelligence/cog-maps" class="repo-cta" target="_blank" rel="noopener">
+        View CogMaps on GitHub →
+      </a>
+      <span class="repo-meta-text">github.com/merlin-intelligence/cog-maps</span>
+    </div>
+  </article>
+
 </main>
 
 <!-- ── Principles Section ── -->
@@ -602,7 +601,7 @@ footer {
     <div class="footer-inner">
       <span class="footer-copy">© 2026 Merlin Intelligence — operated by praXvalue</span>
       <span class="footer-copy">
-        <a href="index.html">home</a>
+        <a href="../index.html">home</a>
         &nbsp;|&nbsp;
         <a href="manifesto.html">manifesto</a>
         &nbsp;|&nbsp;
@@ -612,7 +611,7 @@ footer {
         &nbsp;|&nbsp;
         <a href="open-source.html">open source</a>
         &nbsp;|&nbsp;
-        <a href="index.html#research">research</a>
+        <a href="../index.html#research">research</a>
         &nbsp;|&nbsp;
         <a href="https://github.com/merlin-intelligence"
            target="_blank" rel="noopener">github / merlin-intelligence</a>
@@ -627,22 +626,20 @@ footer {
 function filterRepos(target) {
   const cardEigenmind = document.getElementById('card-eigenmind');
   const cardOlaf = document.getElementById('card-olaf');
+  const cardCogmaps = document.getElementById('card-cogmaps');
+  const cards = { eigenmind: cardEigenmind, olaf: cardOlaf, cogmaps: cardCogmaps };
   const btns = document.querySelectorAll('.tab-btn');
 
   btns.forEach(btn => btn.classList.remove('active'));
 
   if (target === 'all') {
     document.getElementById('tab-all').classList.add('active');
-    cardEigenmind.style.display = 'block';
-    cardOlaf.style.display = 'block';
-  } else if (target === 'eigenmind') {
-    document.getElementById('tab-eigenmind').classList.add('active');
-    cardEigenmind.style.display = 'block';
-    cardOlaf.style.display = 'none';
-  } else if (target === 'olaf') {
-    document.getElementById('tab-olaf').classList.add('active');
-    cardEigenmind.style.display = 'none';
-    cardOlaf.style.display = 'block';
+    Object.values(cards).forEach(card => card.style.display = 'block');
+  } else {
+    document.getElementById('tab-' + target).classList.add('active');
+    Object.entries(cards).forEach(([key, card]) => {
+      card.style.display = key === target ? 'block' : 'none';
+    });
   }
 }
 </script>
