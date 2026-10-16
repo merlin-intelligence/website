@@ -207,6 +207,35 @@ p:last-child { margin-bottom: 0; }
   line-height: 1.58; margin: 0;
 }
 
+/* ── Stat strip ─────────────────────────────────── */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+.stat-box {
+  background: var(--pale);
+  border: 0.5px solid var(--rule);
+  padding: 1.4rem 1.2rem;
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.55rem; font-weight: 700;
+  color: var(--ink); display: block;
+  margin-bottom: 0.3rem;
+}
+.stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; color: var(--gold);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.stat-sub {
+  font-size: 0.75rem; color: var(--light);
+  margin-top: 0.25rem; display: block;
+}
+
 /* ── Open-source repos grid ─────────────────────── */
 .repos-grid {
   display: grid;
@@ -348,7 +377,7 @@ footer {
       <img src="assets/images/MI-icon.png" alt="Merlin Intelligence Logo" class="nav-logo">
       <span>Merlin Intelligence</span>
     </a>
-    <span class="nav-sub"><a href="pages/manifesto.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Manifesto</a> &nbsp;·&nbsp; <a href="pages/team.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Founding Team</a> &nbsp;·&nbsp; <a href="pages/signals.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Signal Series</a> &nbsp;·&nbsp; <a href="pages/open-source.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Open Source</a> &nbsp;·&nbsp; <a href="#research" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Research</a> &nbsp;·&nbsp; operated by praXvalue</span>
+    <span class="nav-sub"><a href="pages/manifesto.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Manifesto</a> &nbsp;·&nbsp; <a href="pages/team.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Founding Team</a> &nbsp;·&nbsp; <a href="pages/signals.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Signal Series</a> &nbsp;·&nbsp; <a href="pages/macro-research.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Global Macro Research</a> &nbsp;·&nbsp; <a href="pages/open-source.html" style="color: inherit; text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem;">Open Source</a></span>
   </div>
 </nav>
 
@@ -458,6 +487,9 @@ footer {
           <a href="articles/merlin_signal_04_grey_rhino.html" style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem; width: fit-content;">
             Signal Series · No. 4 · The AI Grey Rhino: Engineering Closed-Loop Stability
           </a>
+          <a href="articles/article_colombia_geoeconomics.html" style="font-family: 'Space Mono', monospace; font-size: 0.70rem; color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--rule); padding-bottom: 0.1rem; width: fit-content;">
+            Signal Series · No. 5 · Colombia and the Geometry of Sovereign Presence
+          </a>
         </div>
       </div>
       <div class="output-cell">
@@ -474,10 +506,57 @@ footer {
   </div>
 </section>
 
-<!-- ── §03 Singularities ── -->
+<!-- ── §03 Global macro research ── -->
+<section id="macro-research">
+  <div class="wrap">
+    <span class="sec-label">§ 03 · Global macro research</span>
+    <h2 class="section-title">The Calmar ratio as an<br><em>information filter.</em></h2>
+
+    <p>
+      An investment strategy that sustains a healthy Sharpe ratio alongside an exceptionally high, persistent Calmar ratio acts as an empirical filter: preserving capital during violent cross-asset liquidations while capturing structural trends is direct evidence that the underlying model extracts the causal architecture of the macroeconomy before it becomes legible to consensus.
+    </p>
+
+    <div class="sidecard">
+      Operating across a 12-asset liquid ETF universe with strict long-only execution and weekly Tuesday rebalancing, the strategy evaluates an ensemble of candidate models to maximize trajectory linearity and truncate drawdown tail risk. The strategy is unconstrained and not benchmarked; classical market allocations (such as the Traditional 60/40) serve as external market indicators across macroeconomic cycles.
+    </div>
+  </div>
+
+  <div class="wrap--wide">
+    <div class="stat-strip">
+      <div class="stat-box">
+        <span class="stat-num">4.216</span>
+        <span class="stat-label">3Y Calmar Ratio</span>
+        <span class="stat-sub">Max DD: -2.55%</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">1.573</span>
+        <span class="stat-label">3Y True Sharpe</span>
+        <span class="stat-sub">Raw: 2.660 · +10.75% p.a.</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">4.04%</span>
+        <span class="stat-label">3Y Realized Vol</span>
+        <span class="stat-sub">vs 15.27% S&amp;P 500</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">0.100</span>
+        <span class="stat-label">Market Beta (&beta;<sub>SPY</sub>)</span>
+        <span class="stat-sub">Decoupled equity beta</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.8rem; text-align: center;">
+      <a href="pages/macro-research.html" style="font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--gold); text-decoration: none; border-bottom: 0.5px solid var(--gold); padding-bottom: 0.15rem; letter-spacing: 0.05em; text-transform: uppercase;">
+        Explore Full Methodology, Dynamic Risk Budgeting &amp; Weekly Allocations →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── §04 Singularities ── -->
 <section>
   <div class="wrap">
-    <span class="sec-label">§ 03 · Singularities</span>
+    <span class="sec-label">§ 04 · Singularities</span>
     <h2 class="section-title">A mathematics<br><em>of weak signals.</em></h2>
 
     <p>
@@ -576,10 +655,10 @@ footer {
   </div>
 </section>
 
-<!-- ── §04 Open-source framework ── -->
+<!-- ── §05 Open-source framework ── -->
 <section>
   <div class="wrap">
-    <span class="sec-label">§ 04 · Open-source framework</span>
+    <span class="sec-label">§ 05 · Open-source framework</span>
     <h2 class="section-title"><em>eigenmind</em> &amp; <em>olaf</em></h2>
     <p>
       The analytical practice required a robust, open codebase. We open-source our core systems under the MIT license to allow organizations to build, replicate, and extend their own geoeconomic reasoning layers without proprietary dependencies.
@@ -634,10 +713,10 @@ footer {
   </div>
 </section>
 
-<!-- ── §05 Knowledge infrastructure ── -->
+<!-- ── §06 Knowledge infrastructure ── -->
 <section>
   <div class="wrap">
-    <span class="sec-label">§ 05 · Knowledge infrastructure</span>
+    <span class="sec-label">§ 06 · Knowledge infrastructure</span>
     <h2 class="section-title">Building your own<br><em>analytical engine.</em></h2>
 
     <p>
@@ -676,10 +755,10 @@ footer {
   </div>
 </section>
 
-<!-- ── §06 Engagement ── -->
+<!-- ── §07 Engagement ── -->
 <section>
   <div class="wrap">
-    <span class="sec-label">§ 06 · Engagement model</span>
+    <span class="sec-label">§ 07 · Engagement model</span>
     <h2 class="section-title">Embedded partnership,<br><em>not consulting.</em></h2>
 
     <p>
@@ -706,7 +785,7 @@ footer {
 <!-- ── Contact ── -->
 <div class="contact-section">
   <div class="wrap">
-    <span class="sec-label">§ 07 · Get in touch</span>
+    <span class="sec-label">§ 08 · Get in touch</span>
     <h2 class="contact-headline">
       Detect what matters<br><em>before it becomes obvious.</em>
     </h2>
@@ -725,7 +804,7 @@ footer {
 <footer>
   <div class="wrap--wide">
     <div class="footer-inner">
-      <span class="footer-copy">© 2026 Merlin Intelligence — operated by praXvalue</span>
+      <span class="footer-copy">© 2026 Merlin Intelligence</span>
       <span class="footer-copy">
         <a href="pages/manifesto.html">manifesto</a>
         &nbsp;|&nbsp;
@@ -733,9 +812,9 @@ footer {
         &nbsp;|&nbsp;
         <a href="pages/signals.html">signal series</a>
         &nbsp;|&nbsp;
-        <a href="pages/open-source.html">open source</a>
+        <a href="pages/macro-research.html">global macro research</a>
         &nbsp;|&nbsp;
-        <a href="#research">research</a>
+        <a href="pages/open-source.html">open source</a>
         &nbsp;|&nbsp;
         <a href="https://github.com/merlin-intelligence"
            target="_blank" rel="noopener">github / merlin-intelligence</a>
