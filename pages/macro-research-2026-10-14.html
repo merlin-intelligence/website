@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Global Macro Research · Weekly Monitor — October 14, 2026. Tightening Bounds, Compressing Risk: The Portfolio's Shift to Liquidity, and the Macro Fractures Behind the Move.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Weekly Monitor (October 14, 2026): Tightening Bounds, Compressing Risk — The Portfolio's Shift to Liquidity, and the Macro Fractures Behind the Move — Merlin Intelligence">
+<meta property="og:description" content="Global Macro Research · Weekly Monitor — October 14, 2026. Portfolio evolution and cross-asset regime analysis since September 1, 2026.">
+<meta property="og:image" content="../assets/images/macro-preview.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="Weekly Monitor (October 14, 2026): Tightening Bounds, Compressing Risk — The Portfolio's Shift to Liquidity, and the Macro Fractures Behind the Move — Merlin Intelligence">
+<meta name="twitter:description" content="Global Macro Research · Weekly Monitor — October 14, 2026. Portfolio evolution and cross-asset regime analysis since September 1, 2026.">
+<meta name="twitter:image" content="../assets/images/macro-preview.svg">
+<title>Weekly Monitor — October 14, 2026 · Tightening Bounds, Compressing Risk: The Portfolio's Shift to Liquidity — Merlin Intelligence</title>
+<link rel="icon" type="image/png" href="../assets/images/MI-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+
+<style>
+.wrap       { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+.wrap--wide { max-width: 1020px; margin: 0 auto; padding: 0 2rem; }
+
+.nav-sub a {
+  color: inherit; text-decoration: none;
+  border-bottom: 0.5px solid var(--rule);
+  padding-bottom: 0.1rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-sub a:hover { color: var(--gold); border-color: var(--gold); }
+.nav-sub a.active { color: var(--gold); border-color: var(--gold); font-weight: 700; }
+
+/* ── Compact One-Page Layout ────────────────────── */
+.hero {
+  padding: 2.8rem 0 1.8rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -62deg,
+    transparent, transparent 80px,
+    rgba(162,120,68,0.055) 80px,
+    rgba(162,120,68,0.055) 80.5px
+  );
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.66rem; color: var(--gold);
+  letter-spacing: 0.10em; text-transform: uppercase;
+  margin-bottom: 0.8rem; display: block;
+}
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.0rem, 4.5vw, 2.75rem);
+  font-weight: 400; line-height: 1.12;
+  color: var(--ink); margin-bottom: 0.9rem;
+}
+.hero-headline em { font-style: italic; }
+
+section {
+  padding: 2.0rem 0;
+  border-top: 0.5px solid var(--rule);
+}
+.sec-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; color: var(--gold);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 0.45rem; display: block;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+  font-weight: 400; line-height: 1.22;
+  margin-bottom: 0.9rem; color: var(--ink);
+}
+.section-title em { font-style: italic; }
+p { margin-bottom: 0.8rem; font-size: 0.92rem; line-height: 1.6; }
+p:last-child { margin-bottom: 0; }
+
+.summary {
+  border-left: 3px solid var(--gold);
+  padding: 0.15rem 0 0.15rem 1.2rem;
+  margin: 0.9rem 0 1.2rem;
+  max-width: 820px;
+}
+.summary p { font-size: 0.92rem; line-height: 1.58; color: var(--ink); margin-bottom: 0.5rem; }
+
+.shifts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin: 1.0rem 0 1.2rem;
+}
+.shift-card {
+  background: var(--pale);
+  border: 0.5px solid var(--rule);
+  padding: 0.75rem 0.9rem;
+}
+.shift-card .shift-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+}
+.shift-card p {
+  font-size: 0.80rem;
+  line-height: 1.48;
+  margin: 0;
+  color: var(--ink);
+}
+
+figure.macro-figure {
+  margin: 0.8rem 0 0.4rem;
+  border: 0.5px solid var(--rule);
+  background: #FFFFFF;
+  padding: 0.85rem;
+}
+figcaption.macro-caption {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.64rem;
+  color: var(--light);
+  line-height: 1.48;
+  margin-top: 0.55rem;
+}
+figcaption.macro-caption .fig-tag { color: var(--gold); font-weight: 700; }
+
+.tk { font-family: 'Space Mono', monospace; font-size: 0.82em; font-weight: 700; }
+
+.mapping-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem;
+  margin-top: 0.9rem;
+}
+.mapping-item {
+  border-top: 1.5px solid var(--gold);
+  padding-top: 0.65rem;
+}
+.mapping-item h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 0.35rem;
+}
+.mapping-item p {
+  font-size: 0.84rem;
+  line-height: 1.54;
+  margin: 0;
+}
+
+sup.ref-cite { font-size: 0.65rem; line-height: 0; vertical-align: super; margin-left: 1px; }
+sup.ref-cite a { color: var(--gold); text-decoration: none; font-weight: 700; }
+
+.references-block {
+  margin-top: 1.6rem;
+  padding-top: 1.1rem;
+  border-top: 0.5px solid var(--rule);
+}
+.ref-list {
+  list-style: decimal;
+  padding-left: 1.1rem;
+  margin: 0.5rem 0 1.0rem;
+  font-size: 0.73rem;
+  line-height: 1.42;
+  color: var(--ink);
+  columns: 2;
+  column-gap: 1.8rem;
+}
+.ref-list li {
+  margin-bottom: 0.45rem;
+  break-inside: avoid;
+}
+.ref-list li strong { font-family: 'Space Mono', monospace; font-size: 0.69rem; }
+
+.note-box.disclaimer {
+  background: var(--pale);
+  border: 0.5px solid var(--rule);
+  padding: 0.65rem 0.95rem;
+  margin-top: 0.8rem;
+  font-size: 0.71rem;
+  line-height: 1.42;
+  color: var(--light);
+}
+.note-box.disclaimer strong {
+  color: var(--ink);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.63rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 0.4rem;
+}
+
+footer {
+  background: var(--dark);
+  border-top: 0.5px solid rgba(195,185,172,0.2);
+  padding: 2.0rem 0;
+}
+.footer-inner {
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 0.8rem;
+}
+.footer-copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem; color: #5A544E; letter-spacing: 0.04em;
+}
+.footer-copy a {
+  color: #8C827A; text-decoration: none;
+  border-bottom: 0.5px solid rgba(140,130,122,0.3);
+  padding-bottom: 0.1rem;
+}
+.footer-copy a:hover { color: var(--gold); border-color: var(--gold); }
+
+@media (max-width: 900px) {
+  .shifts-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .wrap, .wrap--wide { padding: 0 1.25rem; }
+  .shifts-grid, .mapping-grid { grid-template-columns: 1fr; }
+  .ref-list { columns: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="wrap--wide">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/images/MI-icon.png" alt="Merlin Intelligence Logo" class="nav-logo">
+      <span>Merlin Intelligence</span>
+    </a>
+    <span class="nav-sub">
+      <a href="manifesto.html">Manifesto</a> &nbsp;·&nbsp;
+      <a href="team.html">Founding Team</a> &nbsp;·&nbsp;
+      <a href="signals.html">Signal Series</a> &nbsp;·&nbsp;
+      <a href="macro-research.html" class="active">Global Macro Research</a> &nbsp;·&nbsp;
+      <a href="open-source.html">Open Source</a>
+    </span>
+  </div>
+</nav>
+
+<!-- ── Hero + Panel A & B (September 1 – October 14, 2026) ── -->
+<div class="hero">
+  <div class="wrap--wide">
+    <span class="hero-eyebrow">Global Macro Research · Weekly Monitor — October 14, 2026</span>
+    <h1 class="hero-headline">
+      Tightening Bounds, Compressing Risk: The Portfolio's Shift to Liquidity,<br><em>and the Macro Fractures Behind the Move.</em>
+    </h1>
+    <div class="summary">
+      <p>Following <a href="macro-research-2026-10-06.html"><em>When a Portfolio Becomes a Market Barometer</em></a>, this October 14, 2026 monitor comments on the portfolio changes observed since the beginning of September—capturing a decisive regime transition across seven weekly rebalancings.</p>
+      <p>In late September, the walk-forward learning process selected a new allocator agent among its 60 candidates, activating a markedly more cautious model that tightens concentration bounds and lowers its required return target—indirectly compressing portfolio risk. Rather than stretching for return, this new configuration steps back into risk-free liquidity (<span class="tk">SHV</span> at <strong>31.1%</strong>) and compresses annualized portfolio volatility to <strong>2.67%</strong>.</p>
+    </div>
+
+    <div class="shifts-grid">
+      <div class="shift-card">
+        <span class="shift-tag">1 · Cautious Agent &amp; Cash Fortress</span>
+        <p>By tightening concentration bounds and lowering return demand, the newly activated agent stepped away from directional beta—rotating <strong>31.1%</strong> into cash (<span class="tk">SHV</span>, up from 1.5% in early September) alongside <strong>23.7%</strong> in <span class="tk">UUP</span> and <strong>9.0%</strong> in <span class="tk">IEF</span>.</p>
+      </div>
+      <div class="shift-card">
+        <span class="shift-tag">2 · Duration &amp; Gold Cull</span>
+        <p>Long 20y+ Treasuries (<span class="tk">TLT</span>) and gold (<span class="tk">GLD</span>) moved from 4.0% combined weight at the start of September to <strong>0.0%</strong>, eliminating exposure to sovereign term-premium repricing.</p>
+      </div>
+      <div class="shift-card">
+        <span class="shift-tag">3 · China Exit vs. Feedstocks</span>
+        <p><span class="tk">MCHI</span> was cut from <strong>10.3%</strong> (Sep 01) to <strong>0.07%</strong>, while commodities (<span class="tk">DBC</span>, 6.7%) and energy (<span class="tk">XLE</span>, 6.6%) carry <strong>50.0% of total Euler risk</strong>.</p>
+      </div>
+      <div class="shift-card">
+        <span class="shift-tag">4 · Defensive Equity Tilts</span>
+        <p>Broad <span class="tk">SPY</span> is capped at <strong>4.5%</strong> (3.0% RC), while active equity risk anchors in non-cyclical healthcare (<span class="tk">XLV</span>, 9.5% weight / <strong>27.5% RC</strong>) and value (<span class="tk">VLU</span>, 6.5%).</p>
+      </div>
+    </div>
+
+    <figure class="macro-figure">
+      <svg viewBox="0 0 900 585" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;background:#FFFFFF;border:0.5px solid var(--rule);font-family:'Space Mono',monospace;">
+  <style>
+    .axis-txt { font-size: 10px; fill: #8A7F74; }
+    .panel-hdr { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; fill: #14120F; }
+    .grid-line { stroke: rgba(195,185,172,0.4); stroke-width: 0.6; stroke-dasharray: 4,4; }
+    .zero-line { stroke: #C3B9AC; stroke-width: 1.2; }
+    .leg-title { font-family: 'Playfair Display', serif; font-size: 11px; font-weight: 600; fill: #14120F; }
+    .end-lbl { font-size: 8.8px; font-weight: 700; }
+  </style>
+
+  <!-- Panel A: Share of Capital Across 7 Weekly Reviews (Sep 01 – Oct 13/14) -->
+  <text x="65" y="28" class="panel-hdr">Panel A — Share of Capital Across Weekly Reviews · September 1 – October 14, 2026 (Simplex = 100%)</text>
+  <line x1="65" y1="260.0" x2="755" y2="260.0" class="zero-line"/><text x="57" y="264.0" text-anchor="end" class="axis-txt">0%</text><line x1="65" y1="207.5" x2="755" y2="207.5" class="grid-line"/><text x="57" y="211.5" text-anchor="end" class="axis-txt">25%</text><line x1="65" y1="155.0" x2="755" y2="155.0" class="grid-line"/><text x="57" y="159.0" text-anchor="end" class="axis-txt">50%</text><line x1="65" y1="102.5" x2="755" y2="102.5" class="grid-line"/><text x="57" y="106.5" text-anchor="end" class="axis-txt">75%</text><line x1="65" y1="50.0" x2="755" y2="50.0" class="grid-line"/><text x="57" y="54.0" text-anchor="end" class="axis-txt">100%</text>
+
+  <!-- Sep 01 (x=84.3, w=60, cx=114.3) -->
+  <rect x="84.3" y="256.8" width="60.0" height="3.2" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 1.5%</title></rect><rect x="84.3" y="184.9" width="60.0" height="71.9" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 34.2%</title></rect><text x="114.3" y="223.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 34%</text><rect x="84.3" y="178.0" width="60.0" height="6.9" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 3.3%</title></rect><rect x="84.3" y="173.2" width="60.0" height="4.8" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: 2.3%</title></rect><rect x="84.3" y="169.6" width="60.0" height="3.6" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 1.7%</title></rect><rect x="84.3" y="157.4" width="60.0" height="12.2" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 5.8%</title></rect><rect x="84.3" y="147.2" width="60.0" height="10.2" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 4.8%</title></rect><rect x="84.3" y="127.9" width="60.0" height="19.3" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 9.2%</title></rect><text x="114.3" y="140.6" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 9%</text><rect x="84.3" y="86.9" width="60.0" height="41.0" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 19.5%</title></rect><text x="114.3" y="110.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 20%</text><rect x="84.3" y="71.5" width="60.0" height="15.4" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 7.3%</title></rect><rect x="84.3" y="49.8" width="60.0" height="21.7" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 10.3%</title></rect><text x="114.3" y="63.6" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 10%</text>
+
+  <!-- Sep 08 (x=182.9, w=60, cx=212.9) -->
+  <rect x="182.9" y="256.8" width="60.0" height="3.2" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 1.5%</title></rect><rect x="182.9" y="186.9" width="60.0" height="69.9" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 33.3%</title></rect><text x="212.9" y="224.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 33%</text><rect x="182.9" y="183.7" width="60.0" height="3.2" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 1.5%</title></rect><rect x="182.9" y="180.2" width="60.0" height="3.5" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 1.7%</title></rect><rect x="182.9" y="165.1" width="60.0" height="15.1" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 7.2%</title></rect><rect x="182.9" y="145.7" width="60.0" height="19.4" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 9.3%</title></rect><text x="212.9" y="158.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLE 9%</text><rect x="182.9" y="126.3" width="60.0" height="19.4" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 9.2%</title></rect><text x="212.9" y="139.0" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 9%</text><rect x="182.9" y="85.1" width="60.0" height="41.2" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 19.6%</title></rect><text x="212.9" y="108.7" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 20%</text><rect x="182.9" y="69.7" width="60.0" height="15.4" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 7.3%</title></rect><rect x="182.9" y="50.0" width="60.0" height="19.7" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 9.4%</title></rect><text x="212.9" y="62.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 9%</text>
+
+  <!-- Sep 15 (x=281.4, w=60, cx=311.4) -->
+  <rect x="281.4" y="256.8" width="60.0" height="3.2" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 1.5%</title></rect><rect x="281.4" y="186.6" width="60.0" height="70.2" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 33.5%</title></rect><text x="311.4" y="224.7" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 33%</text><rect x="281.4" y="183.3" width="60.0" height="3.3" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 1.6%</title></rect><rect x="281.4" y="178.5" width="60.0" height="4.8" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: 2.3%</title></rect><rect x="281.4" y="175.1" width="60.0" height="3.4" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 1.6%</title></rect><rect x="281.4" y="158.0" width="60.0" height="17.1" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 8.2%</title></rect><text x="311.4" y="169.6" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">DBC 8%</text><rect x="281.4" y="138.8" width="60.0" height="19.2" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 9.1%</title></rect><text x="311.4" y="151.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLE 9%</text><rect x="281.4" y="130.3" width="60.0" height="8.5" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 4.0%</title></rect><rect x="281.4" y="89.2" width="60.0" height="41.1" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 19.6%</title></rect><text x="311.4" y="112.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 20%</text><rect x="281.4" y="73.9" width="60.0" height="15.3" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 7.3%</title></rect><rect x="281.4" y="67.7" width="60.0" height="6.2" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 2.9%</title></rect><rect x="281.4" y="50.0" width="60.0" height="17.7" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 8.4%</title></rect><text x="311.4" y="61.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 8%</text>
+
+  <!-- Sep 22 (x=380.0, w=60, cx=410.0) -->
+  <rect x="380.0" y="256.8" width="60.0" height="3.2" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 1.5%</title></rect><rect x="380.0" y="185.9" width="60.0" height="70.9" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 33.8%</title></rect><text x="410.0" y="224.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 34%</text><rect x="380.0" y="182.6" width="60.0" height="3.3" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 1.6%</title></rect><rect x="380.0" y="177.7" width="60.0" height="4.9" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: 2.3%</title></rect><rect x="380.0" y="177.1" width="60.0" height="0.6" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 0.3%</title></rect><rect x="380.0" y="146.3" width="60.0" height="30.8" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 14.7%</title></rect><text x="410.0" y="164.7" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">DBC 15%</text><rect x="380.0" y="130.6" width="60.0" height="15.7" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 7.5%</title></rect><rect x="380.0" y="122.0" width="60.0" height="8.6" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 4.1%</title></rect><rect x="380.0" y="81.2" width="60.0" height="40.8" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 19.4%</title></rect><text x="410.0" y="104.6" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 19%</text><rect x="380.0" y="65.6" width="60.0" height="15.6" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 7.4%</title></rect><rect x="380.0" y="59.2" width="60.0" height="6.4" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 3.0%</title></rect><rect x="380.0" y="50.2" width="60.0" height="9.0" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 4.3%</title></rect>
+
+  <!-- Sep 29 (x=478.6, w=60, cx=508.6) -->
+  <rect x="478.6" y="194.1" width="60.0" height="65.9" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 31.4%</title></rect><text x="508.6" y="230.0" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">SHV 31%</text><rect x="478.6" y="144.4" width="60.0" height="49.7" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 23.7%</title></rect><text x="508.6" y="172.2" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 24%</text><rect x="478.6" y="122.5" width="60.0" height="21.9" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 10.4%</title></rect><text x="508.6" y="136.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">IEF 10%</text><rect x="478.6" y="113.8" width="60.0" height="8.7" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 4.2%</title></rect><rect x="478.6" y="100.6" width="60.0" height="13.2" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 6.3%</title></rect><rect x="478.6" y="81.6" width="60.0" height="19.0" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 9.1%</title></rect><text x="508.6" y="94.1" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 9%</text><rect x="478.6" y="68.0" width="60.0" height="13.6" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 6.5%</title></rect><rect x="478.6" y="58.5" width="60.0" height="9.5" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 4.5%</title></rect><rect x="478.6" y="53.5" width="60.0" height="5.0" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 2.4%</title></rect><rect x="478.6" y="50.1" width="60.0" height="3.4" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 1.6%</title></rect>
+
+  <!-- Oct 06 (x=577.1, w=60, cx=607.1) -->
+  <rect x="577.1" y="194.2" width="60.0" height="65.8" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 31.3%</title></rect><text x="607.1" y="230.1" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">SHV 31%</text><rect x="577.1" y="144.2" width="60.0" height="50.0" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 23.8%</title></rect><text x="607.1" y="172.2" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 24%</text><rect x="577.1" y="125.2" width="60.0" height="19.0" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 9.1%</title></rect><text x="607.1" y="137.7" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">IEF 9%</text><rect x="577.1" y="111.4" width="60.0" height="13.8" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 6.5%</title></rect><rect x="577.1" y="98.0" width="60.0" height="13.4" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 6.4%</title></rect><rect x="577.1" y="78.5" width="60.0" height="19.5" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 9.3%</title></rect><text x="607.1" y="91.2" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 9%</text><rect x="577.1" y="64.8" width="60.0" height="13.7" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 6.5%</title></rect><rect x="577.1" y="55.2" width="60.0" height="9.6" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 4.6%</title></rect><rect x="577.1" y="50.1" width="60.0" height="5.1" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 2.4%</title></rect><rect x="577.1" y="50.0" width="60.0" height="0.1" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 0.1%</title></rect>
+
+  <!-- Oct 13/14 (x=675.7, w=60, cx=705.7) -->
+  <rect x="675.7" y="194.8" width="60.0" height="65.2" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 31.1%</title></rect><text x="705.7" y="230.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">SHV 31%</text><rect x="675.7" y="145.0" width="60.0" height="49.8" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 23.7%</title></rect><text x="705.7" y="172.9" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 24%</text><rect x="675.7" y="126.0" width="60.0" height="19.0" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 9.0%</title></rect><text x="705.7" y="138.5" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">IEF 9%</text><rect x="675.7" y="112.0" width="60.0" height="14.0" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 6.7%</title></rect><rect x="675.7" y="98.2" width="60.0" height="13.8" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 6.6%</title></rect><rect x="675.7" y="78.3" width="60.0" height="19.9" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 9.5%</title></rect><text x="705.7" y="91.2" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 9%</text><rect x="675.7" y="64.6" width="60.0" height="13.7" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 6.5%</title></rect><rect x="675.7" y="55.1" width="60.0" height="9.5" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 4.5%</title></rect><rect x="675.7" y="50.2" width="60.0" height="4.9" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 2.3%</title></rect><rect x="675.7" y="50.1" width="60.0" height="0.1" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 0.1%</title></rect>
+
+  <text x="114.3" y="278" text-anchor="middle" class="axis-txt" font-weight="600">Sep 01</text>
+  <text x="212.9" y="278" text-anchor="middle" class="axis-txt" font-weight="600">Sep 08</text>
+  <text x="311.4" y="278" text-anchor="middle" class="axis-txt" font-weight="600">Sep 15</text>
+  <text x="410.0" y="278" text-anchor="middle" class="axis-txt" font-weight="600">Sep 22</text>
+  <text x="508.6" y="278" text-anchor="middle" class="axis-txt" font-weight="600">Sep 29</text>
+  <text x="607.1" y="278" text-anchor="middle" class="axis-txt" font-weight="600">Oct 06</text>
+  <text x="705.7" y="278" text-anchor="middle" class="axis-txt" font-weight="600">Oct 14</text>
+
+  <!-- Panel A Legend -->
+  <text x="772" y="46" class="leg-title">Asset Sleeves</text>
+  <rect x="772" y="60" width="11" height="11" fill="#E11D48"/><text x="789" y="69" font-size="8.8" fill="#14120F" font-weight="600">MCHI <tspan fill="#8A7F74" font-weight="400">(China)</tspan></text>
+  <rect x="772" y="80" width="11" height="11" fill="#0D9488"/><text x="789" y="89" font-size="8.8" fill="#14120F" font-weight="600">EEM <tspan fill="#8A7F74" font-weight="400">(EM Equities)</tspan></text>
+  <rect x="772" y="100" width="11" height="11" fill="#1E40AF"/><text x="789" y="109" font-size="8.8" fill="#14120F" font-weight="600">SPY <tspan fill="#8A7F74" font-weight="400">(S&amp;P 500)</tspan></text>
+  <rect x="772" y="120" width="11" height="11" fill="#6366F1"/><text x="789" y="129" font-size="8.8" fill="#14120F" font-weight="600">VLU <tspan fill="#8A7F74" font-weight="400">(US Value)</tspan></text>
+  <rect x="772" y="140" width="11" height="11" fill="#10B981"/><text x="789" y="149" font-size="8.8" fill="#14120F" font-weight="600">XLV <tspan fill="#8A7F74" font-weight="400">(Healthcare)</tspan></text>
+  <rect x="772" y="160" width="11" height="11" fill="#F59E0B"/><text x="789" y="169" font-size="8.8" fill="#14120F" font-weight="600">XLE <tspan fill="#8A7F74" font-weight="400">(Energy)</tspan></text>
+  <rect x="772" y="180" width="11" height="11" fill="#B45309"/><text x="789" y="189" font-size="8.8" fill="#14120F" font-weight="600">DBC <tspan fill="#8A7F74" font-weight="400">(Commodities)</tspan></text>
+  <rect x="772" y="200" width="11" height="11" fill="#D97706"/><text x="789" y="209" font-size="8.8" fill="#14120F" font-weight="600">GLD <tspan fill="#8A7F74" font-weight="400">(Gold)</tspan></text>
+  <rect x="772" y="220" width="11" height="11" fill="#7C3AED"/><text x="789" y="229" font-size="8.8" fill="#14120F" font-weight="600">TLT <tspan fill="#8A7F74" font-weight="400">(20y+ Treas.)</tspan></text>
+  <rect x="772" y="240" width="11" height="11" fill="#0284C7"/><text x="789" y="249" font-size="8.8" fill="#14120F" font-weight="600">IEF <tspan fill="#8A7F74" font-weight="400">(7-10y Treas.)</tspan></text>
+  <rect x="772" y="260" width="11" height="11" fill="#059669"/><text x="789" y="269" font-size="8.8" fill="#14120F" font-weight="600">UUP <tspan fill="#8A7F74" font-weight="400">(US Dollar)</tspan></text>
+  <rect x="772" y="280" width="11" height="11" fill="#64748B"/><text x="789" y="289" font-size="8.8" fill="#14120F" font-weight="600">SHV <tspan fill="#8A7F74" font-weight="400">(Cash T-Bills)</tspan></text>
+
+  <!-- Panel B: Cumulative Performance Since September 1, 2026 (%) -->
+  <text x="65" y="316" class="panel-hdr">Panel B — Cumulative Performance Since September 1, 2026 (%) · Portfolio vs. Core Sleeves</text>
+  <line x1="65" y1="335.0" x2="755" y2="335.0" class="grid-line"/><text x="57" y="339.0" text-anchor="end" class="axis-txt">+6%</text>
+  <line x1="65" y1="373.2" x2="755" y2="373.2" class="grid-line"/><text x="57" y="377.2" text-anchor="end" class="axis-txt">+4%</text>
+  <line x1="65" y1="411.4" x2="755" y2="411.4" class="grid-line"/><text x="57" y="415.4" text-anchor="end" class="axis-txt">+2%</text>
+  <line x1="65" y1="449.5" x2="755" y2="449.5" class="zero-line"/><text x="57" y="453.5" text-anchor="end" class="axis-txt">0%</text>
+  <line x1="65" y1="487.7" x2="755" y2="487.7" class="grid-line"/><text x="57" y="491.7" text-anchor="end" class="axis-txt">-2%</text>
+  <line x1="65" y1="525.9" x2="755" y2="525.9" class="grid-line"/><text x="57" y="529.9" text-anchor="end" class="axis-txt">-4%</text>
+
+  <!-- Vertical Regime Switch Marker at Sep 29 (x=517.1) -->
+  <line x1="517.1" y1="335.0" x2="517.1" y2="545.0" stroke="#A27844" stroke-width="1.1" stroke-dasharray="3,3"/>
+  <text x="522" y="346" font-size="8.5" fill="#A27844" font-weight="700">Cautious Agent Activated (Sep 29)</text>
+
+  <!-- Sleeve Trajectories -->
+  <polyline fill="none" stroke="#B45309" stroke-width="1.5" opacity="0.88" points="65.0,449.5 88.8,449.5 112.6,447.8 136.4,451.3 160.2,421.4 184.0,394.5 207.8,348.5 231.6,376.0 255.3,376.6 279.1,344.9 302.9,376.0 326.7,382.6 350.5,389.8 374.3,410.7 398.1,419.1 421.9,392.7 445.7,374.8 469.5,408.3 493.3,416.1 517.1,445.4 540.9,426.2 564.7,400.5 588.4,413.1 612.2,422.0 636.0,404.1 659.8,414.9 683.6,391.0 707.4,388.0 731.2,365.8 755.0,356.9"/>
+  <polyline fill="none" stroke="#F59E0B" stroke-width="1.5" opacity="0.88" points="65.0,449.5 88.8,439.8 112.6,454.0 136.4,470.5 160.2,449.5 184.0,433.6 207.8,444.8 231.6,438.6 255.3,456.6 279.1,415.4 302.9,471.4 326.7,458.1 350.5,463.1 374.3,506.7 398.1,526.9 421.9,509.4 445.7,502.5 469.5,519.1 493.3,517.4 517.1,534.0 540.9,535.2 564.7,499.6 588.4,496.0 612.2,477.3 636.0,468.4 659.8,480.0 683.6,424.3 707.4,429.0 731.2,401.4 755.0,366.1"/>
+  <polyline fill="none" stroke="#059669" stroke-width="1.6" opacity="0.92" points="65.0,449.5 88.8,452.3 112.6,463.1 136.4,458.3 160.2,464.4 184.0,465.1 207.8,461.7 231.6,459.0 255.3,452.3 279.1,448.9 302.9,436.7 326.7,438.0 350.5,437.4 374.3,431.3 398.1,431.3 421.9,419.8 445.7,417.1 469.5,421.8 493.3,416.4 517.1,413.0 540.9,411.6 564.7,398.8 588.4,403.5 612.2,396.8 636.0,402.9 659.8,393.4 683.6,397.4 707.4,394.7 731.2,387.3 755.0,394.7"/>
+  <polyline fill="none" stroke="#1E40AF" stroke-width="1.5" opacity="0.88" points="65.0,449.5 88.8,441.1 112.6,421.0 136.4,428.5 160.2,439.1 184.0,448.0 207.8,459.4 231.6,443.3 255.3,451.8 279.1,460.5 302.9,468.9 326.7,447.5 350.5,445.0 374.3,415.4 398.1,415.7 421.9,429.7 445.7,431.2 469.5,420.8 493.3,435.2 517.1,438.7 540.9,442.7 564.7,439.3 588.4,425.1 612.2,412.0 636.0,401.3 659.8,406.0 683.6,414.3 707.4,402.6 731.2,403.8 755.0,404.0"/>
+  <polyline fill="none" stroke="#6366F1" stroke-width="1.5" opacity="0.85" stroke-dasharray="4,2" points="65.0,449.5 88.8,434.4 112.6,418.6 136.4,425.8 160.2,440.3 184.0,449.3 207.8,458.5 231.6,441.9 255.3,444.2 279.1,451.1 302.9,467.3 326.7,456.0 350.5,465.4 374.3,454.3 398.1,460.7 421.9,473.6 445.7,476.8 469.5,467.8 493.3,484.5 517.1,489.3 540.9,497.3 564.7,492.6 588.4,482.4 612.2,474.5 636.0,465.0 659.8,471.9 683.6,463.3 707.4,459.0 731.2,454.0 755.0,450.8"/>
+  <polyline fill="none" stroke="#10B981" stroke-width="1.5" opacity="0.88" points="65.0,449.5 88.8,435.3 112.6,431.9 136.4,452.0 160.2,500.0 184.0,506.1 207.8,516.4 231.6,519.7 255.3,493.1 279.1,494.1 302.9,492.9 326.7,481.4 350.5,486.0 374.3,471.9 398.1,462.1 421.9,474.3 445.7,462.3 469.5,453.1 493.3,446.8 517.1,452.7 540.9,478.5 564.7,503.3 588.4,503.5 612.2,490.2 636.0,493.4 659.8,474.2 683.6,481.4 707.4,451.8 731.2,438.7 755.0,464.7"/>
+  <polyline fill="none" stroke="#0284C7" stroke-width="1.5" opacity="0.88" points="65.0,449.5 88.8,447.9 112.6,445.8 136.4,446.4 160.2,448.3 184.0,453.7 207.8,468.6 231.6,472.1 255.3,473.8 279.1,476.1 302.9,477.9 326.7,467.2 350.5,476.5 374.3,469.2 398.1,469.0 421.9,489.1 445.7,499.5 469.5,493.1 493.3,502.8 517.1,504.5 540.9,507.4 564.7,501.2 588.4,506.4 612.2,509.1 636.0,504.7 659.8,505.2 683.6,498.1 707.4,499.1 731.2,498.5 755.0,496.2"/>
+
+  <!-- Portfolio Trajectory (Highlighted) -->
+  <polyline fill="none" stroke="#14120F" stroke-width="2.8" points="65.0,449.5 88.8,443.9 112.6,443.8 136.4,446.3 160.2,456.0 184.0,457.6 207.8,461.1 231.6,456.2 255.3,456.5 279.1,452.6 302.9,462.1 326.7,455.9 350.5,458.7 374.3,454.8 398.1,457.8 421.9,459.3 445.7,458.2 469.5,458.6 493.3,460.3 517.1,462.9 540.9,465.3 564.7,459.5 588.4,459.7 612.2,454.6 636.0,453.3 659.8,451.9 683.6,448.4 707.4,443.6 731.2,437.6 755.0,438.7"/>
+  <circle cx="755.0" cy="438.7" r="3.5" fill="#14120F"/>
+
+  <!-- Panel B X-Axis Labels -->
+  <text x="65.0" y="562" text-anchor="middle" class="axis-txt" font-weight="600">Sep 01</text>
+  <text x="160.2" y="562" text-anchor="middle" class="axis-txt" font-weight="600">Sep 08</text>
+  <text x="279.1" y="562" text-anchor="middle" class="axis-txt" font-weight="600">Sep 15</text>
+  <text x="398.1" y="562" text-anchor="middle" class="axis-txt" font-weight="600">Sep 22</text>
+  <text x="517.1" y="562" text-anchor="middle" class="axis-txt" font-weight="600">Sep 29</text>
+  <text x="636.0" y="562" text-anchor="middle" class="axis-txt" font-weight="600">Oct 06</text>
+  <text x="755.0" y="562" text-anchor="middle" class="axis-txt" font-weight="600">Oct 14</text>
+
+  <!-- Panel B Right-Side Endpoint Return Labels -->
+  <text x="763" y="357" class="end-lbl" fill="#B45309">DBC +4.85%</text>
+  <text x="763" y="370" class="end-lbl" fill="#F59E0B">XLE +4.37%</text>
+  <text x="763" y="394" class="end-lbl" fill="#059669">UUP +2.87%</text>
+  <text x="763" y="407" class="end-lbl" fill="#1E40AF">SPY +2.38%</text>
+  <rect x="760" y="428" width="122" height="15" rx="2" fill="#14120F"/>
+  <text x="765" y="439" class="end-lbl" fill="#FFFFFF">Portfolio +0.57%</text>
+  <text x="763" y="454" class="end-lbl" fill="#6366F1">VLU -0.06%</text>
+  <text x="763" y="468" class="end-lbl" fill="#10B981">XLV -0.79%</text>
+  <text x="763" y="499" class="end-lbl" fill="#0284C7">IEF -2.44%</text>
+</svg>
+      <figcaption class="macro-caption">
+        <span class="fig-tag">Portfolio Weight &amp; Performance Trajectory (Sep 01 – Oct 14, 2026) —</span> <strong>Panel A:</strong> Nominal simplex weights across the seven weekly reviews since September 1. <strong>Panel B:</strong> Cumulative percentage performance since September 1 for the walk-forward Portfolio (<strong>+0.57%</strong> at 2.67% annualized volatility) alongside <span class="tk">DBC</span> (+4.85%), <span class="tk">XLE</span> (+4.37%), <span class="tk">UUP</span> (+2.87%), <span class="tk">SPY</span> (+2.38%), <span class="tk">VLU</span> (-0.06%), <span class="tk">XLV</span> (-0.79%), and <span class="tk">IEF</span> (-2.44%). Under Euler risk decomposition<sup class="ref-cite"><a href="#ref-1">[1]</a></sup>, the October 14 defensive anchor (<span class="tk">SHV</span> 31.1%, <span class="tk">UUP</span> 23.7%, <span class="tk">IEF</span> 9.0%) represents 63.8% of weight yet only 11.6% of total portfolio risk.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+
+<!-- ── Reading the Macro Regime Directly ── -->
+<section>
+  <div class="wrap--wide">
+    <span class="sec-label">Causal Regime Mapping · Ontology-Guided Transmission Analysis</span>
+    <h2 class="section-title">Reading the macro regime<br><em>through portfolio transitions.</em></h2>
+    <p style="max-width:860px; margin-bottom:1.1rem;">
+      Why did the learning process switch to a cautious agent that tightens concentration limits and reduces its return requirement? Structuring the September–October macro environment through our domain ontology reveals how traditional 60/40 diversification broke down: fiscal supply congestion, external debt funding of AI capex, and hawkish central bank discipline turned concentrated directional bets into sources of uncompensated tail risk. The snapshot below shows the core subgraph from <code>von_neumann_quant_macro_research.ttl</code> that guided our commentary:
+    </p>
+
+    <figure class="macro-figure" style="margin: 0.8rem 0 1.4rem;">
+      <svg viewBox="0 0 900 285" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;background:#FFFFFF;border:0.5px solid var(--rule);font-family:'Space Mono',monospace;">
+        <defs>
+          <marker id="arr-gold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#A27844"/>
+          </marker>
+          <marker id="arr-dark" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#64748B"/>
+          </marker>
+          <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+          </marker>
+        </defs>
+        <style>
+          .ont-hdr { font-family: 'Playfair Display', serif; font-size: 12.5px; font-weight: 600; fill: #14120F; }
+          .ont-col { font-size: 8.5px; font-weight: 700; fill: #A27844; letter-spacing: 0.08em; text-transform: uppercase; }
+          .ont-node { fill: #FAF6F0; stroke: #C3B9AC; stroke-width: 1; }
+          .ont-node-ev { fill: #FFFBEB; stroke: #D97706; stroke-width: 1; }
+          .ont-node-port { fill: #14120F; stroke: #14120F; }
+          .ont-lbl { font-size: 8.8px; font-weight: 700; fill: #14120F; }
+          .ont-sub { font-size: 7.6px; fill: #6B6259; }
+          .ont-port-lbl { font-size: 8.6px; font-weight: 700; fill: #FFFFFF; }
+          .ont-port-sub { font-size: 7.5px; fill: #D6CFC7; }
+          .ont-edge { font-size: 7.5px; fill: #7C5A2B; font-weight: 700; }
+        </style>
+
+        <text x="24" y="24" class="ont-hdr">Ontology Subgraph Snapshot — Key Causal Triples Driving the Equilibrium Commentary (OWL / SKOS)</text>
+        <text x="120" y="44" text-anchor="middle" class="ont-col">1 · Macro &amp; Policy Nodes</text>
+        <text x="435" y="44" text-anchor="middle" class="ont-col">2 · Market &amp; Cross-Asset Friction</text>
+        <text x="765" y="44" text-anchor="middle" class="ont-col">3 · Equilibrium Portfolio Response</text>
+
+        <!-- Row 1: Fiscal Deficit & Bessent Buyback -> BondSelloff -> TLT 0% / SHV 31.1% -->
+        <rect x="24" y="54" width="195" height="42" rx="3" class="ont-node"/>
+        <text x="32" y="70" class="ont-lbl">:FiscalDeficit &amp; :PublicDebt</text>
+        <text x="32" y="84" class="ont-sub">:Bessent6bnBuybackOperation ($6B vs $8-10B)</text>
+
+        <line x1="219" y1="75" x2="322" y2="75" stroke="#A27844" stroke-width="1.2" marker-end="url(#arr-gold)"/>
+        <text x="270" y="69" text-anchor="middle" class="ont-edge">:drives / :leadsTo</text>
+
+        <rect x="325" y="54" width="220" height="42" rx="3" class="ont-node-ev"/>
+        <text x="333" y="70" class="ont-lbl">:BondSelloff &amp; :10yearTreasuryYield</text>
+        <text x="333" y="84" class="ont-sub">10Y &gt; 5% · Low :PrimaryDealer Takedown</text>
+
+        <line x1="545" y1="75" x2="642" y2="75" stroke="#64748B" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-dark)"/>
+        <text x="593" y="69" text-anchor="middle" class="ont-edge" fill="#475569">avoids duration</text>
+
+        <rect x="645" y="54" width="232" height="42" rx="3" class="ont-node-port"/>
+        <text x="655" y="70" class="ont-port-lbl">TLT 0.0% · SHV 31.1% · IEF 9.0%</text>
+        <text x="655" y="84" class="ont-port-sub">Zero long duration · Front-end carry fortress</text>
+
+        <!-- Row 2: Jackson Hole & Sep 2026 Fed Hike -> Debasement Bar & USD Floor -> GLD 0% / UUP 23.7% -->
+        <rect x="24" y="108" width="195" height="42" rx="3" class="ont-node"/>
+        <text x="32" y="124" class="ont-lbl">:JacksonHoleSymposium (Warsh)</text>
+        <text x="32" y="138" class="ont-sub">:StraitOfHormuz &amp; :Tariff :drives :Inflation</text>
+
+        <line x1="219" y1="129" x2="322" y2="129" stroke="#A27844" stroke-width="1.2" marker-end="url(#arr-gold)"/>
+        <text x="270" y="123" text-anchor="middle" class="ont-edge">:leadsTo</text>
+
+        <rect x="325" y="108" width="220" height="42" rx="3" class="ont-node-ev"/>
+        <text x="333" y="124" class="ont-lbl">:September2026FedRateHike (+25bp)</text>
+        <text x="333" y="138" class="ont-sub">3.75–4.00% · Raises bar for :DebasementTrade</text>
+
+        <line x1="545" y1="129" x2="642" y2="129" stroke="#64748B" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-dark)"/>
+        <text x="593" y="123" text-anchor="middle" class="ont-edge" fill="#475569">exits gold / holds USD</text>
+
+        <rect x="645" y="108" width="232" height="42" rx="3" class="ont-node-port"/>
+        <text x="655" y="124" class="ont-port-lbl">GLD 0.0% · UUP 23.7% (9.4% RC)</text>
+        <text x="655" y="138" class="ont-port-sub">Purges debasement trade · Anchors USD floor</text>
+
+        <!-- Row 3: Hyperscaler FCF Collapse & External Debt -> EverythingTrade & HY Correlation -> SPY Capped -->
+        <rect x="24" y="162" width="195" height="42" rx="3" class="ont-node"/>
+        <text x="32" y="178" class="ont-lbl">:Hyperscaler :FreeCashFlow Collapse</text>
+        <text x="32" y="192" class="ont-sub">:PrivateCredit, :IGCredit, :YenCarryTrade</text>
+
+        <line x1="219" y1="183" x2="322" y2="183" stroke="#A27844" stroke-width="1.2" marker-end="url(#arr-gold)"/>
+        <text x="270" y="177" text-anchor="middle" class="ont-edge">:funds :AiCapex</text>
+
+        <rect x="325" y="162" width="220" height="42" rx="3" class="ont-node-ev"/>
+        <text x="333" y="178" class="ont-lbl">:EverythingTrade &amp; :AiTrade</text>
+        <text x="333" y="192" class="ont-sub">:Equity :correlatesWith :HighYieldCredit</text>
+
+        <line x1="545" y1="183" x2="642" y2="183" stroke="#64748B" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-dark)"/>
+        <text x="593" y="177" text-anchor="middle" class="ont-edge" fill="#475569">caps broad beta</text>
+
+        <rect x="645" y="162" width="232" height="42" rx="3" class="ont-node-port"/>
+        <text x="655" y="178" class="ont-port-lbl">SPY Capped at 4.5% (3.0% RC)</text>
+        <text x="655" y="192" class="ont-port-sub">MCHI Cut 10.3% &rarr; 0.07% · Tightens w_max</text>
+
+        <!-- Row 4: Energy, Healthcare & Value -> :diversifies :AiTrade -> 77.5% of Active Risk -->
+        <rect x="24" y="216" width="195" height="46" rx="3" class="ont-node"/>
+        <text x="32" y="233" class="ont-lbl">:EnergySector &amp; :HealthcareSector</text>
+        <text x="32" y="247" class="ont-sub">Neg. beta / neg. HY corr. · :ValueFactor FCF</text>
+
+        <line x1="219" y1="239" x2="322" y2="239" stroke="#059669" stroke-width="1.3" marker-end="url(#arr-green)"/>
+        <text x="270" y="233" text-anchor="middle" class="ont-edge" fill="#059669">:diversifies</text>
+
+        <rect x="325" y="216" width="220" height="46" rx="3" class="ont-node-ev" style="fill:#ECFDF5;stroke:#059669;"/>
+        <text x="333" y="233" class="ont-lbl">:AiTrade &amp; :MarketVolatility</text>
+        <text x="333" y="247" class="ont-sub">XLV cheap vs 30Y :ValuationPercentile</text>
+
+        <line x1="545" y1="239" x2="642" y2="239" stroke="#059669" stroke-width="1.3" marker-end="url(#arr-green)"/>
+        <text x="593" y="233" text-anchor="middle" class="ont-edge" fill="#059669">concentrates RC</text>
+
+        <rect x="645" y="216" width="232" height="46" rx="3" class="ont-node-port"/>
+        <text x="655" y="233" class="ont-port-lbl">XLE 30.0% RC · XLV 27.5% RC · DBC 20.0%</text>
+        <text x="655" y="247" class="ont-port-sub">77.5% of total Euler risk + VLU (7.7% RC)</text>
+      </svg>
+      <div style="background:#FAF6F0;border:0.5px solid var(--rule);border-top:none;padding:0.55rem 0.85rem;font-family:'Space Mono',monospace;font-size:0.64rem;line-height:1.55;color:#4A433C;overflow-x:auto;">
+        <strong style="color:#14120F;">Selected RDF/OWL Triples (<code>von_neumann_quant_macro_research.ttl</code>):</strong><br>
+        <code>:FiscalDeficit :drives :PublicDebt , :BondSelloff . &nbsp; :Bessent6bnBuybackOperation :leadsTo :BondSelloff ; :worksAgainst :FederalReserve .</code><br>
+        <code>:JacksonHoleSymposium :leadsTo :September2026FedRateHike . &nbsp; :StraitOfHormuz :drives :Inflation . &nbsp; :Tariff :drives :Inflation .</code><br>
+        <code>:PrivateCredit :funds :AiCapex . &nbsp; :InvestmentGradeCredit :funds :AiCapex . &nbsp; :YenCarryTrade :funds :AiCapex . &nbsp; :Equity :correlatesWith :HighYieldCredit .</code><br>
+        <code>:EnergySector :diversifies :AiTrade ; skos:definition "...negative beta to the overall market and significantly negative correlation to high-yield credit"@en .</code><br>
+        <code>:HealthcareSector :diversifies :AiTrade ; skos:definition "...a defensive trade that is an AI beneficiary and still cheap relative to its 30-year valuation"@en .</code>
+      </div>
+    </figure>
+
+    <div class="mapping-grid">
+      <div class="mapping-item">
+        <h3>1. Fiscal Deficits &amp; Buyback Disappointment &rarr; Long-Bond Sell-Off &rarr; Front-End Cash (<span class="tk">TLT</span> 0% | <span class="tk">SHV</span> 31.1%)</h3>
+        <p><strong>Causal Chain:</strong> Persistent <em>Fiscal Deficits</em> and a $10.7T 12-month maturity wall<sup class="ref-cite"><a href="#ref-2">[2]</a></sup> pushed the 10Y yield above 5% as <em>Primary Dealer</em> auction takedowns fell to their lowest share since September 2025. Treasury Secretary Bessent's step-up to a $6B <em>Treasury Buyback Operation</em> underwhelmed markets expecting $8–10B and worked against Fed restraint ("financial engineering cannot overpower economic fundamentals")<sup class="ref-cite"><a href="#ref-2">[2]</a></sup>. Even on a brief 2.6 bps 10Y dip after bank Q3 misses<sup class="ref-cite"><a href="#ref-3">[3]</a></sup>, the model held <strong>0.00% in <span class="tk">TLT</span></strong> and parked <strong>31.07% in <span class="tk">SHV</span></strong>—capturing front-end yields anchored near 4.7% by Chair Warsh's September 25 bps Fed hike (to 3.75–4.00%) with zero duration risk.</p>
+      </div>
+
+      <div class="mapping-item">
+        <h3>2. "The Everything Trade" &amp; Hyperscaler FCF Collapse &rarr; Credit Contagion &rarr; <span class="tk">XLV</span> &amp; <span class="tk">VLU</span> Diversifiers</h3>
+        <p><strong>Causal Chain:</strong> While a &gt;$2T <em>Cloud Revenue Backlog</em> underpins record <em>AI Capex</em>, hyperscaler <em>Free Cash Flow</em> (ex-Apple) has collapsed—forcing incremental buildouts onto external debt (<em>IG Credit</em> share projected to triple from 2.7% to 8.8%, <em>Private Credit</em>, <em>ABS/CMBS</em>, and the <em>Yen Carry Trade</em>)<sup class="ref-cite"><a href="#ref-2">[2]</a></sup> while debt-funded GPU cloud yields spiked to <strong>15%</strong><sup class="ref-cite"><a href="#ref-3">[3]</a></sup>. Because the <em>AI Trade</em> now permeates equities, credit (<em>Equity–HY Credit</em> correlation near historic highs), and rates, the model caps <span class="tk">SPY</span> at <strong>4.54%</strong> (2.98% RC) and rotates into the two equity sleeves that explicitly diversify AI capex risk: <strong>Healthcare (<span class="tk">XLV</span>, 27.45% RC)</strong>—trading cheap vs. its 30-year valuation percentile—and <strong>Value (<span class="tk">VLU</span>, 6.52% weight)</strong>.</p>
+      </div>
+
+      <div class="mapping-item">
+        <h3>3. China Export Redirection &amp; Hormuz Friction &rarr; Upstream Feedstocks (<span class="tk">MCHI</span> 0.07% | <span class="tk">XLE</span>+<span class="tk">DBC</span> 50% RC)</h3>
+        <p><strong>Causal Chain:</strong> US <em>IEEPA Tariffs</em> and domestic debt saturation (&gt;300% of GDP, CPI at 0.9%)<sup class="ref-cite"><a href="#ref-6">[6]</a>,<a href="#ref-7">[7]</a></sup> forced China to redirect its export machine toward Emerging Markets (+36.3% YoY, $938.1B YTD surplus)<sup class="ref-cite"><a href="#ref-4">[4]</a>,<a href="#ref-5">[5]</a></sup>, while <em>Strait of Hormuz</em> flow disruptions and petrochemical costs pushed Chinese PPI to 5.0%<sup class="ref-cite"><a href="#ref-6">[6]</a></sup>. The optimizer purged Chinese equity (<span class="tk">MCHI</span> from 10.3% to <strong>0.07%</strong>) and concentrated <strong>50.0% of total Euler risk</strong> in <span class="tk">XLE</span> (30.01% RC) and <span class="tk">DBC</span> (19.97% RC)—leveraging the <em>Energy Sector's</em> negative market beta and negative correlation to <em>High-Yield Credit</em><sup class="ref-cite"><a href="#ref-2">[2]</a></sup>.</p>
+      </div>
+
+      <div class="mapping-item">
+        <h3>4. Hawkish Fed Discipline &amp; Nominal Rigidities &rarr; Exiting the Debasement Trade (<span class="tk">GLD</span> 0% | <span class="tk">UUP</span> 23.7%)</h3>
+        <p><strong>Causal Chain:</strong> Following Jackson Hole, the FOMC's September 25 bps rate hike and sticky US core inflation (+0.3% MoM) raised the bar for the <em>Debasement Trade</em>, pushing <em>EUR/USD</em> below 1.150 alongside European fiscal divergence (OAT–Bund spread near 137 bps)<sup class="ref-cite"><a href="#ref-7">[7]</a>,<a href="#ref-8">[8]</a></sup>. Consequently, the portfolio completely exited gold (<span class="tk">GLD</span> from 1.7% to <strong>0.00%</strong>) and anchored <strong>23.73% in <span class="tk">UUP</span></strong> (9.43% RC). Echoing the 2026 Economics Nobel awarded to Hall and Woodford on <em>Nominal Rigidities</em><sup class="ref-cite"><a href="#ref-9">[9]</a></sup>, uneven price stickiness under restrictive policy rewards unlevered cash-flow price setters (<span class="tk">XLE</span>, <span class="tk">XLV</span>) over refinancing-dependent duration.</p>
+      </div>
+    </div>
+
+    <div class="references-block" id="references">
+      <span class="sec-label">References &amp; Market Sources</span>
+      <ol class="ref-list">
+        <li id="ref-1"><strong>Tasche, D. (2008) &amp; Maillard, S., Roncalli, T., Te&iuml;letche, J. (Summer 2010).</strong> <em>The Properties of Equally Weighted Risk Contribution Portfolios.</em> <span>Journal of Portfolio Management</span>, 36(4), 60–70.</li>
+        <li id="ref-2"><strong>Fraser Jenkins, I. et al. (September 2026).</strong> <em>The Everything Trade</em> &amp; <em>An Invidious Choice? Towards Bond Market Crisis or Yield Curve Control.</em> <span>AllianceBernstein Research</span>.</li>
+        <li id="ref-3"><strong>LoRosha (October 14, 2026).</strong> <em>10Y Treasury -2.60bp vs CoreWeave Bond at 15%: GPU Cloud Breaks Opposite.</em> <span>LoRosha's Investment Desk</span>.</li>
+        <li id="ref-4"><strong>ING Economics — Song, L. (October 14, 2026).</strong> <em>China's export engine continued to hum in September: Trade surplus surpasses $938bn YTD.</em> <span>ING THINK</span>.</li>
+        <li id="ref-5"><strong>Brooks, R. J. (October 14, 2026).</strong> <em>How China is Reinventing its Export Machine: Flooding Emerging Markets.</em> <span>Shadow Price Macro</span>.</li>
+        <li id="ref-6"><strong>Benigno, G. (October 14, 2026).</strong> <em>China September-26 CPI Inflation Report: CPI at 0.9% as Food Deflation Deepens, PPI Reaches 5.0%.</em> <span>The Central Banks' Watcher</span>.</li>
+        <li id="ref-7"><strong>The Daily Shot (October 13, 2026).</strong> <em>The Daily Shot Brief: China Nonfinancial Debt Tops 300% of GDP, French Uncertainty Jumps.</em></li>
+        <li id="ref-8"><strong>Pesole, F., Garvey, P., &amp; Knightley, J. (September &amp; October 13–14, 2026).</strong> <em>Fed Hike Analysis &amp; FX Daily: No Trigger in Sight for a Dollar Reversal (Oct 13) / Hot Inflation to Strengthen Dollar Floor (Oct 14).</em> <span>ING THINK</span>.</li>
+        <li id="ref-9"><strong>Smith, N. (October 13, 2026) / Woodford, M. (2003) &amp; Hall, R. E. (1988).</strong> <em>A Nobel for New Keynesian Macro, at Last! — Nominal Rigidities &amp; Microfoundations.</em> <span>Noahpinion</span>.</li>
+      </ol>
+    </div>
+
+    <div class="note-box" style="margin-top:1.2rem;">
+      <strong>Methodological Note:</strong> The equilibrium portfolio is computed by a specialized quantitative meta-agent (non-GenAI) triggered manually on a weekly basis by the Merlin Intelligence team. Market references and institutional research articles are independently curated and read by the team, while the causal mapping between equilibrium portfolio transitions and macroeconomic developments—structured through a formal OWL/SKOS domain ontology—is piloted by the Merlin Intelligence team with the support of <em>Gemini 4 Argon &middot; Medium</em>.
+    </div>
+
+    <div class="note-box disclaimer" style="margin-top:0.75rem;">
+      <strong>Regulatory Disclosure:</strong> Prepared for institutional and educational purposes only; does not constitute investment advice or an offer to buy or sell any instrument. Weights and risk metrics are derived from simulated out-of-sample walk-forward series net of 6 bps one-way transaction friction.
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="wrap--wide">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2026 Merlin Intelligence</span>
+      <span class="footer-copy">
+        <a href="manifesto.html">manifesto</a>
+        &nbsp;|&nbsp;
+        <a href="team.html">founding team</a>
+        &nbsp;|&nbsp;
+        <a href="signals.html">signal series</a>
+        &nbsp;|&nbsp;
+        <a href="macro-research.html">global macro research</a>
+        &nbsp;|&nbsp;
+        <a href="open-source.html">open source</a>
+        &nbsp;|&nbsp;
+        <a href="https://github.com/merlin-intelligence" target="_blank" rel="noopener">github / merlin-intelligence</a>
+        &nbsp;|&nbsp;
+        <a href="legal-notice.html">legal notice</a>
+      </span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
