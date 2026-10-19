@@ -92,28 +92,28 @@ p:last-child { margin-bottom: 0; }
 
 .shifts-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
   margin: 1.0rem 0 1.2rem;
 }
 .shift-card {
   background: var(--pale);
   border: 0.5px solid var(--rule);
-  padding: 0.75rem 0.9rem;
+  padding: 1rem 1.15rem;
 }
 .shift-card .shift-tag {
   font-family: 'Space Mono', monospace;
-  font-size: 0.60rem;
+  font-size: 0.68rem;
   color: var(--gold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   display: block;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.4rem;
   font-weight: 700;
 }
 .shift-card p {
-  font-size: 0.80rem;
-  line-height: 1.48;
+  font-size: 0.90rem;
+  line-height: 1.55;
   margin: 0;
   color: var(--ink);
 }
@@ -220,9 +220,6 @@ footer {
 }
 .footer-copy a:hover { color: var(--gold); border-color: var(--gold); }
 
-@media (max-width: 900px) {
-  .shifts-grid { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 768px) {
   .wrap, .wrap--wide { padding: 0 1.25rem; }
   .shifts-grid, .mapping-grid { grid-template-columns: 1fr; }
@@ -428,85 +425,91 @@ footer {
         </style>
 
         <text x="24" y="24" class="ont-hdr">Ontology Subgraph Snapshot — Key Causal Triples Driving the Equilibrium Commentary (OWL / SKOS)</text>
-        <text x="120" y="44" text-anchor="middle" class="ont-col">1 · Macro &amp; Policy Nodes</text>
-        <text x="435" y="44" text-anchor="middle" class="ont-col">2 · Market &amp; Cross-Asset Friction</text>
-        <text x="765" y="44" text-anchor="middle" class="ont-col">3 · Equilibrium Portfolio Response</text>
+        <text x="136" y="44" text-anchor="middle" class="ont-col">1 · Macro &amp; Policy Nodes</text>
+        <text x="440" y="44" text-anchor="middle" class="ont-col">2 · Market &amp; Cross-Asset Friction</text>
+        <text x="754" y="44" text-anchor="middle" class="ont-col">3 · Equilibrium Portfolio Response</text>
 
         <!-- Row 1: Fiscal Deficit & Bessent Buyback -> BondSelloff -> TLT 0% / SHV 31.1% -->
-        <rect x="24" y="54" width="195" height="42" rx="3" class="ont-node"/>
-        <text x="32" y="70" class="ont-lbl">:FiscalDeficit &amp; :PublicDebt</text>
-        <text x="32" y="84" class="ont-sub">:Bessent6bnBuybackOperation ($6B vs $8-10B)</text>
+        <rect x="20" y="54" width="232" height="42" rx="3" class="ont-node"/>
+        <text x="30" y="70" class="ont-lbl">:FiscalDeficit &amp; :PublicDebt</text>
+        <text x="30" y="84" class="ont-sub">:Bessent6bnBuybackOperation ($6B vs $8-10B)</text>
 
-        <line x1="219" y1="75" x2="322" y2="75" stroke="#A27844" stroke-width="1.2" marker-end="url(#arr-gold)"/>
-        <text x="270" y="69" text-anchor="middle" class="ont-edge">:drives / :leadsTo</text>
+        <line x1="252" y1="75" x2="321" y2="75" stroke="#A27844" stroke-width="1.2" marker-end="url(#arr-gold)"/>
+        <text x="288" y="69" text-anchor="middle" class="ont-edge">:drives /</text>
+        <text x="288" y="86" text-anchor="middle" class="ont-edge">:leadsTo</text>
 
-        <rect x="325" y="54" width="220" height="42" rx="3" class="ont-node-ev"/>
-        <text x="333" y="70" class="ont-lbl">:BondSelloff &amp; :10yearTreasuryYield</text>
-        <text x="333" y="84" class="ont-sub">10Y &gt; 5% · Low :PrimaryDealer Takedown</text>
+        <rect x="324" y="54" width="232" height="42" rx="3" class="ont-node-ev"/>
+        <text x="334" y="70" class="ont-lbl">:BondSelloff &amp; :10yearTreasuryYield</text>
+        <text x="334" y="84" class="ont-sub">10Y &gt; 5% · Low :PrimaryDealer Takedown</text>
 
-        <line x1="545" y1="75" x2="642" y2="75" stroke="#64748B" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-dark)"/>
-        <text x="593" y="69" text-anchor="middle" class="ont-edge" fill="#475569">avoids duration</text>
+        <line x1="556" y1="75" x2="625" y2="75" stroke="#64748B" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-dark)"/>
+        <text x="592" y="69" text-anchor="middle" class="ont-edge" fill="#475569">avoids</text>
+        <text x="592" y="86" text-anchor="middle" class="ont-edge" fill="#475569">duration</text>
 
-        <rect x="645" y="54" width="232" height="42" rx="3" class="ont-node-port"/>
-        <text x="655" y="70" class="ont-port-lbl">TLT 0.0% · SHV 31.1% · IEF 9.0%</text>
-        <text x="655" y="84" class="ont-port-sub">Zero long duration · Front-end carry fortress</text>
+        <rect x="628" y="54" width="252" height="42" rx="3" class="ont-node-port"/>
+        <text x="638" y="70" class="ont-port-lbl">TLT 0.0% · SHV 31.1% · IEF 9.0%</text>
+        <text x="638" y="84" class="ont-port-sub">Zero long duration · Front-end carry fortress</text>
 
         <!-- Row 2: Jackson Hole & Sep 2026 Fed Hike -> Debasement Bar & USD Floor -> GLD 0% / UUP 23.7% -->
-        <rect x="24" y="108" width="195" height="42" rx="3" class="ont-node"/>
-        <text x="32" y="124" class="ont-lbl">:JacksonHoleSymposium (Warsh)</text>
-        <text x="32" y="138" class="ont-sub">:StraitOfHormuz &amp; :Tariff :drives :Inflation</text>
+        <rect x="20" y="108" width="232" height="42" rx="3" class="ont-node"/>
+        <text x="30" y="124" class="ont-lbl">:JacksonHoleSymposium (Warsh)</text>
+        <text x="30" y="138" class="ont-sub">:StraitOfHormuz &amp; :Tariff :drives :Inflation</text>
 
-        <line x1="219" y1="129" x2="322" y2="129" stroke="#A27844" stroke-width="1.2" marker-end="url(#arr-gold)"/>
-        <text x="270" y="123" text-anchor="middle" class="ont-edge">:leadsTo</text>
+        <line x1="252" y1="129" x2="321" y2="129" stroke="#A27844" stroke-width="1.2" marker-end="url(#arr-gold)"/>
+        <text x="288" y="123" text-anchor="middle" class="ont-edge">:leadsTo</text>
 
-        <rect x="325" y="108" width="220" height="42" rx="3" class="ont-node-ev"/>
-        <text x="333" y="124" class="ont-lbl">:September2026FedRateHike (+25bp)</text>
-        <text x="333" y="138" class="ont-sub">3.75–4.00% · Raises bar for :DebasementTrade</text>
+        <rect x="324" y="108" width="232" height="42" rx="3" class="ont-node-ev"/>
+        <text x="334" y="124" class="ont-lbl">:September2026FedRateHike (+25bp)</text>
+        <text x="334" y="138" class="ont-sub">3.75–4.00% · Raises bar for :DebasementTrade</text>
 
-        <line x1="545" y1="129" x2="642" y2="129" stroke="#64748B" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-dark)"/>
-        <text x="593" y="123" text-anchor="middle" class="ont-edge" fill="#475569">exits gold / holds USD</text>
+        <line x1="556" y1="129" x2="625" y2="129" stroke="#64748B" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-dark)"/>
+        <text x="592" y="123" text-anchor="middle" class="ont-edge" fill="#475569">exits gold /</text>
+        <text x="592" y="140" text-anchor="middle" class="ont-edge" fill="#475569">holds USD</text>
 
-        <rect x="645" y="108" width="232" height="42" rx="3" class="ont-node-port"/>
-        <text x="655" y="124" class="ont-port-lbl">GLD 0.0% · UUP 23.7% (9.4% RC)</text>
-        <text x="655" y="138" class="ont-port-sub">Purges debasement trade · Anchors USD floor</text>
+        <rect x="628" y="108" width="252" height="42" rx="3" class="ont-node-port"/>
+        <text x="638" y="124" class="ont-port-lbl">GLD 0.0% · UUP 23.7% (9.4% RC)</text>
+        <text x="638" y="138" class="ont-port-sub">Purges debasement trade · Anchors USD floor</text>
 
         <!-- Row 3: Hyperscaler FCF Collapse & External Debt -> EverythingTrade & HY Correlation -> SPY Capped -->
-        <rect x="24" y="162" width="195" height="42" rx="3" class="ont-node"/>
-        <text x="32" y="178" class="ont-lbl">:Hyperscaler :FreeCashFlow Collapse</text>
-        <text x="32" y="192" class="ont-sub">:PrivateCredit, :IGCredit, :YenCarryTrade</text>
+        <rect x="20" y="162" width="232" height="42" rx="3" class="ont-node"/>
+        <text x="30" y="178" class="ont-lbl">:Hyperscaler :FreeCashFlow Collapse</text>
+        <text x="30" y="192" class="ont-sub">:PrivateCredit, :IGCredit, :YenCarryTrade</text>
 
-        <line x1="219" y1="183" x2="322" y2="183" stroke="#A27844" stroke-width="1.2" marker-end="url(#arr-gold)"/>
-        <text x="270" y="177" text-anchor="middle" class="ont-edge">:funds :AiCapex</text>
+        <line x1="252" y1="183" x2="321" y2="183" stroke="#A27844" stroke-width="1.2" marker-end="url(#arr-gold)"/>
+        <text x="288" y="177" text-anchor="middle" class="ont-edge">:funds</text>
+        <text x="288" y="194" text-anchor="middle" class="ont-edge">:AiCapex</text>
 
-        <rect x="325" y="162" width="220" height="42" rx="3" class="ont-node-ev"/>
-        <text x="333" y="178" class="ont-lbl">:EverythingTrade &amp; :AiTrade</text>
-        <text x="333" y="192" class="ont-sub">:Equity :correlatesWith :HighYieldCredit</text>
+        <rect x="324" y="162" width="232" height="42" rx="3" class="ont-node-ev"/>
+        <text x="334" y="178" class="ont-lbl">:EverythingTrade &amp; :AiTrade</text>
+        <text x="334" y="192" class="ont-sub">:Equity :correlatesWith :HighYieldCredit</text>
 
-        <line x1="545" y1="183" x2="642" y2="183" stroke="#64748B" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-dark)"/>
-        <text x="593" y="177" text-anchor="middle" class="ont-edge" fill="#475569">caps broad beta</text>
+        <line x1="556" y1="183" x2="625" y2="183" stroke="#64748B" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-dark)"/>
+        <text x="592" y="177" text-anchor="middle" class="ont-edge" fill="#475569">caps broad</text>
+        <text x="592" y="194" text-anchor="middle" class="ont-edge" fill="#475569">beta</text>
 
-        <rect x="645" y="162" width="232" height="42" rx="3" class="ont-node-port"/>
-        <text x="655" y="178" class="ont-port-lbl">SPY Capped at 4.5% (3.0% RC)</text>
-        <text x="655" y="192" class="ont-port-sub">MCHI Cut 10.3% &rarr; 0.07% · Tightens w_max</text>
+        <rect x="628" y="162" width="252" height="42" rx="3" class="ont-node-port"/>
+        <text x="638" y="178" class="ont-port-lbl">SPY Capped at 4.5% (3.0% RC)</text>
+        <text x="638" y="192" class="ont-port-sub">MCHI Cut 10.3% &rarr; 0.07% · Tightens w_max</text>
 
         <!-- Row 4: Energy, Healthcare & Value -> :diversifies :AiTrade -> 77.5% of Active Risk -->
-        <rect x="24" y="216" width="195" height="46" rx="3" class="ont-node"/>
-        <text x="32" y="233" class="ont-lbl">:EnergySector &amp; :HealthcareSector</text>
-        <text x="32" y="247" class="ont-sub">Neg. beta / neg. HY corr. · :ValueFactor FCF</text>
+        <rect x="20" y="216" width="232" height="46" rx="3" class="ont-node"/>
+        <text x="30" y="233" class="ont-lbl">:EnergySector &amp; :HealthcareSector</text>
+        <text x="30" y="247" class="ont-sub">Neg. beta / neg. HY corr. · :ValueFactor FCF</text>
 
-        <line x1="219" y1="239" x2="322" y2="239" stroke="#059669" stroke-width="1.3" marker-end="url(#arr-green)"/>
-        <text x="270" y="233" text-anchor="middle" class="ont-edge" fill="#059669">:diversifies</text>
+        <line x1="252" y1="239" x2="321" y2="239" stroke="#059669" stroke-width="1.3" marker-end="url(#arr-green)"/>
+        <text x="288" y="233" text-anchor="middle" class="ont-edge" fill="#059669">:diversifies</text>
 
-        <rect x="325" y="216" width="220" height="46" rx="3" class="ont-node-ev" style="fill:#ECFDF5;stroke:#059669;"/>
-        <text x="333" y="233" class="ont-lbl">:AiTrade &amp; :MarketVolatility</text>
-        <text x="333" y="247" class="ont-sub">XLV cheap vs 30Y :ValuationPercentile</text>
+        <rect x="324" y="216" width="232" height="46" rx="3" class="ont-node-ev" style="fill:#ECFDF5;stroke:#059669;"/>
+        <text x="334" y="233" class="ont-lbl">:AiTrade &amp; :MarketVolatility</text>
+        <text x="334" y="247" class="ont-sub">XLV cheap vs 30Y :ValuationPercentile</text>
 
-        <line x1="545" y1="239" x2="642" y2="239" stroke="#059669" stroke-width="1.3" marker-end="url(#arr-green)"/>
-        <text x="593" y="233" text-anchor="middle" class="ont-edge" fill="#059669">concentrates RC</text>
+        <line x1="556" y1="239" x2="625" y2="239" stroke="#059669" stroke-width="1.3" marker-end="url(#arr-green)"/>
+        <text x="592" y="233" text-anchor="middle" class="ont-edge" fill="#059669">concentrates</text>
+        <text x="592" y="250" text-anchor="middle" class="ont-edge" fill="#059669">RC</text>
 
-        <rect x="645" y="216" width="232" height="46" rx="3" class="ont-node-port"/>
-        <text x="655" y="233" class="ont-port-lbl">XLE 30.0% RC · XLV 27.5% RC · DBC 20.0%</text>
-        <text x="655" y="247" class="ont-port-sub">77.5% of total Euler risk + VLU (7.7% RC)</text>
+        <rect x="628" y="216" width="252" height="46" rx="3" class="ont-node-port"/>
+        <text x="638" y="233" class="ont-port-lbl">XLE 30.0% RC · XLV 27.5% RC · DBC 20.0%</text>
+        <text x="638" y="247" class="ont-port-sub">77.5% of total Euler risk + VLU (7.7% RC)</text>
       </svg>
       <div style="background:#FAF6F0;border:0.5px solid var(--rule);border-top:none;padding:0.55rem 0.85rem;font-family:'Space Mono',monospace;font-size:0.64rem;line-height:1.55;color:#4A433C;overflow-x:auto;">
         <strong style="color:#14120F;">Selected RDF/OWL Triples (<code>von_neumann_quant_macro_research.ttl</code>):</strong><br>
