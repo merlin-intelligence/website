@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Equilibrium Portfolio Series, Part 1. Why a strategy with a strong return-to-worst-loss ratio produces portfolios that describe the state of the market.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="When a Portfolio Becomes a Market Barometer — Merlin Intelligence">
+<meta property="og:description" content="Equilibrium Portfolio Series, Part 1. Why a strategy with a strong return-to-worst-loss ratio produces portfolios that describe the state of the market.">
+<meta property="og:image" content="../assets/images/macro-preview.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="When a Portfolio Becomes a Market Barometer — Merlin Intelligence">
+<meta name="twitter:description" content="Equilibrium Portfolio Series, Part 1. Why a strategy with a strong return-to-worst-loss ratio produces portfolios that describe the state of the market.">
+<meta name="twitter:image" content="../assets/images/macro-preview.svg">
+<title>When a Portfolio Becomes a Market Barometer — Merlin Intelligence</title>
+<link rel="icon" type="image/png" href="../assets/images/MI-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+
+<style>
+.wrap       { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+.wrap--wide { max-width: 1020px; margin: 0 auto; padding: 0 2rem; }
+
+.nav-sub a {
+  color: inherit; text-decoration: none;
+  border-bottom: 0.5px solid var(--rule);
+  padding-bottom: 0.1rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-sub a:hover {
+  color: var(--gold); border-color: var(--gold);
+}
+.nav-sub a.active {
+  color: var(--gold); border-color: var(--gold); font-weight: 700;
+}
+
+/* ── Hero ───────────────────────────────────────── */
+.hero {
+  padding: 5.5rem 0 3.5rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -62deg,
+    transparent, transparent 80px,
+    rgba(162,120,68,0.055) 80px,
+    rgba(162,120,68,0.055) 80.5px
+  );
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; color: var(--gold);
+  letter-spacing: 0.10em; text-transform: uppercase;
+  margin-bottom: 1.5rem; display: block;
+}
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 400; line-height: 1.10;
+  color: var(--ink); margin-bottom: 1.2rem;
+  max-width: 820px;
+}
+.hero-headline em { font-style: italic; }
+
+/* ── Sections ───────────────────────────────────── */
+section {
+  padding: 4.5rem 0;
+  border-top: 0.5px solid var(--rule);
+}
+.sec-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--gold);
+  letter-spacing: 0.08em; margin-bottom: 0.9rem;
+  display: block;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+  font-weight: 400; line-height: 1.22;
+  margin-bottom: 1.6rem; color: var(--ink);
+}
+.section-title em { font-style: italic; }
+p { margin-bottom: 1.1rem; }
+p:last-child { margin-bottom: 0; }
+
+/* ── Sidecard & Callouts ────────────────────────── */
+.sidecard {
+  border-left: 2px solid var(--gold);
+  padding: 0.9rem 0 0.9rem 1.4rem;
+  margin: 2.2rem 0; color: var(--ink);
+  font-style: italic; font-size: 1.02rem;
+  line-height: 1.65;
+  background: rgba(162,120,68,0.03);
+}
+.sidecard strong { font-style: normal; }
+
+.note-box {
+  background: var(--pale);
+  border: 0.5px solid var(--rule);
+  padding: 1.1rem 1.3rem;
+  margin: 1.8rem 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--light);
+}
+.note-box strong {
+  color: var(--ink);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+/* ── Data Tables ────────────────────────────────── */
+.table-container {
+  overflow-x: auto;
+  margin: 2rem 0;
+  border: 0.5px solid var(--rule);
+  background: var(--pale);
+}
+table.macro-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+  text-align: left;
+}
+table.macro-table th {
+  background: #EFEBE5;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  padding: 0.85rem 0.95rem;
+  border-bottom: 1px solid var(--rule);
+  font-weight: 700;
+}
+table.macro-table td {
+  padding: 0.70rem 0.95rem;
+  border-bottom: 0.5px solid var(--rule);
+  color: var(--ink);
+}
+table.macro-table tr:last-child td {
+  border-bottom: none;
+}
+table.macro-table td.num {
+  font-family: 'Space Mono', monospace;
+  text-align: right;
+}
+table.macro-table th.num {
+  text-align: right;
+}
+table.macro-table tr.highlight-row {
+  background: rgba(162,120,68,0.08);
+  font-weight: 600;
+}
+
+/* ── Charts & Figures ───────────────────────────── */
+figure.macro-figure {
+  margin: 2.8rem 0;
+  border: 0.5px solid var(--rule);
+  background: #FFFFFF;
+  padding: 1.2rem;
+  box-shadow: 0 4px 16px rgba(20, 18, 15, 0.03);
+}
+figure.macro-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 0.5px solid var(--rule);
+}
+figcaption.macro-caption {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.70rem;
+  color: var(--light);
+  line-height: 1.55;
+  margin-top: 1rem;
+  padding: 0 0.4rem;
+}
+figcaption.macro-caption .fig-tag {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* ── Footer ─────────────────────────────────────── */
+footer {
+  background: var(--dark);
+  border-top: 0.5px solid rgba(195,185,172,0.2);
+  padding: 3rem 0;
+}
+.footer-inner {
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 0.8rem;
+}
+.footer-copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem; color: #5A544E; letter-spacing: 0.04em;
+}
+.footer-copy a {
+  color: #8C827A; text-decoration: none;
+  border-bottom: 0.5px solid rgba(140,130,122,0.3);
+  padding-bottom: 0.1rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-copy a:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ── Article additions (large-audience edition) ── */
+.hero-meta {
+  font-family: 'Space Mono', monospace; font-size: 0.68rem;
+  color: var(--light); margin-top: 1.4rem;
+}
+.subhead {
+  font-family: 'Playfair Display', serif; font-size: 1.35rem;
+  margin: 2.6rem 0 0.9rem; color: var(--ink); font-weight: 400;
+}
+.plain-list { margin: 0 0 1.4rem; padding-left: 1.3rem; line-height: 1.7; }
+.plain-list li { margin-bottom: 0.55rem; }
+.tk { font-family: 'Space Mono', monospace; font-size: 0.82em; }
+
+/* Bar comparisons (pure HTML/CSS charts) */
+.bars { margin: 2rem 0 0.6rem; }
+.bars-title {
+  font-family: 'Playfair Display', serif; font-size: 1.08rem;
+  color: var(--ink); margin-bottom: 1rem;
+}
+.bar-row {
+  display: grid; grid-template-columns: 9.5rem 1fr 4.6rem;
+  align-items: center; gap: 0.8rem; margin-bottom: 0.6rem;
+  font-size: 0.86rem;
+}
+.bar-label { color: var(--ink); }
+.bar-track { background: var(--pale); border: 0.5px solid var(--rule); height: 1.15rem; }
+.bar-fill { height: 100%; background: var(--rule); }
+.bar-fill.is-strategy { background: var(--gold); }
+.bar-val { font-family: 'Space Mono', monospace; font-size: 0.8rem; text-align: right; color: var(--ink); }
+.bars-note { font-size: 0.8rem; color: var(--light); margin-top: 0.4rem; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4rem; }
+
+/* Money vs risk */
+.mr-legend { display: flex; gap: 1.6rem; font-size: 0.8rem; color: var(--light); margin-bottom: 1rem; }
+.mr-legend i { display: inline-block; width: 0.8rem; height: 0.8rem; margin-right: 0.4rem; vertical-align: -1px; }
+.mr-row {
+  display: grid; grid-template-columns: 11rem 1fr; gap: 0.8rem;
+  align-items: center; margin-bottom: 0.75rem; font-size: 0.86rem;
+}
+.mr-bars { display: grid; gap: 3px; }
+.mr-bar { height: 0.8rem; display: flex; align-items: center; }
+.mr-bar span { height: 100%; display: block; }
+.mr-bar em {
+  font-style: normal; font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; color: var(--light); margin-left: 0.4rem; white-space: nowrap;
+}
+.c-money { background: var(--ink); opacity: 0.72; }
+.c-risk  { background: var(--gold); }
+.group-sum {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0;
+}
+.group-box { border: 0.5px solid var(--rule); background: var(--pale); padding: 1.2rem 1.3rem; }
+.group-box h4 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 1.08rem; margin-bottom: 0.5rem; color: var(--ink); }
+.group-box p { font-size: 0.88rem; color: var(--light); margin: 0; }
+.group-box b { font-family: 'Space Mono', monospace; color: var(--ink); font-weight: 700; }
+
+.timeline { border-left: 1.5px solid var(--gold); margin: 1.6rem 0 2rem; padding-left: 1.4rem; }
+.timeline div { margin-bottom: 1.2rem; }
+.timeline .when { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--gold); display: block; margin-bottom: 0.2rem; }
+.timeline p { font-size: 0.93rem; margin: 0; }
+
+.disclaimer { font-size: 0.8rem; color: var(--light); line-height: 1.6; }
+
+@media (max-width: 768px) {
+  .wrap, .wrap--wide { padding: 0 1.25rem; }
+  .two-col, .group-sum { grid-template-columns: 1fr; }
+  .bar-row { grid-template-columns: 7.5rem 1fr 4rem; }
+  .mr-row { grid-template-columns: 1fr; gap: 0.35rem; margin-bottom: 0.9rem; }
+  .mr-bar span { max-width: calc(100% - 6.5rem); }
+  .mr-bar em { font-size: 0.64rem; margin-left: 0.35rem; }
+}
+
+.summary {
+  border-left: 3px solid var(--gold);
+  padding: 0.2rem 0 0.2rem 1.4rem;
+  margin: 1.6rem 0 0.4rem; max-width: 680px;
+}
+.summary p { font-size: 0.97rem; line-height: 1.66; color: var(--ink); margin-bottom: 0.8rem; }
+
+/* In-situ reference citations & References block */
+sup.ref-cite {
+  font-size: 0.70rem;
+  line-height: 0;
+  vertical-align: super;
+  margin-left: 1px;
+}
+sup.ref-cite a {
+  color: var(--gold);
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  border-bottom: none;
+  padding: 0 1px;
+  transition: color 0.15s;
+}
+sup.ref-cite a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+.references-block {
+  margin-top: 2.8rem;
+  padding-top: 2rem;
+  border-top: 0.5px solid var(--rule);
+}
+.ref-list {
+  padding-left: 1.4rem;
+  margin: 1.2rem 0 2rem;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.ref-list li {
+  margin-bottom: 1.1rem;
+  padding-left: 0.3rem;
+}
+.ref-list li strong {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.80rem;
+  color: var(--ink);
+}
+.ref-list li em {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+.ref-list li span.ref-meta {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--light);
+  font-family: 'Space Mono', monospace;
+  margin-top: 0.25rem;
+}
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="wrap--wide">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/images/MI-icon.png" alt="Merlin Intelligence Logo" class="nav-logo">
+      <span>Merlin Intelligence</span>
+    </a>
+    <span class="nav-sub">
+      <a href="manifesto.html">Manifesto</a> &nbsp;·&nbsp;
+      <a href="team.html">Founding Team</a> &nbsp;·&nbsp;
+      <a href="signals.html">Signal Series</a> &nbsp;·&nbsp;
+      <a href="macro-research.html" class="active">Global Macro Research</a> &nbsp;·&nbsp;
+      <a href="open-source.html">Open Source</a>
+    </span>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="wrap">
+    <span class="hero-eyebrow">Equilibrium Portfolio Series · Introduction · October 6, 2026</span>
+    <h1 class="hero-headline">
+      When a portfolio becomes<br><em>a market barometer.</em>
+    </h1>
+    <div class="summary">
+      <p>Conventional macro research focuses on tactical forecasting and asset selection. This series explores an inverse question: what does an empirically robust, risk-managed equilibrium portfolio reveal about the prevailing macroeconomic regime?</p>
+      <p>Our foundational premise is that systematic portfolios engineered for downside containment generate valuable structural signals. When an allocation framework is constrained to compound capital with minimal peak-to-trough drawdowns, its weekly equilibrium weights reflect the marginal compensation for risk across asset classes. Interpreted sequentially, these weights provide an objective reading of what the market is rewarding and what it is penalizing.</p>
+      <p>Over an eight-year out-of-sample period (2018–2026), a long-only allocation across twelve liquid ETFs delivered 7.6% annualized net return with a maximum peak-to-trough drawdown of −6.5% (Calmar ratio 1.16, True Sharpe 1.06). Across the trailing three-year cycle (2023–2026), compounding efficiency accelerated to a 10.8% annualized return with maximum drawdown contained at −2.6%, producing an institutional Calmar ratio of 4.22 and a True Sharpe ratio of 1.57 (evaluated above the 4.39% cash carry rate; Raw Sharpe 2.66). The strategy's quantitative mandate is asymmetric capital preservation, structural compounding efficiency, and strict downside containment across divergent macroeconomic regimes. That empirical stability serves as the calibration benchmark validating the portfolio's weights as an objective macroeconomic gauge.</p>
+      <p>The dynamic investment strategy operates by systematically recalibrating capital distribution as cross-asset interdependencies, term premia, and liquidity regimes evolve. By continuously reconciling marginal risk contributions across equities, fixed income, real assets, and cash collateral, the framework adapts its posture to prevailing market physics, providing an observable macroeconomic reading of which structural risk factors are being rewarded over time.</p>
+      <p>This introductory paper establishes the core quantitative framework and equilibrium philosophy. Going forward, the series will utilize the weekly equilibrium portfolio to observe and diagnose evolving cross-asset market conditions, demonstrating how dynamic allocations serve as an objective empirical barometer of market structure.</p>
+    </div>
+    <p class="hero-meta">Merlin Intelligence · Global Macro Research · Data as of October 5, 2026</p>
+  </div>
+</div>
+
+<!-- ── Performance Profile & Downside Containment ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">Mandate &amp; Downside Profile</span>
+    <h2 class="section-title">Asymmetric compounding<br><em>and path stability.</em></h2>
+    <p>
+      To evaluate the strategy properly, one must define its quantitative mandate: delivering steady compound growth while strictly bounding maximum drawdowns and preserving capital across adverse market cycles. Over the 2018–2026 out-of-sample period, the strategy generated an annualized net return of 7.6%, compared with 16.1% for the S&amp;P 500 and 10.1% for a standard 60/40 benchmark, prioritizing path stability and capital preservation across distinct macro regimes.
+    </p>
+  </div>
+  <div class="wrap--wide">
+    <figure class="macro-figure">
+<svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;background:#FFFFFF;border:0.5px solid var(--rule);font-family:'Space Mono',monospace;">
+  <style>
+    .axis-txt { font-size: 10px; fill: #8A7F74; }
+    .panel-hdr { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; fill: #14120F; }
+    .grid-line { stroke: rgba(195,185,172,0.4); stroke-width: 0.6; stroke-dasharray: 4,4; }
+    .zero-line { stroke: #C3B9AC; stroke-width: 1.2; }
+    .leg-txt { font-size: 10px; fill: #14120F; font-weight: 600; }
+  </style>
+
+  <!-- Panel 1: Growth of $1.00 -->
+  <text x="65" y="28" class="panel-hdr">Growth of $1.00 Investment (Linear Scale, Net of Friction)</text>
+  
+  <g transform="translate(430, 22)">
+    <line x1="0" y1="0" x2="20" y2="0" stroke="#059669" stroke-width="2.6"/>
+    <text x="26" y="3" class="leg-txt">This strategy ($1.85, +84.5%)</text>
+    <line x1="215" y1="0" x2="235" y2="0" stroke="#D97706" stroke-width="1.8" stroke-dasharray="5,3"/>
+    <text x="241" y="3" class="leg-txt">60/40 ($2.17)</text>
+    <line x1="330" y1="0" x2="350" y2="0" stroke="#8A7F74" stroke-width="1.4" stroke-dasharray="2,2"/>
+    <text x="356" y="3" class="leg-txt">S&amp;P 500 ($3.23)</text>
+  </g>
+
+  <line x1="65" y1="247.1" x2="865" y2="247.1" class="grid-line"/><text x="57" y="251.1" text-anchor="end" class="axis-txt">$1.00</text><line x1="65" y1="204.1" x2="865" y2="204.1" class="grid-line"/><text x="57" y="208.1" text-anchor="end" class="axis-txt">$1.50</text><line x1="65" y1="161.1" x2="865" y2="161.1" class="grid-line"/><text x="57" y="165.1" text-anchor="end" class="axis-txt">$2.00</text><line x1="65" y1="118.1" x2="865" y2="118.1" class="grid-line"/><text x="57" y="122.1" text-anchor="end" class="axis-txt">$2.50</text><line x1="65" y1="75.1" x2="865" y2="75.1" class="grid-line"/><text x="57" y="79.1" text-anchor="end" class="axis-txt">$3.00</text>
+  <line x1="113.5" y1="45" x2="113.5" y2="260" class="grid-line"/><line x1="113.5" y1="320" x2="113.5" y2="460" class="grid-line"/><text x="113.5" y="276" text-anchor="middle" class="axis-txt">2019</text><line x1="210.3" y1="45" x2="210.3" y2="260" class="grid-line"/><line x1="210.3" y1="320" x2="210.3" y2="460" class="grid-line"/><text x="210.3" y="276" text-anchor="middle" class="axis-txt">2020</text><line x1="307.4" y1="45" x2="307.4" y2="260" class="grid-line"/><line x1="307.4" y1="320" x2="307.4" y2="460" class="grid-line"/><text x="307.4" y="276" text-anchor="middle" class="axis-txt">2021</text><line x1="404.1" y1="45" x2="404.1" y2="260" class="grid-line"/><line x1="404.1" y1="320" x2="404.1" y2="460" class="grid-line"/><text x="404.1" y="276" text-anchor="middle" class="axis-txt">2022</text><line x1="500.9" y1="45" x2="500.9" y2="260" class="grid-line"/><line x1="500.9" y1="320" x2="500.9" y2="460" class="grid-line"/><text x="500.9" y="276" text-anchor="middle" class="axis-txt">2023</text><line x1="597.7" y1="45" x2="597.7" y2="260" class="grid-line"/><line x1="597.7" y1="320" x2="597.7" y2="460" class="grid-line"/><text x="597.7" y="276" text-anchor="middle" class="axis-txt">2024</text><line x1="694.8" y1="45" x2="694.8" y2="260" class="grid-line"/><line x1="694.8" y1="320" x2="694.8" y2="460" class="grid-line"/><text x="694.8" y="276" text-anchor="middle" class="axis-txt">2025</text><line x1="791.5" y1="45" x2="791.5" y2="260" class="grid-line"/><line x1="791.5" y1="320" x2="791.5" y2="460" class="grid-line"/><text x="791.5" y="276" text-anchor="middle" class="axis-txt">2026</text>
+
+  <path d="M65.0,246.9 L66.9,245.0 L67.9,244.5 L69.5,244.3 L71.1,243.1 L72.7,243.9 L74.3,242.9 L75.3,243.3 L76.9,243.0 L78.5,242.4 L80.1,241.2 L82.0,241.2 L83.6,241.8 L84.6,240.9 L86.2,240.0 L87.8,240.8 L89.4,240.3 L91.0,241.4 L92.0,245.2 L93.6,245.1 L95.2,248.6 L96.8,247.8 L98.4,246.0 L99.5,244.6 L101.1,246.2 L102.7,248.7 L104.5,245.7 L106.1,247.0 L108.0,249.0 L109.5,251.8 L110.6,256.0 L112.5,253.7 L114.3,252.3 L115.9,250.2 L117.5,249.5 L119.4,248.7 L120.9,248.7 L122.5,246.0 L123.6,246.5 L125.2,245.2 L127.0,244.2 L128.6,243.7 L130.2,243.7 L131.8,243.9 L132.9,242.6 L134.5,241.5 L136.1,243.1 L137.7,241.1 L139.2,240.2 L140.3,239.7 L141.9,239.8 L143.8,239.1 L145.3,239.2 L146.9,240.5 L148.5,242.7 L149.6,241.1 L151.2,242.3 L153.0,243.3 L154.6,242.1 L156.2,240.2 L157.8,240.0 L158.9,238.1 L160.5,238.9 L162.1,236.5 L163.9,236.6 L165.5,236.2 L167.1,236.8 L168.1,235.5 L169.7,237.8 L171.3,240.0 L172.9,238.5 L174.5,238.6 L175.6,241.0 L177.2,238.5 L179.0,236.8 L180.6,236.0 L182.2,235.8 L183.8,236.2 L184.9,237.2 L186.4,238.8 L188.0,238.5 L189.6,236.0 L191.2,235.7 L192.3,235.1 L193.9,234.6 L195.5,233.4 L197.1,232.7 L198.6,231.8 L199.7,232.1 L201.6,231.0 L203.2,231.8 L204.7,231.0 L206.3,229.3 L207.9,228.3 L209.8,228.3 L211.6,227.5 L212.7,226.8 L214.3,225.1 L216.1,224.8 L217.7,226.5 L219.3,225.7 L220.9,223.9 L222.0,222.9 L223.8,224.3 L225.4,236.0 L227.0,231.0 L228.6,239.0 L230.2,254.8 L231.3,258.0 L232.1,259.9 L232.8,247.3 L234.4,252.3 L236.0,246.1 L237.9,239.9 L239.5,240.7 L240.5,240.2 L242.1,237.7 L243.7,239.8 L245.3,239.0 L246.9,236.3 L248.0,236.1 L249.8,233.2 L251.4,230.9 L253.0,228.4 L254.6,230.4 L256.2,230.7 L257.2,234.2 L258.8,230.1 L260.7,229.4 L262.3,227.0 L263.9,225.9 L265.5,226.5 L266.5,225.4 L268.1,222.9 L269.7,221.8 L271.3,221.4 L272.9,220.0 L273.9,217.5 L275.5,219.2 L277.4,223.0 L279.0,221.4 L280.6,223.8 L282.2,222.5 L283.2,222.6 L284.8,219.3 L286.4,217.9 L288.0,219.4 L289.6,220.7 L290.7,225.0 L292.2,217.1 L293.8,215.0 L295.4,213.7 L297.0,214.8 L298.9,213.2 L299.9,210.7 L301.5,211.7 L303.1,210.6 L304.7,211.0 L306.6,209.6 L308.4,209.6 L310.0,207.2 L311.1,208.2 L312.9,205.8 L314.5,207.5 L316.1,206.1 L317.7,203.4 L319.6,202.7 L321.1,204.4 L322.2,206.6 L323.8,207.9 L325.4,203.6 L327.0,201.5 L328.6,202.1 L329.6,201.0 L331.2,199.5 L333.1,196.8 L334.7,195.9 L336.3,195.6 L337.9,193.8 L338.9,193.9 L340.5,193.3 L342.1,197.9 L343.7,195.7 L345.3,193.3 L346.3,193.0 L348.2,192.1 L349.8,191.8 L351.4,192.3 L353.0,191.5 L354.6,190.0 L355.6,188.0 L357.5,187.4 L359.1,187.6 L360.7,187.7 L362.2,186.2 L363.8,186.7 L364.9,185.0 L366.5,184.1 L368.1,186.1 L369.7,183.2 L371.3,181.8 L372.3,181.5 L374.2,184.0 L375.8,183.5 L377.4,186.1 L379.0,187.5 L380.5,189.2 L381.6,186.1 L383.2,184.5 L384.8,181.2 L386.4,180.0 L388.0,178.7 L389.0,175.8 L390.6,177.4 L392.2,175.9 L393.8,175.9 L395.7,180.2 L397.3,179.1 L398.3,175.1 L399.9,176.5 L401.5,175.5 L403.3,172.2 L404.9,172.2 L406.5,176.3 L407.6,176.5 L409.4,185.5 L411.0,187.8 L412.6,179.0 L414.2,181.2 L415.8,185.2 L416.9,186.8 L418.7,185.6 L420.3,186.3 L421.9,189.1 L423.5,189.5 L425.1,182.9 L426.2,180.1 L427.7,180.5 L429.3,182.2 L430.9,185.0 L432.8,182.7 L434.4,188.3 L435.4,193.9 L437.0,193.3 L438.6,200.4 L440.2,195.1 L441.8,199.0 L442.9,192.8 L444.7,194.4 L446.3,197.4 L447.9,204.9 L449.8,206.0 L451.3,203.9 L453.2,203.5 L454.8,202.7 L455.9,202.4 L457.4,197.7 L459.0,197.0 L460.6,194.6 L462.2,192.9 L463.3,188.1 L464.9,187.9 L466.5,192.7 L468.0,197.9 L469.9,200.5 L471.5,193.6 L472.6,201.7 L474.1,205.6 L475.7,206.8 L477.3,204.3 L478.9,210.4 L480.0,211.2 L481.6,208.6 L483.2,202.9 L484.8,202.1 L486.3,203.6 L487.4,197.3 L489.0,198.7 L490.6,196.0 L492.4,194.2 L494.0,198.9 L495.6,197.1 L496.7,201.9 L498.3,202.8 L500.1,201.8 L502.0,203.2 L503.6,197.7 L505.4,199.1 L507.0,196.1 L508.6,196.0 L509.7,191.9 L511.3,193.7 L512.9,191.4 L514.7,196.7 L516.3,197.4 L517.9,194.6 L519.0,201.0 L520.6,197.5 L522.1,198.3 L523.7,197.1 L525.3,191.9 L527.2,192.3 L528.2,191.3 L529.8,191.5 L531.4,194.1 L533.0,191.9 L534.6,191.3 L535.7,191.6 L537.3,189.0 L538.8,191.8 L540.7,189.5 L542.3,186.0 L543.9,184.0 L544.9,181.5 L546.8,183.7 L548.4,182.0 L550.3,181.4 L551.8,179.2 L553.4,176.4 L555.0,176.4 L556.1,175.5 L557.7,178.3 L559.3,179.3 L560.9,180.3 L562.4,181.5 L563.5,181.3 L565.1,177.8 L567.0,179.6 L568.5,179.1 L570.1,179.8 L571.7,183.5 L572.8,185.1 L574.4,186.2 L576.0,182.1 L577.6,182.2 L579.2,187.6 L580.2,190.9 L581.8,184.0 L583.4,181.7 L585.0,177.8 L586.6,175.8 L588.4,175.8 L589.5,174.2 L591.1,174.5 L592.7,170.2 L594.3,168.1 L596.1,167.8 L598.0,168.8 L599.6,168.1 L600.6,167.4 L602.5,165.4 L604.1,163.5 L605.7,165.3 L607.3,161.4 L608.9,159.0 L609.9,159.5 L611.8,156.6 L613.4,156.5 L615.0,155.9 L616.5,153.5 L618.1,154.3 L619.2,151.4 L620.8,150.7 L622.6,154.2 L624.2,153.9 L625.8,157.5 L627.4,158.9 L628.5,155.9 L630.1,157.0 L631.7,152.8 L633.2,150.7 L634.8,148.3 L635.9,148.5 L637.8,149.2 L639.3,146.7 L640.9,144.4 L642.5,141.9 L644.4,142.5 L646.0,142.4 L647.8,138.9 L648.9,137.2 L650.5,139.8 L652.1,143.8 L653.7,143.5 L655.3,152.1 L656.3,146.7 L657.9,139.6 L659.5,137.0 L661.1,136.7 L662.9,140.0 L664.5,142.0 L665.6,136.5 L667.2,133.4 L668.8,133.1 L670.4,133.6 L672.0,133.9 L673.0,129.8 L674.6,128.8 L676.2,130.3 L677.8,129.0 L679.4,133.2 L680.4,123.2 L682.0,124.9 L683.6,125.9 L685.2,122.4 L687.1,121.2 L688.7,120.9 L689.7,121.1 L691.3,127.5 L693.2,121.4 L695.0,127.3 L696.6,125.6 L698.5,124.4 L700.3,119.6 L701.9,120.3 L703.5,122.7 L704.6,121.6 L706.2,118.5 L708.0,118.2 L709.6,123.8 L711.2,130.0 L712.8,135.8 L713.9,135.0 L715.4,134.0 L717.0,132.3 L718.6,135.0 L720.2,155.0 L721.3,144.6 L722.9,147.2 L724.7,140.1 L726.3,137.3 L727.9,135.8 L729.5,127.3 L730.6,123.3 L732.2,127.2 L734.0,124.8 L735.6,122.7 L737.2,120.2 L738.8,120.3 L740.6,120.6 L741.7,115.3 L743.3,111.6 L745.1,111.5 L746.7,112.0 L748.3,110.4 L749.9,107.5 L751.0,112.9 L752.6,109.2 L754.2,104.7 L755.8,106.5 L757.3,105.6 L758.4,104.7 L760.3,103.9 L761.9,100.2 L763.4,99.7 L765.0,97.6 L766.6,97.4 L767.7,95.5 L769.3,94.8 L770.9,96.9 L772.5,94.7 L774.0,89.8 L775.1,90.9 L776.7,95.1 L778.3,90.4 L779.9,98.7 L781.5,95.6 L783.3,91.5 L784.4,89.6 L786.0,88.4 L787.6,94.7 L789.2,88.1 L791.0,88.4 L792.9,86.7 L794.5,85.5 L795.5,86.8 L797.4,87.6 L799.0,85.9 L800.6,88.7 L802.2,86.6 L804.0,89.9 L805.6,90.1 L806.7,88.8 L808.3,90.4 L809.8,92.2 L811.4,94.2 L813.0,99.0 L814.1,106.6 L815.7,98.9 L817.5,90.3 L819.1,83.1 L820.7,81.6 L822.3,77.7 L823.4,75.7 L825.0,71.8 L826.6,68.0 L828.1,71.1 L830.0,65.0 L831.6,62.2 L832.6,69.7 L834.2,69.6 L835.8,68.5 L837.7,70.6 L839.3,65.7 L841.1,65.4 L842.7,64.9 L843.8,67.0 L845.4,68.8 L847.0,71.9 L848.6,56.9 L850.2,56.3 L851.2,55.1 L852.8,60.0 L854.4,58.8 L856.0,60.3 L857.8,58.8 L859.4,60.7 L860.5,59.7 L862.1,57.7 L863.7,59.4 L865.0,55.0" fill="none" stroke="#8A7F74" stroke-width="1.4" stroke-dasharray="3,3" opacity="0.85"/>
+  <path d="M65.0,247.0 L66.9,245.8 L67.9,245.4 L69.5,245.4 L71.1,244.9 L72.7,245.4 L74.3,244.7 L75.3,244.8 L76.9,244.6 L78.5,244.0 L80.1,243.5 L82.0,243.5 L83.6,243.9 L84.6,243.5 L86.2,243.2 L87.8,243.6 L89.4,243.3 L91.0,244.4 L92.0,246.4 L93.6,246.4 L95.2,248.2 L96.8,247.7 L98.4,246.9 L99.5,246.0 L101.1,246.7 L102.7,248.0 L104.5,246.2 L106.1,246.6 L108.0,247.7 L109.5,249.3 L110.6,251.7 L112.5,250.1 L114.3,248.9 L115.9,247.8 L117.5,247.4 L119.4,247.0 L120.9,246.8 L122.5,245.2 L123.6,245.2 L125.2,244.5 L127.0,244.0 L128.6,243.6 L130.2,243.7 L131.8,243.6 L132.9,242.6 L134.5,241.8 L136.1,242.3 L137.7,241.4 L139.2,240.9 L140.3,240.8 L141.9,240.8 L143.8,240.3 L145.3,240.2 L146.9,240.8 L148.5,242.0 L149.6,241.0 L151.2,241.5 L153.0,241.8 L154.6,240.7 L156.2,239.6 L157.8,239.3 L158.9,238.1 L160.5,238.4 L162.1,236.8 L163.9,237.1 L165.5,237.1 L167.1,237.2 L168.1,236.5 L169.7,237.3 L171.3,238.1 L172.9,237.2 L174.5,237.0 L175.6,238.2 L177.2,236.6 L179.0,235.7 L180.6,235.8 L182.2,235.8 L183.8,235.8 L184.9,236.2 L186.4,236.7 L188.0,236.6 L189.6,235.7 L191.2,235.5 L192.3,235.2 L193.9,234.6 L195.5,234.2 L197.1,234.1 L198.6,233.2 L199.7,233.3 L201.6,232.7 L203.2,233.2 L204.7,232.7 L206.3,232.0 L207.9,231.5 L209.8,231.3 L211.6,230.6 L212.7,230.2 L214.3,229.2 L216.1,228.8 L217.7,229.2 L219.3,228.8 L220.9,227.6 L222.0,227.1 L223.8,227.5 L225.4,233.9 L227.0,229.9 L228.6,234.3 L230.2,243.9 L231.3,246.3 L232.1,247.2 L232.8,238.7 L234.4,241.4 L236.0,237.4 L237.9,233.4 L239.5,233.4 L240.5,233.1 L242.1,231.7 L243.7,233.1 L245.3,232.4 L246.9,230.8 L248.0,230.5 L249.8,228.6 L251.4,227.7 L253.0,225.8 L254.6,227.0 L256.2,227.1 L257.2,229.1 L258.8,226.6 L260.7,226.0 L262.3,224.5 L263.9,223.8 L265.5,224.2 L266.5,223.3 L268.1,221.7 L269.7,221.5 L271.3,221.2 L272.9,220.3 L273.9,219.0 L275.5,219.6 L277.4,222.0 L279.0,221.1 L280.6,222.4 L282.2,221.6 L283.2,221.8 L284.8,220.0 L286.4,219.0 L288.0,220.2 L289.6,221.0 L290.7,223.8 L292.2,218.7 L293.8,218.0 L295.4,216.9 L297.0,217.5 L298.9,216.6 L299.9,215.5 L301.5,215.8 L303.1,215.2 L304.7,215.4 L306.6,214.6 L308.4,214.7 L310.0,214.0 L311.1,214.3 L312.9,212.9 L314.5,213.8 L316.1,213.3 L317.7,211.7 L319.6,211.8 L321.1,213.0 L322.2,214.5 L323.8,215.6 L325.4,213.1 L327.0,212.3 L328.6,212.9 L329.6,212.2 L331.2,211.4 L333.1,209.8 L334.7,209.2 L336.3,208.8 L337.9,207.9 L338.9,208.1 L340.5,207.6 L342.1,210.4 L343.7,209.0 L345.3,207.6 L346.3,207.4 L348.2,206.7 L349.8,206.1 L351.4,207.0 L353.0,206.1 L354.6,205.4 L355.6,204.0 L357.5,203.4 L359.1,203.3 L360.7,203.2 L362.2,202.2 L363.8,202.2 L364.9,201.8 L366.5,201.6 L368.1,202.2 L369.7,200.7 L371.3,199.9 L372.3,199.9 L374.2,201.3 L375.8,201.0 L377.4,202.3 L379.0,204.0 L380.5,204.6 L381.6,203.4 L383.2,202.3 L384.8,201.1 L386.4,200.3 L388.0,199.4 L389.0,197.4 L390.6,198.9 L392.2,198.1 L393.8,198.5 L395.7,199.6 L397.3,199.0 L398.3,197.1 L399.9,197.6 L401.5,197.2 L403.3,195.8 L404.9,196.2 L406.5,198.9 L407.6,199.1 L409.4,203.6 L411.0,205.1 L412.6,200.3 L414.2,202.2 L415.8,204.5 L416.9,204.9 L418.7,204.4 L420.3,204.2 L421.9,206.1 L423.5,207.2 L425.1,204.4 L426.2,203.7 L427.7,203.2 L429.3,205.3 L430.9,207.1 L432.8,206.7 L434.4,209.1 L435.4,212.2 L437.0,212.4 L438.6,215.5 L440.2,213.0 L441.8,214.5 L442.9,210.7 L444.7,212.3 L446.3,214.3 L447.9,219.3 L449.8,219.2 L451.3,218.1 L453.2,216.5 L454.8,216.7 L455.9,216.3 L457.4,213.7 L459.0,212.8 L460.6,211.4 L462.2,210.5 L463.3,208.2 L464.9,208.2 L466.5,211.7 L468.0,214.4 L469.9,216.6 L471.5,213.0 L472.6,217.5 L474.1,220.5 L475.7,221.2 L477.3,219.5 L478.9,223.9 L480.0,224.5 L481.6,223.7 L483.2,219.9 L484.8,219.6 L486.3,220.9 L487.4,216.2 L489.0,216.7 L490.6,214.9 L492.4,213.8 L494.0,215.8 L495.6,215.2 L496.7,217.1 L498.3,218.2 L500.1,218.2 L502.0,218.5 L503.6,214.9 L505.4,214.9 L507.0,213.6 L508.6,213.9 L509.7,211.8 L511.3,213.3 L512.9,212.5 L514.7,215.7 L516.3,216.0 L517.9,214.8 L519.0,217.0 L520.6,214.7 L522.1,214.6 L523.7,214.3 L525.3,211.0 L527.2,211.2 L528.2,211.0 L529.8,211.1 L531.4,212.1 L533.0,210.8 L534.6,210.7 L535.7,210.7 L537.3,210.1 L538.8,211.8 L540.7,210.3 L542.3,208.7 L543.9,207.8 L544.9,206.7 L546.8,207.7 L548.4,207.2 L550.3,207.7 L551.8,205.8 L553.4,204.1 L555.0,204.4 L556.1,204.2 L557.7,206.3 L559.3,206.1 L560.9,207.5 L562.4,208.5 L563.5,208.0 L565.1,205.6 L567.0,207.2 L568.5,206.8 L570.1,207.6 L571.7,210.0 L572.8,210.9 L574.4,211.8 L576.0,209.2 L577.6,210.2 L579.2,212.8 L580.2,214.4 L581.8,210.4 L583.4,208.7 L585.0,206.4 L586.6,205.4 L588.4,205.2 L589.5,203.7 L591.1,203.6 L592.7,200.9 L594.3,199.5 L596.1,199.2 L598.0,199.8 L599.6,199.7 L600.6,199.0 L602.5,198.8 L604.1,197.7 L605.7,197.8 L607.3,196.6 L608.9,195.7 L609.9,196.5 L611.8,194.9 L613.4,194.8 L615.0,193.9 L616.5,192.9 L618.1,194.0 L619.2,192.1 L620.8,191.7 L622.6,193.6 L624.2,194.5 L625.8,196.6 L627.4,197.0 L628.5,195.8 L630.1,195.8 L631.7,193.5 L633.2,192.3 L634.8,191.2 L635.9,191.3 L637.8,191.7 L639.3,189.7 L640.9,188.7 L642.5,187.1 L644.4,187.4 L646.0,188.3 L647.8,185.7 L648.9,184.5 L650.5,185.7 L652.1,187.9 L653.7,187.1 L655.3,189.5 L656.3,187.6 L657.9,184.2 L659.5,182.4 L661.1,182.3 L662.9,183.8 L664.5,184.0 L665.6,181.3 L667.2,180.1 L668.8,180.2 L670.4,180.2 L672.0,181.6 L673.0,179.9 L674.6,179.4 L676.2,180.7 L677.8,180.2 L679.4,182.3 L680.4,177.8 L682.0,179.1 L683.6,179.4 L685.2,177.3 L687.1,176.4 L688.7,176.1 L689.7,177.0 L691.3,180.5 L693.2,177.8 L695.0,180.3 L696.6,179.9 L698.5,179.2 L700.3,176.9 L701.9,176.8 L703.5,177.8 L704.6,177.1 L706.2,175.9 L708.0,175.6 L709.6,176.9 L711.2,179.4 L712.8,182.0 L713.9,182.0 L715.4,181.2 L717.0,180.8 L718.6,181.2 L720.2,190.4 L721.3,186.5 L722.9,187.0 L724.7,183.5 L726.3,181.4 L727.9,181.3 L729.5,178.1 L730.6,176.1 L732.2,178.2 L734.0,176.6 L735.6,175.3 L737.2,174.6 L738.8,174.5 L740.6,174.0 L741.7,171.4 L743.3,170.0 L745.1,169.9 L746.7,170.5 L748.3,169.2 L749.9,168.3 L751.0,169.7 L752.6,168.1 L754.2,166.0 L755.8,167.0 L757.3,166.5 L758.4,165.7 L760.3,164.7 L761.9,162.7 L763.4,162.7 L765.0,161.9 L766.6,162.0 L767.7,161.0 L769.3,160.8 L770.9,161.1 L772.5,159.7 L774.0,157.7 L775.1,158.7 L776.7,160.4 L778.3,158.2 L779.9,161.9 L781.5,160.1 L783.3,158.6 L784.4,157.9 L786.0,157.4 L787.6,160.1 L789.2,157.3 L791.0,157.2 L792.9,156.6 L794.5,156.1 L795.5,156.9 L797.4,157.2 L799.0,156.4 L800.6,157.8 L802.2,156.1 L804.0,157.0 L805.6,156.9 L806.7,155.9 L808.3,157.5 L809.8,158.7 L811.4,159.4 L813.0,162.2 L814.1,166.0 L815.7,161.8 L817.5,158.0 L819.1,154.8 L820.7,154.3 L822.3,152.6 L823.4,152.0 L825.0,150.4 L826.6,149.1 L828.1,151.3 L830.0,147.9 L831.6,146.6 L832.6,150.1 L834.2,149.5 L835.8,149.3 L837.7,149.6 L839.3,147.7 L841.1,148.0 L842.7,148.1 L843.8,148.5 L845.4,150.0 L847.0,151.1 L848.6,144.5 L850.2,144.7 L851.2,144.0 L852.8,146.0 L854.4,145.2 L856.0,146.6 L857.8,145.9 L859.4,147.7 L860.5,147.4 L862.1,147.5 L863.7,148.5 L865.0,146.8" fill="none" stroke="#D97706" stroke-width="1.8" stroke-dasharray="6,4"/>
+  <path d="M65.0,247.0 L66.9,246.5 L67.9,245.9 L69.5,245.9 L71.1,246.4 L72.7,246.3 L74.3,245.7 L75.3,245.2 L76.9,244.8 L78.5,244.9 L80.1,244.8 L82.0,244.7 L83.6,244.9 L84.6,244.7 L86.2,244.9 L87.8,244.8 L89.4,244.1 L91.0,245.0 L92.0,246.5 L93.6,246.2 L95.2,246.5 L96.8,246.6 L98.4,247.3 L99.5,248.3 L101.1,248.7 L102.7,249.0 L104.5,249.9 L106.1,248.9 L108.0,248.7 L109.5,248.8 L110.6,248.4 L112.5,248.0 L114.3,247.7 L115.9,248.0 L117.5,247.8 L119.4,247.9 L120.9,247.2 L122.5,247.0 L123.6,246.5 L125.2,246.5 L127.0,246.5 L128.6,246.5 L130.2,246.8 L131.8,246.7 L132.9,246.4 L134.5,246.1 L136.1,245.6 L137.7,245.5 L139.2,245.5 L140.3,245.7 L141.9,245.7 L143.8,245.5 L145.3,245.7 L146.9,245.7 L148.5,245.7 L149.6,245.6 L151.2,245.5 L153.0,245.2 L154.6,244.7 L156.2,244.9 L157.8,244.3 L158.9,243.9 L160.5,243.6 L162.1,243.2 L163.9,243.2 L165.5,243.4 L167.1,243.1 L168.1,242.9 L169.7,242.4 L171.3,242.1 L172.9,241.7 L174.5,241.5 L175.6,241.4 L177.2,241.0 L179.0,241.1 L180.6,241.4 L182.2,241.3 L183.8,240.9 L184.9,241.2 L186.4,241.1 L188.0,241.2 L189.6,241.8 L191.2,241.9 L192.3,241.4 L193.9,241.4 L195.5,240.5 L197.1,241.1 L198.6,240.9 L199.7,241.0 L201.6,241.0 L203.2,241.1 L204.7,240.9 L206.3,240.3 L207.9,240.1 L209.8,240.1 L211.6,239.8 L212.7,239.5 L214.3,239.1 L216.1,239.0 L217.7,239.0 L219.3,239.1 L220.9,238.4 L222.0,238.2 L223.8,238.0 L225.4,239.6 L227.0,238.7 L228.6,239.2 L230.2,241.1 L231.3,240.1 L232.1,239.5 L232.8,240.1 L234.4,240.0 L236.0,239.8 L237.9,239.7 L239.5,239.3 L240.5,239.1 L242.1,239.7 L243.7,239.6 L245.3,239.5 L246.9,239.0 L248.0,239.3 L249.8,239.2 L251.4,239.4 L253.0,239.0 L254.6,239.3 L256.2,238.5 L257.2,238.8 L258.8,238.0 L260.7,236.7 L262.3,236.9 L263.9,236.6 L265.5,236.3 L266.5,236.0 L268.1,235.1 L269.7,236.5 L271.3,235.9 L272.9,236.2 L273.9,235.9 L275.5,236.3 L277.4,238.0 L279.0,236.8 L280.6,238.8 L282.2,239.1 L283.2,238.5 L284.8,236.7 L286.4,235.7 L288.0,235.9 L289.6,236.2 L290.7,236.6 L292.2,235.2 L293.8,236.0 L295.4,235.8 L297.0,235.6 L298.9,236.3 L299.9,236.0 L301.5,235.5 L303.1,235.2 L304.7,235.6 L306.6,235.0 L308.4,233.6 L310.0,234.1 L311.1,233.6 L312.9,233.6 L314.5,233.8 L316.1,233.1 L317.7,232.2 L319.6,231.6 L321.1,231.6 L322.2,231.9 L323.8,231.4 L325.4,230.7 L327.0,230.6 L328.6,231.5 L329.6,230.7 L331.2,230.7 L333.1,230.9 L334.7,230.5 L336.3,230.7 L337.9,230.0 L338.9,229.7 L340.5,228.8 L342.1,229.6 L343.7,229.5 L345.3,229.3 L346.3,229.0 L348.2,228.2 L349.8,227.9 L351.4,228.6 L353.0,229.1 L354.6,228.8 L355.6,227.4 L357.5,227.9 L359.1,227.9 L360.7,228.2 L362.2,227.4 L363.8,227.1 L364.9,227.4 L366.5,227.5 L368.1,226.9 L369.7,226.6 L371.3,226.4 L372.3,226.6 L374.2,227.2 L375.8,226.7 L377.4,226.8 L379.0,228.1 L380.5,227.4 L381.6,227.3 L383.2,226.6 L384.8,226.7 L386.4,226.5 L388.0,226.5 L389.0,226.2 L390.6,226.2 L392.2,226.2 L393.8,226.4 L395.7,227.2 L397.3,226.8 L398.3,226.8 L399.9,226.8 L401.5,226.7 L403.3,226.8 L404.9,227.1 L406.5,227.5 L407.6,227.5 L409.4,228.8 L411.0,227.9 L412.6,227.4 L414.2,227.6 L415.8,226.7 L416.9,226.7 L418.7,226.3 L420.3,223.3 L421.9,221.5 L423.5,222.4 L425.1,221.2 L426.2,220.8 L427.7,221.3 L429.3,220.7 L430.9,219.9 L432.8,219.6 L434.4,220.9 L435.4,220.6 L437.0,220.4 L438.6,220.6 L440.2,220.8 L441.8,221.7 L442.9,221.2 L444.7,220.7 L446.3,219.7 L447.9,219.7 L449.8,220.9 L451.3,220.4 L453.2,219.6 L454.8,219.0 L455.9,219.4 L457.4,220.0 L459.0,220.3 L460.6,220.8 L462.2,221.0 L463.3,219.6 L464.9,218.4 L466.5,218.9 L468.0,219.6 L469.9,219.2 L471.5,220.0 L472.6,220.0 L474.1,220.1 L475.7,220.7 L477.3,221.4 L478.9,220.3 L480.0,220.2 L481.6,219.9 L483.2,220.5 L484.8,219.3 L486.3,219.7 L487.4,220.6 L489.0,220.5 L490.6,220.4 L492.4,219.6 L494.0,219.8 L495.6,219.6 L496.7,220.2 L498.3,221.0 L500.1,220.7 L502.0,220.0 L503.6,218.9 L505.4,218.7 L507.0,218.2 L508.6,218.4 L509.7,218.9 L511.3,219.2 L512.9,218.9 L514.7,219.5 L516.3,219.5 L517.9,219.0 L519.0,220.8 L520.6,219.9 L522.1,220.4 L523.7,220.3 L525.3,219.7 L527.2,219.3 L528.2,219.3 L529.8,219.3 L531.4,220.2 L533.0,219.7 L534.6,219.8 L535.7,219.4 L537.3,219.5 L538.8,219.5 L540.7,219.2 L542.3,218.8 L543.9,218.8 L544.9,219.1 L546.8,219.4 L548.4,219.0 L550.3,219.0 L551.8,219.4 L553.4,219.2 L555.0,218.6 L556.1,218.2 L557.7,218.3 L559.3,218.5 L560.9,218.4 L562.4,218.5 L563.5,218.0 L565.1,217.5 L567.0,217.2 L568.5,217.2 L570.1,216.9 L571.7,217.2 L572.8,217.8 L574.4,218.3 L576.0,217.5 L577.6,216.8 L579.2,217.4 L580.2,217.3 L581.8,216.5 L583.4,216.9 L585.0,216.7 L586.6,216.5 L588.4,216.3 L589.5,215.5 L591.1,215.8 L592.7,215.5 L594.3,215.2 L596.1,215.0 L598.0,214.9 L599.6,215.0 L600.6,214.7 L602.5,214.3 L604.1,213.8 L605.7,213.8 L607.3,213.1 L608.9,212.9 L609.9,212.8 L611.8,212.3 L613.4,212.1 L615.0,211.5 L616.5,211.1 L618.1,210.7 L619.2,209.9 L620.8,209.2 L622.6,208.9 L624.2,208.1 L625.8,207.7 L627.4,208.0 L628.5,207.5 L630.1,208.4 L631.7,208.0 L633.2,206.9 L634.8,205.8 L635.9,207.2 L637.8,208.2 L639.3,207.3 L640.9,206.7 L642.5,205.5 L644.4,205.4 L646.0,205.7 L647.8,204.7 L648.9,204.4 L650.5,205.1 L652.1,205.6 L653.7,205.3 L655.3,206.9 L656.3,206.2 L657.9,205.6 L659.5,205.5 L661.1,205.6 L662.9,205.4 L664.5,205.1 L665.6,204.5 L667.2,204.5 L668.8,204.1 L670.4,203.8 L672.0,203.9 L673.0,203.5 L674.6,202.8 L676.2,202.7 L677.8,202.3 L679.4,202.7 L680.4,202.1 L682.0,202.4 L683.6,201.9 L685.2,201.5 L687.1,201.3 L688.7,201.2 L689.7,201.3 L691.3,201.7 L693.2,201.1 L695.0,200.8 L696.6,200.8 L698.5,200.5 L700.3,200.1 L701.9,199.9 L703.5,199.2 L704.6,199.1 L706.2,198.9 L708.0,199.1 L709.6,198.9 L711.2,199.5 L712.8,200.5 L713.9,200.0 L715.4,199.5 L717.0,199.7 L718.6,199.0 L720.2,201.6 L721.3,201.9 L722.9,201.1 L724.7,200.8 L726.3,200.6 L727.9,200.3 L729.5,201.0 L730.6,201.3 L732.2,201.5 L734.0,201.2 L735.6,200.6 L737.2,200.8 L738.8,200.5 L740.6,200.2 L741.7,200.4 L743.3,200.0 L745.1,200.0 L746.7,199.8 L748.3,198.9 L749.9,199.4 L751.0,199.1 L752.6,198.5 L754.2,198.2 L755.8,198.7 L757.3,198.0 L758.4,197.5 L760.3,196.2 L761.9,195.1 L763.4,194.8 L765.0,194.2 L766.6,193.5 L767.7,192.8 L769.3,191.9 L770.9,191.0 L772.5,191.3 L774.0,191.6 L775.1,191.8 L776.7,192.2 L778.3,190.0 L779.9,191.9 L781.5,190.7 L783.3,190.6 L784.4,191.4 L786.0,190.9 L787.6,190.4 L789.2,188.8 L791.0,189.3 L792.9,186.5 L794.5,185.7 L795.5,185.8 L797.4,184.1 L799.0,182.8 L800.6,183.6 L802.2,182.4 L804.0,182.0 L805.6,180.6 L806.7,179.7 L808.3,181.7 L809.8,181.2 L811.4,180.5 L813.0,181.7 L814.1,180.3 L815.7,180.4 L817.5,181.2 L819.1,181.5 L820.7,181.0 L822.3,179.7 L823.4,178.8 L825.0,178.7 L826.6,177.4 L828.1,177.9 L830.0,177.7 L831.6,177.1 L832.6,178.8 L834.2,178.7 L835.8,179.1 L837.7,178.1 L839.3,177.3 L841.1,176.3 L842.7,176.0 L843.8,176.5 L845.4,175.6 L847.0,176.0 L848.6,175.6 L850.2,174.0 L851.2,174.3 L852.8,174.2 L854.4,174.0 L856.0,174.0 L857.8,174.5 L859.4,174.6 L860.5,174.7 L862.1,174.7 L863.7,175.3 L865.0,174.4" fill="none" stroke="#059669" stroke-width="2.6"/>
+
+  <circle cx="865.0" cy="55.0" r="3" fill="#8A7F74"/>
+  <circle cx="865.0" cy="146.8" r="3" fill="#D97706"/>
+  <circle cx="865.0" cy="174.4" r="3.6" fill="#059669"/>
+
+  <!-- Panel 2: Underwater Drawdown -->
+  <text x="65" y="306" class="panel-hdr">Distance Below Previous Peak (Underwater Drawdown, %)</text>
+  
+  <g transform="translate(480, 300)">
+    <rect x="0" y="-7" width="16" height="9" fill="#059669" fill-opacity="0.25" stroke="#059669" stroke-width="1"/>
+    <text x="22" y="1" class="leg-txt">Strategy (Max −6.5%)</text>
+    <line x1="168" y1="-2" x2="188" y2="-2" stroke="#D97706" stroke-width="1.6" stroke-dasharray="5,3"/>
+    <text x="194" y="1" class="leg-txt">60/40 (−21.0%)</text>
+    <line x1="280" y1="-2" x2="300" y2="-2" stroke="#8A7F74" stroke-width="1.4" stroke-dasharray="2,2"/>
+    <text x="306" y="1" class="leg-txt">S&amp;P (−33.7%)</text>
+  </g>
+
+  <line x1="65" y1="320.0" x2="865" y2="320.0" class="zero-line"/><text x="57" y="324.0" text-anchor="end" class="axis-txt">0%</text><line x1="65" y1="358.9" x2="865" y2="358.9" class="grid-line"/><text x="57" y="362.9" text-anchor="end" class="axis-txt">-10%</text><line x1="65" y1="397.8" x2="865" y2="397.8" class="grid-line"/><text x="57" y="401.8" text-anchor="end" class="axis-txt">-20%</text><line x1="65" y1="436.7" x2="865" y2="436.7" class="grid-line"/><text x="57" y="440.7" text-anchor="end" class="axis-txt">-30%</text>
+
+  <path d="M65.0,320 L65.0,320.0 L66.9,320.0 L67.9,320.0 L69.5,320.0 L71.1,322.3 L72.7,321.5 L74.3,320.0 L75.3,320.0 L76.9,320.0 L78.5,321.0 L80.1,320.7 L82.0,320.7 L83.6,321.4 L84.6,320.8 L86.2,321.5 L87.8,321.1 L89.4,320.0 L91.0,323.9 L92.0,330.1 L93.6,328.9 L95.2,330.4 L96.8,330.8 L98.4,333.9 L99.5,338.1 L101.1,340.1 L102.7,341.4 L104.5,345.3 L106.1,340.7 L108.0,340.0 L109.5,340.5 L110.6,338.5 L112.5,337.1 L114.3,335.7 L115.9,337.0 L117.5,336.1 L119.4,336.3 L120.9,333.5 L122.5,332.6 L123.6,330.3 L125.2,330.1 L127.0,330.2 L128.6,330.4 L130.2,331.5 L131.8,331.1 L132.9,329.8 L134.5,328.4 L136.1,326.5 L137.7,326.1 L139.2,326.0 L140.3,326.7 L141.9,326.9 L143.8,326.0 L145.3,326.6 L146.9,326.6 L148.5,326.6 L149.6,326.6 L151.2,326.0 L153.0,324.5 L154.6,322.5 L156.2,323.2 L157.8,320.7 L158.9,320.6 L160.5,320.6 L162.1,320.0 L163.9,320.3 L165.5,320.9 L167.1,320.0 L168.1,320.0 L169.7,320.0 L171.3,320.0 L172.9,320.0 L174.5,320.7 L175.6,320.6 L177.2,320.0 L179.0,321.8 L180.6,323.1 L182.2,322.6 L183.8,321.2 L184.9,322.2 L186.4,321.9 L188.0,322.3 L189.6,324.7 L191.2,325.3 L192.3,323.2 L193.9,323.2 L195.5,320.2 L197.1,322.7 L198.6,321.7 L199.7,321.9 L201.6,322.0 L203.2,322.7 L204.7,321.5 L206.3,320.0 L207.9,320.1 L209.8,320.9 L211.6,320.2 L212.7,320.0 L214.3,320.0 L216.1,320.0 L217.7,320.0 L219.3,320.2 L220.9,320.0 L222.0,320.0 L223.8,320.3 L225.4,327.2 L227.0,323.3 L228.6,325.5 L230.2,333.1 L231.3,328.9 L232.1,326.4 L232.8,329.1 L234.4,328.5 L236.0,327.6 L237.9,327.4 L239.5,325.7 L240.5,324.8 L242.1,327.5 L243.7,327.2 L245.3,326.5 L246.9,324.7 L248.0,325.6 L249.8,325.4 L251.4,326.2 L253.0,324.4 L254.6,326.0 L256.2,322.7 L257.2,323.6 L258.8,320.3 L260.7,320.0 L262.3,320.7 L263.9,320.0 L265.5,320.0 L266.5,320.1 L268.1,320.0 L269.7,325.4 L271.3,323.3 L272.9,324.4 L273.9,323.3 L275.5,324.8 L277.4,331.4 L279.0,326.6 L280.6,334.5 L282.2,335.9 L283.2,333.5 L284.8,326.1 L286.4,322.6 L288.0,323.3 L289.6,324.5 L290.7,326.0 L292.2,320.6 L293.8,323.7 L295.4,322.9 L297.0,322.2 L298.9,324.9 L299.9,323.8 L301.5,321.8 L303.1,320.6 L304.7,322.9 L306.6,320.6 L308.4,320.0 L310.0,322.1 L311.1,321.2 L312.9,322.4 L314.5,323.5 L316.1,320.4 L317.7,320.0 L319.6,320.0 L321.1,320.8 L322.2,323.3 L323.8,321.3 L325.4,321.0 L327.0,320.8 L328.6,324.1 L329.6,321.0 L331.2,320.8 L333.1,321.6 L334.7,320.3 L336.3,322.6 L337.9,320.1 L338.9,320.4 L340.5,320.0 L342.1,323.7 L343.7,323.6 L345.3,322.7 L346.3,321.5 L348.2,320.0 L349.8,320.0 L351.4,322.6 L353.0,324.4 L354.6,323.1 L355.6,320.0 L357.5,321.9 L359.1,321.9 L360.7,323.2 L362.2,320.1 L363.8,320.0 L364.9,322.5 L366.5,322.9 L368.1,321.6 L369.7,320.5 L371.3,320.0 L372.3,320.9 L374.2,323.1 L375.8,321.4 L377.4,321.8 L379.0,326.5 L380.5,323.8 L381.6,323.4 L383.2,320.8 L384.8,321.5 L386.4,320.5 L388.0,320.6 L389.0,320.0 L390.6,320.8 L392.2,320.7 L393.8,321.2 L395.7,324.2 L397.3,323.0 L398.3,322.9 L399.9,322.9 L401.5,322.4 L403.3,322.9 L404.9,323.8 L406.5,325.4 L407.6,325.3 L409.4,330.1 L411.0,326.7 L412.6,324.8 L414.2,325.9 L415.8,322.6 L416.9,322.5 L418.7,321.0 L420.3,320.0 L421.9,323.2 L423.5,326.2 L425.1,322.2 L426.2,320.7 L427.7,322.5 L429.3,320.3 L430.9,321.2 L432.8,320.1 L434.4,324.4 L435.4,323.6 L437.0,322.7 L438.6,323.7 L440.2,324.2 L441.8,327.1 L442.9,325.7 L444.7,323.8 L446.3,320.3 L447.9,321.6 L449.8,325.6 L451.3,324.1 L453.2,321.2 L454.8,320.0 L455.9,321.3 L457.4,323.5 L459.0,324.3 L460.6,326.0 L462.2,326.7 L463.3,321.8 L464.9,320.0 L466.5,321.5 L468.0,323.9 L469.9,322.6 L471.5,325.4 L472.6,325.4 L474.1,325.6 L475.7,327.8 L477.3,329.9 L478.9,326.4 L480.0,325.9 L481.6,324.9 L483.2,327.1 L484.8,322.9 L486.3,324.2 L487.4,327.2 L489.0,327.0 L490.6,326.7 L492.4,323.9 L494.0,324.5 L495.6,323.9 L496.7,326.0 L498.3,328.8 L500.1,327.6 L502.0,325.3 L503.6,321.7 L505.4,321.1 L507.0,320.0 L508.6,320.8 L509.7,322.8 L511.3,323.5 L512.9,322.5 L514.7,324.6 L516.3,324.5 L517.9,322.8 L519.0,329.2 L520.6,325.9 L522.1,327.8 L523.7,327.3 L525.3,325.5 L527.2,324.0 L528.2,324.0 L529.8,324.1 L531.4,326.9 L533.0,325.2 L534.6,325.6 L535.7,324.4 L537.3,324.8 L538.8,324.7 L540.7,323.5 L542.3,322.2 L543.9,322.4 L544.9,323.4 L546.8,324.2 L548.4,323.0 L550.3,322.9 L551.8,324.4 L553.4,323.6 L555.0,321.5 L556.1,320.2 L557.7,321.1 L559.3,321.7 L560.9,321.4 L562.4,321.8 L563.5,320.1 L565.1,320.0 L567.0,320.4 L568.5,320.3 L570.1,320.8 L571.7,321.7 L572.8,323.8 L574.4,325.5 L576.0,322.8 L577.6,320.5 L579.2,322.3 L580.2,322.1 L581.8,320.0 L583.4,321.3 L585.0,320.7 L586.6,320.3 L588.4,320.3 L589.5,320.0 L591.1,320.8 L592.7,320.0 L594.3,320.0 L596.1,320.0 L598.0,320.0 L599.6,320.3 L600.6,320.0 L602.5,320.0 L604.1,320.0 L605.7,320.9 L607.3,320.0 L608.9,320.0 L609.9,320.1 L611.8,320.0 L613.4,320.0 L615.0,320.0 L616.5,320.0 L618.1,320.0 L619.2,320.0 L620.8,320.0 L622.6,320.9 L624.2,320.0 L625.8,320.3 L627.4,321.3 L628.5,320.0 L630.1,322.9 L631.7,321.6 L633.2,320.0 L634.8,320.0 L635.9,324.2 L637.8,327.3 L639.3,324.3 L640.9,322.8 L642.5,320.0 L644.4,320.2 L646.0,321.4 L647.8,320.0 L648.9,321.8 L650.5,324.3 L652.1,325.8 L653.7,325.1 L655.3,329.8 L656.3,327.7 L657.9,325.9 L659.5,325.6 L661.1,325.9 L662.9,325.2 L664.5,324.4 L665.6,322.5 L667.2,322.5 L668.8,321.3 L670.4,320.5 L672.0,320.6 L673.0,320.0 L674.6,320.0 L676.2,320.6 L677.8,320.0 L679.4,321.2 L680.4,320.0 L682.0,320.9 L683.6,320.0 L685.2,320.9 L687.1,320.5 L688.7,320.2 L689.7,321.7 L691.3,322.7 L693.2,321.0 L695.0,320.0 L696.6,320.3 L698.5,320.0 L700.3,320.0 L701.9,320.0 L703.5,320.0 L704.6,320.0 L706.2,320.8 L708.0,321.4 L709.6,320.8 L711.2,322.4 L712.8,325.5 L713.9,323.8 L715.4,322.4 L717.0,323.1 L718.6,321.0 L720.2,328.7 L721.3,329.4 L722.9,327.2 L724.7,326.4 L726.3,325.6 L727.9,324.8 L729.5,327.0 L730.6,327.7 L732.2,328.4 L734.0,327.3 L735.6,325.6 L737.2,326.1 L738.8,325.3 L740.6,324.7 L741.7,325.2 L743.3,324.1 L745.1,324.0 L746.7,323.4 L748.3,320.8 L749.9,322.3 L751.0,321.3 L752.6,320.0 L754.2,320.0 L755.8,321.4 L757.3,320.0 L758.4,320.0 L760.3,320.0 L761.9,320.0 L763.4,320.1 L765.0,320.0 L766.6,320.0 L767.7,320.0 L769.3,321.4 L770.9,320.0 L772.5,323.8 L774.0,324.4 L775.1,324.9 L776.7,326.2 L778.3,320.0 L779.9,325.3 L781.5,322.0 L783.3,321.9 L784.4,324.1 L786.0,322.7 L787.6,321.3 L789.2,320.0 L791.0,323.1 L792.9,320.0 L794.5,320.0 L795.5,321.6 L797.4,320.2 L799.0,320.0 L800.6,322.0 L802.2,320.3 L804.0,321.3 L805.6,320.0 L806.7,320.0 L808.3,324.9 L809.8,323.7 L811.4,321.9 L813.0,324.9 L814.1,321.4 L815.7,321.7 L817.5,323.8 L819.1,324.4 L820.7,323.3 L822.3,320.0 L823.4,320.4 L825.0,321.9 L826.6,320.0 L828.1,321.4 L830.0,321.0 L831.6,320.0 L832.6,325.2 L834.2,324.9 L835.8,325.8 L837.7,323.5 L839.3,321.5 L841.1,320.0 L842.7,320.0 L843.8,321.3 L845.4,320.0 L847.0,321.8 L848.6,321.0 L850.2,320.0 L851.2,320.9 L852.8,321.1 L854.4,320.6 L856.0,320.6 L857.8,322.5 L859.4,322.6 L860.5,323.0 L862.1,322.9 L863.7,324.4 L865.0,322.2 L865.0,320 Z" fill="#059669" fill-opacity="0.18"/>
+  <path d="M65.0,320.0 L66.9,320.0 L67.9,320.0 L69.5,321.5 L71.1,320.0 L72.7,323.7 L74.3,320.0 L75.3,323.3 L76.9,322.1 L78.5,320.2 L80.1,320.0 L82.0,322.2 L83.6,324.5 L84.6,320.8 L86.2,320.0 L87.8,323.2 L89.4,320.9 L91.0,325.9 L92.0,341.7 L93.6,341.1 L95.2,355.8 L96.8,352.6 L98.4,345.1 L99.5,339.3 L101.1,345.6 L102.7,356.2 L104.5,343.5 L106.1,349.3 L108.0,357.4 L109.5,369.1 L110.6,386.7 L112.5,377.3 L114.3,371.1 L115.9,362.4 L117.5,359.6 L119.4,356.3 L120.9,356.3 L122.5,344.9 L123.6,346.9 L125.2,341.7 L127.0,337.6 L128.6,335.2 L130.2,335.4 L131.8,336.2 L132.9,330.7 L134.5,326.1 L136.1,333.0 L137.7,324.5 L139.2,320.7 L140.3,320.0 L141.9,320.2 L143.8,321.1 L145.3,322.9 L146.9,328.1 L148.5,337.4 L149.6,330.8 L151.2,335.7 L153.0,339.8 L154.6,334.6 L156.2,326.8 L157.8,326.2 L158.9,320.6 L160.5,323.9 L162.1,320.0 L163.9,320.2 L165.5,321.3 L167.1,323.7 L168.1,320.0 L169.7,329.2 L171.3,338.1 L172.9,332.2 L174.5,332.5 L175.6,342.1 L177.2,332.1 L179.0,325.4 L180.6,322.3 L182.2,321.4 L183.8,323.1 L184.9,326.8 L186.4,333.2 L188.0,332.1 L189.6,322.3 L191.2,320.8 L192.3,320.0 L193.9,321.0 L195.5,320.3 L197.1,320.0 L198.6,320.0 L199.7,321.3 L201.6,321.4 L203.2,324.3 L204.7,321.3 L206.3,320.0 L207.9,320.0 L209.8,322.2 L211.6,321.5 L212.7,321.1 L214.3,320.0 L216.1,320.3 L217.7,326.2 L219.3,323.4 L220.9,320.0 L222.0,320.0 L223.8,325.6 L225.4,366.9 L227.0,349.3 L228.6,377.4 L230.2,433.2 L231.3,444.4 L232.1,451.1 L232.8,406.9 L234.4,424.3 L236.0,402.4 L237.9,380.8 L239.5,383.3 L240.5,381.7 L242.1,373.0 L243.7,380.3 L245.3,377.5 L246.9,367.8 L248.0,367.3 L249.8,357.0 L251.4,348.9 L253.0,340.1 L254.6,347.1 L256.2,348.2 L257.2,360.5 L258.8,346.3 L260.7,343.8 L262.3,335.1 L263.9,331.5 L265.5,333.5 L266.5,329.7 L268.1,320.6 L269.7,320.0 L271.3,320.0 L272.9,320.0 L273.9,320.0 L275.5,333.4 L277.4,345.9 L279.0,340.5 L280.6,348.4 L282.2,344.1 L283.2,344.5 L284.8,333.6 L286.4,329.1 L288.0,334.1 L289.6,338.4 L290.7,352.5 L292.2,326.6 L293.8,320.0 L295.4,322.1 L297.0,325.5 L298.9,321.7 L299.9,320.0 L301.5,323.6 L303.1,320.0 L304.7,323.6 L306.6,320.7 L308.4,322.7 L310.0,322.6 L311.1,325.7 L312.9,321.4 L314.5,326.8 L316.1,322.6 L317.7,320.3 L319.6,320.3 L321.1,325.6 L322.2,332.2 L323.8,335.8 L325.4,323.0 L327.0,320.5 L328.6,323.3 L329.6,320.0 L331.2,320.0 L333.1,320.0 L334.7,321.3 L336.3,324.7 L337.9,320.0 L338.9,322.6 L340.5,320.9 L342.1,335.4 L343.7,329.4 L345.3,322.7 L346.3,321.9 L348.2,320.0 L349.8,320.0 L351.4,322.9 L353.0,320.7 L354.6,320.0 L355.6,320.0 L357.5,320.0 L359.1,322.1 L360.7,322.3 L362.2,321.8 L363.8,323.0 L364.9,320.0 L366.5,320.0 L368.1,326.8 L369.7,320.0 L371.3,320.0 L372.3,320.1 L374.2,326.7 L375.8,325.2 L377.4,332.0 L379.0,335.5 L380.5,339.9 L381.6,332.0 L383.2,328.0 L384.8,320.0 L386.4,320.0 L388.0,320.0 L389.0,320.0 L390.6,324.3 L392.2,320.9 L393.8,321.3 L395.7,331.7 L397.3,329.1 L398.3,320.0 L399.9,323.5 L401.5,321.2 L403.3,320.0 L404.9,320.1 L406.5,329.9 L407.6,330.6 L409.4,352.3 L411.0,357.8 L412.6,336.6 L414.2,341.8 L415.8,351.5 L416.9,355.4 L418.7,352.5 L420.3,354.2 L421.9,360.9 L423.5,362.0 L425.1,346.0 L426.2,339.2 L427.7,340.1 L429.3,344.3 L430.9,351.0 L432.8,345.5 L434.4,359.0 L435.4,372.5 L437.0,371.0 L438.6,388.2 L440.2,375.5 L441.8,384.8 L442.9,369.8 L444.7,373.6 L446.3,381.1 L447.9,399.2 L449.8,401.8 L451.3,396.7 L453.2,395.6 L454.8,393.8 L455.9,393.0 L457.4,381.8 L459.0,380.0 L460.6,374.2 L462.2,370.2 L463.3,358.6 L464.9,358.0 L466.5,369.6 L468.0,382.3 L469.9,388.4 L471.5,371.8 L472.6,391.4 L474.1,400.7 L475.7,403.8 L477.3,397.6 L478.9,412.4 L480.0,414.4 L481.6,408.0 L483.2,394.3 L484.8,392.2 L486.3,396.0 L487.4,380.7 L489.0,384.2 L490.6,377.5 L492.4,373.2 L494.0,384.6 L495.6,380.4 L496.7,391.8 L498.3,393.9 L500.1,391.7 L502.0,395.0 L503.6,381.7 L505.4,385.0 L507.0,377.8 L508.6,377.5 L509.7,367.8 L511.3,372.1 L512.9,366.4 L514.7,379.2 L516.3,381.1 L517.9,374.3 L519.0,389.6 L520.6,381.2 L522.1,383.3 L523.7,380.4 L525.3,367.6 L527.2,368.7 L528.2,366.4 L529.8,366.9 L531.4,373.1 L533.0,367.7 L534.6,366.1 L535.7,367.1 L537.3,360.7 L538.8,367.5 L540.7,361.9 L542.3,353.4 L543.9,348.6 L544.9,342.6 L546.8,347.8 L548.4,343.7 L550.3,342.4 L551.8,337.1 L553.4,330.3 L555.0,330.3 L556.1,328.0 L557.7,334.8 L559.3,337.3 L560.9,339.7 L562.4,342.7 L563.5,342.2 L565.1,333.5 L567.0,338.1 L568.5,336.7 L570.1,338.6 L571.7,347.3 L572.8,351.3 L574.4,353.8 L576.0,343.9 L577.6,344.2 L579.2,357.2 L580.2,365.4 L581.8,348.6 L583.4,343.1 L585.0,333.5 L586.6,328.9 L588.4,328.7 L589.5,324.9 L591.1,325.6 L592.7,320.0 L594.3,320.0 L596.1,320.0 L598.0,323.3 L599.6,321.7 L600.6,320.0 L602.5,320.0 L604.1,320.0 L605.7,326.6 L607.3,320.3 L608.9,320.2 L609.9,321.9 L611.8,320.0 L613.4,320.0 L615.0,322.4 L616.5,320.0 L618.1,321.8 L619.2,320.7 L620.8,320.1 L622.6,327.5 L624.2,326.7 L625.8,334.6 L627.4,337.4 L628.5,331.1 L630.1,333.5 L631.7,324.4 L633.2,320.0 L634.8,320.0 L635.9,321.4 L637.8,322.9 L639.3,320.0 L640.9,320.0 L642.5,320.0 L644.4,321.3 L646.0,321.0 L647.8,320.0 L648.9,320.9 L650.5,328.4 L652.1,336.3 L653.7,335.7 L655.3,352.7 L656.3,341.9 L657.9,328.1 L659.5,322.9 L661.1,322.3 L662.9,328.8 L664.5,332.7 L665.6,322.0 L667.2,320.0 L668.8,320.9 L670.4,323.5 L672.0,324.0 L673.0,320.0 L674.6,321.3 L676.2,324.4 L677.8,321.9 L679.4,329.8 L680.4,320.0 L682.0,323.5 L683.6,325.4 L685.2,320.0 L687.1,320.0 L688.7,322.0 L689.7,322.3 L691.3,333.9 L693.2,322.8 L695.0,333.6 L696.6,330.5 L698.5,328.3 L700.3,320.0 L701.9,323.3 L703.5,327.6 L704.6,325.7 L706.2,320.0 L708.0,321.6 L709.6,331.7 L711.2,342.9 L712.8,353.2 L713.9,351.8 L715.4,350.1 L717.0,347.0 L718.6,351.9 L720.2,387.9 L721.3,369.1 L722.9,373.9 L724.7,361.0 L726.3,356.0 L727.9,353.3 L729.5,337.9 L730.6,330.7 L732.2,337.8 L734.0,333.4 L735.6,329.6 L737.2,325.1 L738.8,325.4 L740.6,325.8 L741.7,320.0 L743.3,320.0 L745.1,320.0 L746.7,321.0 L748.3,320.0 L749.9,320.1 L751.0,329.4 L752.6,323.0 L754.2,320.0 L755.8,323.1 L757.3,321.7 L758.4,322.3 L760.3,321.1 L761.9,320.0 L763.4,321.0 L765.0,322.1 L766.6,321.8 L767.7,320.0 L769.3,321.1 L770.9,324.6 L772.5,321.1 L774.0,320.0 L775.1,323.0 L776.7,329.7 L778.3,322.3 L779.9,335.5 L781.5,330.6 L783.3,324.0 L784.4,321.0 L786.0,320.0 L787.6,330.0 L789.2,320.0 L791.0,321.9 L792.9,320.0 L794.5,320.0 L795.5,322.0 L797.4,323.3 L799.0,320.8 L800.6,325.2 L802.2,321.9 L804.0,327.1 L805.6,327.3 L806.7,325.3 L808.3,327.9 L809.8,330.7 L811.4,333.8 L813.0,341.4 L814.1,353.4 L815.7,341.2 L817.5,327.7 L819.1,320.0 L820.7,323.3 L822.3,320.0 L823.4,320.0 L825.0,321.2 L826.6,320.0 L828.1,327.5 L830.0,320.0 L831.6,320.0 L832.6,331.3 L834.2,331.2 L835.8,329.5 L837.7,332.5 L839.3,325.6 L841.1,325.1 L842.7,324.3 L843.8,327.4 L845.4,330.0 L847.0,334.5 L848.6,320.0 L850.2,320.1 L851.2,320.8 L852.8,327.6 L854.4,325.9 L856.0,328.0 L857.8,326.0 L859.4,328.5 L860.5,327.1 L862.1,324.4 L863.7,326.7 L865.0,320.6" fill="none" stroke="#8A7F74" stroke-width="1.2" stroke-dasharray="2,2" opacity="0.8"/>
+  <path d="M65.0,320.0 L66.9,320.0 L67.9,320.0 L69.5,320.5 L71.1,320.0 L72.7,322.1 L74.3,320.0 L75.3,320.9 L76.9,320.0 L78.5,320.0 L80.1,320.2 L82.0,321.4 L83.6,323.0 L84.6,321.5 L86.2,320.2 L87.8,321.9 L89.4,320.4 L91.0,325.3 L92.0,334.0 L93.6,333.6 L95.2,341.7 L96.8,339.6 L98.4,336.0 L99.5,332.1 L101.1,335.0 L102.7,341.0 L104.5,332.9 L106.1,334.7 L108.0,339.3 L109.5,346.3 L110.6,356.9 L112.5,349.8 L114.3,344.8 L115.9,340.0 L117.5,338.0 L119.4,336.2 L120.9,335.6 L122.5,328.5 L123.6,328.7 L125.2,325.5 L127.0,323.3 L128.6,321.7 L130.2,322.2 L131.8,321.6 L132.9,320.0 L134.5,320.0 L136.1,322.3 L137.7,320.0 L139.2,320.1 L140.3,320.0 L141.9,320.1 L143.8,320.3 L145.3,321.8 L146.9,324.2 L148.5,329.1 L149.6,324.9 L151.2,327.0 L153.0,328.4 L154.6,323.9 L156.2,320.1 L157.8,320.1 L158.9,321.0 L160.5,322.3 L162.1,320.0 L163.9,321.3 L165.5,321.1 L167.1,321.7 L168.1,320.0 L169.7,323.2 L171.3,326.7 L172.9,322.8 L174.5,322.0 L175.6,326.9 L177.2,320.5 L179.0,320.0 L180.6,320.5 L182.2,320.7 L183.8,320.5 L184.9,322.4 L186.4,324.4 L188.0,324.0 L189.6,320.3 L191.2,320.0 L192.3,320.0 L193.9,320.0 L195.5,320.6 L197.1,320.4 L198.6,320.0 L199.7,320.6 L201.6,321.0 L203.2,322.8 L204.7,320.9 L206.3,320.0 L207.9,320.0 L209.8,321.4 L211.6,320.0 L212.7,320.3 L214.3,320.0 L216.1,320.0 L217.7,321.7 L219.3,320.1 L220.9,320.0 L222.0,320.0 L223.8,322.3 L225.4,345.5 L227.0,331.1 L228.6,347.1 L230.2,382.1 L231.3,391.0 L232.1,394.4 L232.8,363.1 L234.4,372.9 L236.0,358.5 L237.9,343.8 L239.5,343.9 L240.5,342.7 L242.1,337.4 L243.7,342.6 L245.3,340.2 L246.9,334.2 L248.0,333.0 L249.8,326.2 L251.4,322.7 L253.0,321.3 L254.6,325.8 L256.2,326.0 L257.2,333.1 L258.8,324.2 L260.7,322.1 L262.3,320.0 L263.9,320.0 L265.5,322.8 L266.5,320.0 L268.1,320.0 L269.7,320.0 L271.3,320.0 L272.9,320.0 L273.9,320.0 L275.5,327.8 L277.4,335.8 L279.0,332.6 L280.6,337.2 L282.2,334.3 L283.2,334.9 L284.8,329.0 L286.4,325.8 L288.0,329.6 L289.6,332.3 L290.7,341.7 L292.2,324.7 L293.8,322.3 L295.4,320.9 L297.0,322.8 L298.9,321.1 L299.9,320.0 L301.5,322.0 L303.1,320.0 L304.7,321.9 L306.6,320.5 L308.4,321.9 L310.0,321.9 L311.1,323.1 L312.9,320.6 L314.5,324.4 L316.1,322.6 L317.7,320.0 L319.6,321.3 L321.1,325.2 L322.2,330.0 L323.8,333.6 L325.4,325.7 L327.0,322.9 L328.6,324.9 L329.6,322.7 L331.2,320.2 L333.1,320.0 L334.7,321.0 L336.3,322.6 L337.9,320.0 L338.9,321.4 L340.5,320.0 L342.1,330.6 L343.7,326.2 L345.3,321.8 L346.3,321.2 L348.2,320.0 L349.8,320.0 L351.4,322.8 L353.0,320.2 L354.6,320.0 L355.6,320.0 L357.5,320.0 L359.1,320.4 L360.7,320.3 L362.2,320.4 L363.8,320.5 L364.9,320.8 L366.5,320.0 L368.1,324.2 L369.7,320.1 L371.3,320.0 L372.3,320.4 L374.2,324.6 L375.8,323.7 L377.4,327.4 L379.0,332.3 L380.5,334.2 L381.6,330.7 L383.2,327.4 L384.8,323.8 L386.4,321.7 L388.0,320.0 L389.0,320.0 L390.6,324.2 L392.2,321.8 L393.8,323.1 L395.7,326.3 L397.3,324.5 L398.3,320.0 L399.9,321.6 L401.5,320.4 L403.3,320.7 L404.9,321.9 L406.5,329.3 L407.6,329.8 L409.4,342.6 L411.0,346.8 L412.6,333.3 L414.2,338.6 L415.8,345.1 L416.9,346.4 L418.7,345.0 L420.3,344.5 L421.9,349.6 L423.5,352.8 L425.1,345.0 L426.2,343.0 L427.7,341.6 L429.3,347.4 L430.9,352.4 L432.8,351.5 L434.4,358.2 L435.4,367.0 L437.0,367.4 L438.6,376.4 L440.2,369.2 L441.8,373.6 L442.9,362.7 L444.7,367.3 L446.3,373.0 L447.9,387.1 L449.8,386.8 L451.3,383.8 L453.2,379.1 L454.8,379.6 L455.9,378.6 L457.4,371.2 L459.0,368.6 L460.6,364.7 L462.2,362.1 L463.3,355.8 L464.9,355.8 L466.5,365.5 L468.0,373.3 L469.9,379.4 L471.5,369.2 L472.6,382.1 L474.1,390.4 L475.7,392.3 L477.3,387.6 L478.9,400.1 L480.0,401.7 L481.6,399.5 L483.2,388.8 L484.8,387.8 L486.3,391.6 L487.4,378.3 L489.0,379.7 L490.6,374.7 L492.4,371.4 L494.0,377.2 L495.6,375.3 L496.7,380.9 L498.3,384.1 L500.1,384.0 L502.0,384.8 L503.6,374.5 L505.4,374.7 L507.0,371.0 L508.6,371.8 L509.7,365.7 L511.3,370.0 L512.9,367.9 L514.7,376.9 L516.3,377.7 L517.9,374.4 L519.0,380.4 L520.6,374.1 L522.1,373.7 L523.7,372.8 L525.3,363.7 L527.2,364.2 L528.2,363.5 L529.8,364.0 L531.4,366.6 L533.0,363.0 L534.6,362.7 L535.7,362.7 L537.3,360.9 L538.8,365.9 L540.7,361.5 L542.3,357.1 L543.9,354.7 L544.9,351.4 L546.8,354.1 L548.4,352.8 L550.3,354.2 L551.8,348.8 L553.4,344.0 L555.0,344.9 L556.1,344.5 L557.7,350.4 L559.3,349.8 L560.9,353.6 L562.4,356.4 L563.5,355.1 L565.1,348.4 L567.0,352.7 L568.5,351.7 L570.1,354.0 L571.7,360.6 L572.8,363.2 L574.4,365.8 L576.0,358.6 L577.6,361.4 L579.2,368.7 L580.2,373.2 L581.8,361.8 L583.4,357.0 L585.0,350.7 L586.6,347.8 L588.4,347.2 L589.5,342.9 L591.1,342.5 L592.7,335.1 L594.3,331.0 L596.1,330.2 L598.0,331.9 L599.6,331.6 L600.6,329.7 L602.5,329.0 L604.1,326.0 L605.7,326.3 L607.3,322.8 L608.9,320.4 L609.9,322.5 L611.8,320.0 L613.4,320.0 L615.0,320.4 L616.5,320.0 L618.1,323.0 L619.2,320.0 L620.8,320.2 L622.6,325.7 L624.2,328.0 L625.8,333.8 L627.4,334.9 L628.5,331.5 L630.1,331.7 L631.7,325.3 L633.2,322.0 L634.8,320.9 L635.9,321.4 L637.8,322.4 L639.3,320.1 L640.9,320.0 L642.5,320.0 L644.4,320.9 L646.0,323.3 L647.8,320.0 L648.9,320.0 L650.5,325.4 L652.1,331.0 L653.7,329.0 L655.3,335.2 L656.3,330.2 L657.9,321.3 L659.5,320.0 L661.1,320.5 L662.9,324.3 L664.5,324.9 L665.6,320.0 L667.2,320.0 L668.8,321.1 L670.4,321.5 L672.0,325.1 L673.0,320.8 L674.6,320.8 L676.2,324.3 L677.8,323.1 L679.4,328.3 L680.4,320.0 L682.0,323.4 L683.6,324.0 L685.2,320.0 L687.1,320.3 L688.7,321.7 L689.7,324.0 L691.3,332.7 L693.2,326.0 L695.0,332.1 L696.6,331.0 L698.5,329.5 L700.3,323.7 L701.9,323.5 L703.5,326.0 L704.6,324.3 L706.2,321.2 L708.0,320.7 L709.6,323.8 L711.2,330.0 L712.8,336.4 L713.9,336.4 L715.4,334.3 L717.0,333.5 L718.6,334.4 L720.2,357.2 L721.3,347.4 L722.9,348.6 L724.7,340.0 L726.3,335.0 L727.9,334.8 L729.5,326.7 L730.6,321.9 L732.2,327.1 L734.0,323.0 L735.6,320.0 L737.2,320.0 L738.8,321.4 L740.6,320.2 L741.7,320.0 L743.3,320.0 L745.1,320.0 L746.7,321.6 L748.3,320.0 L749.9,320.4 L751.0,323.6 L752.6,320.3 L754.2,320.0 L755.8,322.4 L757.3,321.3 L758.4,321.5 L760.3,320.0 L761.9,320.0 L763.4,320.9 L765.0,320.8 L766.6,321.1 L767.7,320.3 L769.3,320.8 L770.9,321.5 L772.5,320.0 L774.0,320.0 L775.1,322.9 L776.7,326.7 L778.3,321.8 L779.9,330.1 L781.5,326.1 L783.3,322.7 L784.4,321.2 L786.0,320.1 L787.6,326.0 L789.2,320.0 L791.0,321.1 L792.9,320.0 L794.5,320.0 L795.5,321.6 L797.4,322.3 L799.0,320.6 L800.6,323.6 L802.2,320.0 L804.0,322.0 L805.6,321.8 L806.7,321.4 L808.3,324.9 L809.8,327.3 L811.4,328.9 L813.0,335.1 L814.1,343.3 L815.7,334.3 L817.5,325.8 L819.1,320.0 L820.7,322.8 L822.3,320.0 L823.4,320.0 L825.0,321.2 L826.6,320.0 L828.1,326.4 L830.0,320.0 L831.6,320.0 L832.6,327.8 L834.2,326.5 L835.8,326.0 L837.7,326.7 L839.3,322.7 L841.1,323.3 L842.7,323.6 L843.8,324.5 L845.4,327.7 L847.0,329.8 L848.6,320.0 L850.2,320.8 L851.2,320.9 L852.8,325.1 L854.4,323.5 L856.0,326.3 L857.8,324.9 L859.4,328.5 L860.5,327.9 L862.1,328.1 L863.7,330.1 L865.0,326.6" fill="none" stroke="#D97706" stroke-width="1.6" stroke-dasharray="5,3"/>
+  <path d="M65.0,320.0 L66.9,320.0 L67.9,320.0 L69.5,320.0 L71.1,322.3 L72.7,321.5 L74.3,320.0 L75.3,320.0 L76.9,320.0 L78.5,321.0 L80.1,320.7 L82.0,320.7 L83.6,321.4 L84.6,320.8 L86.2,321.5 L87.8,321.1 L89.4,320.0 L91.0,323.9 L92.0,330.1 L93.6,328.9 L95.2,330.4 L96.8,330.8 L98.4,333.9 L99.5,338.1 L101.1,340.1 L102.7,341.4 L104.5,345.3 L106.1,340.7 L108.0,340.0 L109.5,340.5 L110.6,338.5 L112.5,337.1 L114.3,335.7 L115.9,337.0 L117.5,336.1 L119.4,336.3 L120.9,333.5 L122.5,332.6 L123.6,330.3 L125.2,330.1 L127.0,330.2 L128.6,330.4 L130.2,331.5 L131.8,331.1 L132.9,329.8 L134.5,328.4 L136.1,326.5 L137.7,326.1 L139.2,326.0 L140.3,326.7 L141.9,326.9 L143.8,326.0 L145.3,326.6 L146.9,326.6 L148.5,326.6 L149.6,326.6 L151.2,326.0 L153.0,324.5 L154.6,322.5 L156.2,323.2 L157.8,320.7 L158.9,320.6 L160.5,320.6 L162.1,320.0 L163.9,320.3 L165.5,320.9 L167.1,320.0 L168.1,320.0 L169.7,320.0 L171.3,320.0 L172.9,320.0 L174.5,320.7 L175.6,320.6 L177.2,320.0 L179.0,321.8 L180.6,323.1 L182.2,322.6 L183.8,321.2 L184.9,322.2 L186.4,321.9 L188.0,322.3 L189.6,324.7 L191.2,325.3 L192.3,323.2 L193.9,323.2 L195.5,320.2 L197.1,322.7 L198.6,321.7 L199.7,321.9 L201.6,322.0 L203.2,322.7 L204.7,321.5 L206.3,320.0 L207.9,320.1 L209.8,320.9 L211.6,320.2 L212.7,320.0 L214.3,320.0 L216.1,320.0 L217.7,320.0 L219.3,320.2 L220.9,320.0 L222.0,320.0 L223.8,320.3 L225.4,327.2 L227.0,323.3 L228.6,325.5 L230.2,333.1 L231.3,328.9 L232.1,326.4 L232.8,329.1 L234.4,328.5 L236.0,327.6 L237.9,327.4 L239.5,325.7 L240.5,324.8 L242.1,327.5 L243.7,327.2 L245.3,326.5 L246.9,324.7 L248.0,325.6 L249.8,325.4 L251.4,326.2 L253.0,324.4 L254.6,326.0 L256.2,322.7 L257.2,323.6 L258.8,320.3 L260.7,320.0 L262.3,320.7 L263.9,320.0 L265.5,320.0 L266.5,320.1 L268.1,320.0 L269.7,325.4 L271.3,323.3 L272.9,324.4 L273.9,323.3 L275.5,324.8 L277.4,331.4 L279.0,326.6 L280.6,334.5 L282.2,335.9 L283.2,333.5 L284.8,326.1 L286.4,322.6 L288.0,323.3 L289.6,324.5 L290.7,326.0 L292.2,320.6 L293.8,323.7 L295.4,322.9 L297.0,322.2 L298.9,324.9 L299.9,323.8 L301.5,321.8 L303.1,320.6 L304.7,322.9 L306.6,320.6 L308.4,320.0 L310.0,322.1 L311.1,321.2 L312.9,322.4 L314.5,323.5 L316.1,320.4 L317.7,320.0 L319.6,320.0 L321.1,320.8 L322.2,323.3 L323.8,321.3 L325.4,321.0 L327.0,320.8 L328.6,324.1 L329.6,321.0 L331.2,320.8 L333.1,321.6 L334.7,320.3 L336.3,322.6 L337.9,320.1 L338.9,320.4 L340.5,320.0 L342.1,323.7 L343.7,323.6 L345.3,322.7 L346.3,321.5 L348.2,320.0 L349.8,320.0 L351.4,322.6 L353.0,324.4 L354.6,323.1 L355.6,320.0 L357.5,321.9 L359.1,321.9 L360.7,323.2 L362.2,320.1 L363.8,320.0 L364.9,322.5 L366.5,322.9 L368.1,321.6 L369.7,320.5 L371.3,320.0 L372.3,320.9 L374.2,323.1 L375.8,321.4 L377.4,321.8 L379.0,326.5 L380.5,323.8 L381.6,323.4 L383.2,320.8 L384.8,321.5 L386.4,320.5 L388.0,320.6 L389.0,320.0 L390.6,320.8 L392.2,320.7 L393.8,321.2 L395.7,324.2 L397.3,323.0 L398.3,322.9 L399.9,322.9 L401.5,322.4 L403.3,322.9 L404.9,323.8 L406.5,325.4 L407.6,325.3 L409.4,330.1 L411.0,326.7 L412.6,324.8 L414.2,325.9 L415.8,322.6 L416.9,322.5 L418.7,321.0 L420.3,320.0 L421.9,323.2 L423.5,326.2 L425.1,322.2 L426.2,320.7 L427.7,322.5 L429.3,320.3 L430.9,321.2 L432.8,320.1 L434.4,324.4 L435.4,323.6 L437.0,322.7 L438.6,323.7 L440.2,324.2 L441.8,327.1 L442.9,325.7 L444.7,323.8 L446.3,320.3 L447.9,321.6 L449.8,325.6 L451.3,324.1 L453.2,321.2 L454.8,320.0 L455.9,321.3 L457.4,323.5 L459.0,324.3 L460.6,326.0 L462.2,326.7 L463.3,321.8 L464.9,320.0 L466.5,321.5 L468.0,323.9 L469.9,322.6 L471.5,325.4 L472.6,325.4 L474.1,325.6 L475.7,327.8 L477.3,329.9 L478.9,326.4 L480.0,325.9 L481.6,324.9 L483.2,327.1 L484.8,322.9 L486.3,324.2 L487.4,327.2 L489.0,327.0 L490.6,326.7 L492.4,323.9 L494.0,324.5 L495.6,323.9 L496.7,326.0 L498.3,328.8 L500.1,327.6 L502.0,325.3 L503.6,321.7 L505.4,321.1 L507.0,320.0 L508.6,320.8 L509.7,322.8 L511.3,323.5 L512.9,322.5 L514.7,324.6 L516.3,324.5 L517.9,322.8 L519.0,329.2 L520.6,325.9 L522.1,327.8 L523.7,327.3 L525.3,325.5 L527.2,324.0 L528.2,324.0 L529.8,324.1 L531.4,326.9 L533.0,325.2 L534.6,325.6 L535.7,324.4 L537.3,324.8 L538.8,324.7 L540.7,323.5 L542.3,322.2 L543.9,322.4 L544.9,323.4 L546.8,324.2 L548.4,323.0 L550.3,322.9 L551.8,324.4 L553.4,323.6 L555.0,321.5 L556.1,320.2 L557.7,321.1 L559.3,321.7 L560.9,321.4 L562.4,321.8 L563.5,320.1 L565.1,320.0 L567.0,320.4 L568.5,320.3 L570.1,320.8 L571.7,321.7 L572.8,323.8 L574.4,325.5 L576.0,322.8 L577.6,320.5 L579.2,322.3 L580.2,322.1 L581.8,320.0 L583.4,321.3 L585.0,320.7 L586.6,320.3 L588.4,320.3 L589.5,320.0 L591.1,320.8 L592.7,320.0 L594.3,320.0 L596.1,320.0 L598.0,320.0 L599.6,320.3 L600.6,320.0 L602.5,320.0 L604.1,320.0 L605.7,320.9 L607.3,320.0 L608.9,320.0 L609.9,320.1 L611.8,320.0 L613.4,320.0 L615.0,320.0 L616.5,320.0 L618.1,320.0 L619.2,320.0 L620.8,320.0 L622.6,320.9 L624.2,320.0 L625.8,320.3 L627.4,321.3 L628.5,320.0 L630.1,322.9 L631.7,321.6 L633.2,320.0 L634.8,320.0 L635.9,324.2 L637.8,327.3 L639.3,324.3 L640.9,322.8 L642.5,320.0 L644.4,320.2 L646.0,321.4 L647.8,320.0 L648.9,321.8 L650.5,324.3 L652.1,325.8 L653.7,325.1 L655.3,329.8 L656.3,327.7 L657.9,325.9 L659.5,325.6 L661.1,325.9 L662.9,325.2 L664.5,324.4 L665.6,322.5 L667.2,322.5 L668.8,321.3 L670.4,320.5 L672.0,320.6 L673.0,320.0 L674.6,320.0 L676.2,320.6 L677.8,320.0 L679.4,321.2 L680.4,320.0 L682.0,320.9 L683.6,320.0 L685.2,320.9 L687.1,320.5 L688.7,320.2 L689.7,321.7 L691.3,322.7 L693.2,321.0 L695.0,320.0 L696.6,320.3 L698.5,320.0 L700.3,320.0 L701.9,320.0 L703.5,320.0 L704.6,320.0 L706.2,320.8 L708.0,321.4 L709.6,320.8 L711.2,322.4 L712.8,325.5 L713.9,323.8 L715.4,322.4 L717.0,323.1 L718.6,321.0 L720.2,328.7 L721.3,329.4 L722.9,327.2 L724.7,326.4 L726.3,325.6 L727.9,324.8 L729.5,327.0 L730.6,327.7 L732.2,328.4 L734.0,327.3 L735.6,325.6 L737.2,326.1 L738.8,325.3 L740.6,324.7 L741.7,325.2 L743.3,324.1 L745.1,324.0 L746.7,323.4 L748.3,320.8 L749.9,322.3 L751.0,321.3 L752.6,320.0 L754.2,320.0 L755.8,321.4 L757.3,320.0 L758.4,320.0 L760.3,320.0 L761.9,320.0 L763.4,320.1 L765.0,320.0 L766.6,320.0 L767.7,320.0 L769.3,321.4 L770.9,320.0 L772.5,323.8 L774.0,324.4 L775.1,324.9 L776.7,326.2 L778.3,320.0 L779.9,325.3 L781.5,322.0 L783.3,321.9 L784.4,324.1 L786.0,322.7 L787.6,321.3 L789.2,320.0 L791.0,323.1 L792.9,320.0 L794.5,320.0 L795.5,321.6 L797.4,320.2 L799.0,320.0 L800.6,322.0 L802.2,320.3 L804.0,321.3 L805.6,320.0 L806.7,320.0 L808.3,324.9 L809.8,323.7 L811.4,321.9 L813.0,324.9 L814.1,321.4 L815.7,321.7 L817.5,323.8 L819.1,324.4 L820.7,323.3 L822.3,320.0 L823.4,320.4 L825.0,321.9 L826.6,320.0 L828.1,321.4 L830.0,321.0 L831.6,320.0 L832.6,325.2 L834.2,324.9 L835.8,325.8 L837.7,323.5 L839.3,321.5 L841.1,320.0 L842.7,320.0 L843.8,321.3 L845.4,320.0 L847.0,321.8 L848.6,321.0 L850.2,320.0 L851.2,320.9 L852.8,321.1 L854.4,320.6 L856.0,320.6 L857.8,322.5 L859.4,322.6 L860.5,323.0 L862.1,322.9 L863.7,324.4 L865.0,322.2" fill="none" stroke="#059669" stroke-width="2.2"/>
+</svg>
+      <figcaption class="macro-caption">
+        <span class="fig-tag">Display 1 —</span> Growth of $1 (top) and distance below the previous peak (bottom), July 2018 – October 2026, net of trading costs. Simulated results. Past performance does not guarantee future results. As of October 5, 2026. Source: Merlin Intelligence.
+      </figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
+    <div class="note-box">
+      <strong>Benchmark context</strong>
+      The strategy operates as an unconstrained absolute return framework. The S&amp;P 500 (SPY) and a standard 60/40 balanced allocation (60% SPY / 40% IEF) serve as standard market reference points to illustrate the empirical behavior of conventional passive allocations across identical market regimes.
+    </div>
+    <p>
+      What the strategy achieved was consistent capital compounding with a fraction of the downside volatility and drawdown severity. Navigating the March 2020 liquidity shock, the 2022 cross-asset correlation breakdown (wherein simultaneous stock and bond declines dismantled traditional 60/40 diversification), and the recent steepening sell-off across long-duration Treasuries, the portfolio's maximum peak-to-trough drawdown was limited to −6.5%. By contrast, the 60/40 portfolio experienced a peak drawdown of −21.0%, while the S&amp;P 500 fell −33.7%.
+    </p>
+    <div class="two-col">
+      <div class="bars">
+        <div class="bars-title">Maximum Peak-to-Trough Drawdown (2018–2026)</div>
+        <div class="bar-row"><span class="bar-label">This strategy</span><div class="bar-track"><div class="bar-fill is-strategy" style="width:19.3%"></div></div><span class="bar-val">−6.5%</span></div>
+        <div class="bar-row"><span class="bar-label">60/40 portfolio</span><div class="bar-track"><div class="bar-fill" style="width:62.3%"></div></div><span class="bar-val">−21.0%</span></div>
+        <div class="bar-row"><span class="bar-label">S&amp;P 500</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">−33.7%</span></div>
+      </div>
+      <div class="bars">
+        <div class="bars-title">Downside-Adjusted Compounding: Calmar Ratio</div>
+        <div class="bar-row"><span class="bar-label">This strategy</span><div class="bar-track"><div class="bar-fill is-strategy" style="width:100%"></div></div><span class="bar-val">1.16</span></div>
+        <div class="bar-row"><span class="bar-label">60/40 portfolio</span><div class="bar-track"><div class="bar-fill" style="width:41.3%"></div></div><span class="bar-val">0.48</span></div>
+        <div class="bar-row"><span class="bar-label">S&amp;P 500</span><div class="bar-track"><div class="bar-fill" style="width:41.2%"></div></div><span class="bar-val">0.48</span></div>
+      </div>
+    </div>
+    <p class="bars-note">The Calmar ratio<sup class="ref-cite"><a href="#ref-1">[1]</a></sup> measures annualized net return divided by maximum peak-to-trough drawdown. It serves as our primary quantitative metric for evaluating structural compounding efficiency.</p>
+    <p style="margin-top:1.4rem;">
+      Robust downside-adjusted stability serves as the foundational empirical prerequisite validating the portfolio's weights as an informative macroeconomic equilibrium signal.
+    </p>
+  </div>
+</section>
+
+<!-- ── Philosophy ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">Equilibrium Signal Extraction</span>
+    <h2 class="section-title">From portfolio optimization<br><em>to structural macro diagnostics.</em></h2>
+    <p>
+      In traditional macroeconomic management, portfolio construction is the terminus of the analytical process: an investment committee forms qualitative views on growth, policy rates, inflation, and sovereign risk, and asset weights represent the tactical execution of those views. We propose inverting this paradigm. A systematic portfolio governed by rigorous downside-containment constraints is itself a rich source of macroeconomic intelligence—and arguably less susceptible to cognitive biases than discretionary forecasting.
+    </p>
+    <p>
+      The quantitative mechanism is straightforward. At each weekly rebalancing interval, the model evaluates twelve liquid assets spanning global equities, sovereign rates, currency, precious metals, broad commodities, and cash equivalents. It identifies the optimal allocation that maximizes net risk-adjusted compounding while strictly containing downside risk. The resulting vector of weights represents a dynamic <strong>equilibrium</strong>: a state wherein each asset's marginal contribution to risk is precisely justified by its marginal expected contribution to portfolio stability. Crucially, this equilibrium endogenously reflects prevailing cross-asset interdependencies, volatility clustering, and dynamic market physics.
+    </p>
+    <p>
+      Hence the macroeconomic barometer. During liquidity contractions or risk-off episodes, equilibrium weights shift toward cash instruments and the US dollar. During supply-side commodity dislocations, energy equities and raw materials expand their footprint. When the term premium widens, duration-sensitive bonds are systematically de-allocated. The evolving asset weights thus constitute an empirical, real-time map of which risks the market is compensating, and which it is penalizing.
+    </p>
+    <div class="sidecard">
+      An indicator is only credible if the underlying optimization engine is well calibrated. <strong>Out-of-sample risk-adjusted stability is that calibration.</strong> An allocation engine sustaining high Calmar efficiency across divergent market regimes—from zero-interest-rate environments to rapid monetary tightening—demonstrates that its portfolio selections reflect genuine structural signals across shifting macroeconomic environments.
+    </div>
+    <p>
+      Evaluating return relative to maximum drawdown (the Calmar ratio) captures path-dependent capital preservation. Institutional allocators recognize that risk is fundamentally asymmetric: terminal wealth destruction, drawdown depth, and the duration of capital impairment. By systematically optimizing for downside containment, the framework identifies early inflection points where cross-asset interdependencies shift and risk clusters form, yielding the empirical intelligence embedded in the equilibrium weights.
+    </p>
+  </div>
+  <div class="wrap">
+    <p>Over the eight-year period, the model's equilibrium allocations exhibit four distinct structural macro patterns:</p>
+    <ul class="plain-list">
+      <li><strong>Cash equivalents and the dollar</strong> (<span class="tk">SHV</span>, <span class="tk">UUP</span>) expand during monetary tightening cycles, dollar liquidity squeezes, and cross-asset correlation breakdowns. In practice, their combined capital weight serves as a systematic stress gauge.</li>
+      <li><strong>Sovereign duration</strong> (<span class="tk">IEF</span>, <span class="tk">TLT</span>) is managed dynamically across maturities and liquidated promptly when term premia reprice higher, actively reflecting sovereign risk, term premia, and duration roll economics.</li>
+      <li><strong>Real assets and defensive hedges</strong> (<span class="tk">XLE</span>, <span class="tk">DBC</span>, <span class="tk">GLD</span>) scale up during stagflationary shocks, supply bottlenecks, and geopolitical dislocations.</li>
+      <li><strong>Equities</strong> (<span class="tk">SPY</span>, <span class="tk">VLU</span>, <span class="tk">XLV</span>, <span class="tk">EEM</span>, <span class="tk">MCHI</span>) capture global growth premia, rotating toward low-multiple value and defensive non-cyclical sectors when macroeconomic uncertainty escalates.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Method ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">Optimization Framework</span>
+    <h2 class="section-title">Parsimonious architecture,<br><em>by deliberate design.</em></h2>
+    <p>
+      The quantitative framework adheres to strict principles of model parsimony. In portfolio optimization, unconstrained complexity frequently introduces parameter instability and overfits noise. Four core architectural constraints govern the model.
+    </p>
+    <h3 class="subhead">Liquid, orthogonal asset universe spanning global macro factors</h3>
+    <p>
+      Twelve highly liquid US-listed ETFs, selected ex-ante to represent distinct and orthogonal macroeconomic drivers<sup class="ref-cite"><a href="#ref-2">[2]</a></sup>: domestic and global growth, value versus growth factors, non-cyclical earnings, commodity inflation, sovereign duration, currency reserve flows, and risk-free collateral. The universe consists exclusively of highly liquid, transparently traded instruments, ensuring frictionless institutional execution, direct price discovery, and custodian-agnostic implementation without synthetic leverage.
+    </p>
+  </div>
+  <div class="wrap--wide">
+    <div class="table-container">
+      <table class="macro-table">
+        <thead>
+          <tr><th>Ticker</th><th>What it holds</th><th>The macro force it represents</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>SPY</strong></td><td>S&amp;P 500</td><td>US economic growth</td></tr>
+          <tr><td><strong>VLU</strong></td><td>US value-tilted equities</td><td>Growth, with a valuation discipline</td></tr>
+          <tr><td><strong>XLV</strong></td><td>US healthcare equities</td><td>Defensive, non-cyclical earnings</td></tr>
+          <tr><td><strong>XLE</strong></td><td>US energy equities</td><td>Oil prices and supply shocks</td></tr>
+          <tr><td><strong>EEM</strong></td><td>Emerging-market equities</td><td>Global growth outside the US</td></tr>
+          <tr><td><strong>MCHI</strong></td><td>Chinese equities</td><td>China's economic cycle</td></tr>
+          <tr><td><strong>IEF</strong></td><td>7–10 year US Treasuries</td><td>Medium-term interest rates</td></tr>
+          <tr><td><strong>TLT</strong></td><td>20+ year US Treasuries</td><td>Term premium and long-run fiscal credibility</td></tr>
+          <tr><td><strong>UUP</strong></td><td>US dollar index</td><td>Global demand for dollar liquidity</td></tr>
+          <tr><td><strong>GLD</strong></td><td>Physical gold</td><td>A non-fiat, zero-duration hedge</td></tr>
+          <tr><td><strong>DBC</strong></td><td>Broad commodities</td><td>Real-economy inflation</td></tr>
+          <tr><td><strong>SHV</strong></td><td>Short-term Treasuries (0–1 year)</td><td>Cash: the option to wait</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="wrap">
+    <h3 class="subhead">Long-only mandate and structural concentration bounds</h3>
+    <p>
+      The portfolio operates under a fully funded, long-only mandate (weights strictly sum to 100% on the simplex) with zero synthetic leverage and zero short positions. Single-asset concentration bounds prevent idiosyncratic factor dominance. While this aligns directly with institutional investment mandates, it also serves a foundational methodological purpose: a long-only portfolio provides an unambiguous statement of which risk factors offer positive marginal value. Short-term Treasuries (<span class="tk">SHV</span>) function as the unconstrained safe asset, enabling the model to de-risk entirely into risk-free collateral when market conditions fail to offer adequate risk premia.
+    </p>
+    <h3 class="subhead">Weekly review cadence governed by quantitative turnover penalties</h3>
+    <p>
+      The model executes a weekly rebalancing review every Tuesday based on Monday closing data, eliminating weekend gap noise and holiday settlement anomalies. Between reviews, asset weights drift passively with market prices. Turnover is governed by an explicit friction penalty: rebalancing trades are executed only if the expected marginal improvement in portfolio utility clears a quantitative threshold covering transaction costs and execution slippage. If the projected efficiency gain falls short of this threshold, the existing allocation is maintained. All reported performance and attribution metrics are net of a conservative one-way transaction cost of 6 basis points (0.06%) per trade leg.
+    </p>
+    <h3 class="subhead">Deterministic-yet-adaptive agents: generating a traceable macroeconomic state variable</h3>
+    <p>
+      The learning process produces a fully traceable, auditable, and explainable trail of current market conditions. By establishing equilibrium allocations across twelve liquid asset classes, the framework aggregates the collective state of the market into an empirical multi-asset state variable.
+    </p>
+    <p>
+      The architecture structures its pool of 60 candidate investment models as <strong>deterministic-yet-adaptive allocator agents</strong>:
+    </p>
+    <p>
+      <strong>Deterministic Execution Policy.</strong> Each of the 60 allocator agents operates under a distinct, explicit mathematical constitution &theta; = (&tau;, &mu;*, w<sub>max</sub>, &kappa;) defining its memory horizon (&tau;), minimum expected return target (&mu;*), concentration ceiling (w<sub>max</sub>), and turnover penalty coefficient (&kappa;). The expected return target is evaluated against trailing trend and momentum dynamics over horizon &tau;, ensuring that capital allocations satisfy a baseline expected drift while strictly containing cross-asset interdependencies. For any observed state of market interdependencies, the agent's target allocation is the unique global optimum of a constrained convex quadratic program. Every position is algebraically auditable through its marginal contribution to total portfolio risk, providing complete causal traceability from asset-level interdependencies to capital weights.
+    </p>
+    <p>
+      <strong>Dynamic Structural Adaptability.</strong> While an agent's constitutional rules are fixed, its internal state dynamically reflects the evolution of market physics. As cross-asset interdependencies tighten, correlation regimes invert, or liquidity costs shift, the agent automatically recalibrates its capital distribution to maintain risk equilibrium.
+    </p>
+    <p>
+      <strong>Walk-Forward Agent Selection (1 of 60).</strong> Learning and selection of the allocator agents operate via a continuous, out-of-sample walk-forward protocol that consists in activating a single agent among the 60 candidates. At regular calibration intervals, a supervisory audit evaluates all 60 candidate allocator agents across rolling historical windows, measuring how effectively each constitutional rule-set preserved capital and contained drawdowns across trailing market conditions. The single allocator agent demonstrating superior path stability and drawdown containment across the prevailing market regime is activated to govern portfolio capital for the subsequent period.
+    </p>
+    <p>
+      <strong>The Portfolio as an Empirical Macroeconomic State Variable.</strong> The resulting allocation vector represents an endogenous equilibrium point where cross-asset interdependencies, term premia, and liquidity conditions are reconciled. Because every step of the selection protocol and optimization policy forms a transparent mathematical trail, the evolving portfolio weights serve as an observable, aggregate state variable characterizing the multi-asset macro environment.
+    </p>
+  </div>
+</section>
+
+<!-- ── Current reading ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">Current Macroeconomic Regime</span>
+    <h2 class="section-title">Nominal capital allocation vs.<br><em>Euler risk contribution.</em></h2>
+    <p>
+      In risk-budgeted portfolio management, nominal capital allocation diverges sharply from marginal risk contribution. A large allocation to cash or short bills exerts negligible volatility drag, whereas a modest allocation to volatile cyclical commodities or energy equities can dominate total portfolio variance. Under Euler risk decomposition<sup class="ref-cite"><a href="#ref-3">[3]</a></sup> as of the October 5, 2026 review, this divergence is especially pronounced.
+    </p>
+  </div>
+  <div class="wrap--wide">
+    <div class="bars" style="max-width:860px;">
+      <div class="bars-title">Current portfolio: share of capital vs. share of risk</div>
+      <div class="mr-legend"><span><i class="c-money"></i>Share of capital</span><span><i class="c-risk"></i>Share of risk</span></div>
+      <div class="mr-row">
+        <div><span class="tk">SHV</span> <span style="color:var(--light)">Short-term Treasuries (cash)</span></div>
+        <div class="mr-bars">
+          <div class="mr-bar"><span class="c-money" style="width:82.6%"></span><em>31.4% of capital</em></div>
+          <div class="mr-bar"><span class="c-risk" style="width:0.4%"></span><em>0.1% of risk</em></div>
+        </div>
+      </div>
+      <div class="mr-row">
+        <div><span class="tk">UUP</span> <span style="color:var(--light)">US dollar</span></div>
+        <div class="mr-bars">
+          <div class="mr-bar"><span class="c-money" style="width:62.7%"></span><em>23.8% of capital</em></div>
+          <div class="mr-bar"><span class="c-risk" style="width:21.2%"></span><em>8.1% of risk</em></div>
+        </div>
+      </div>
+      <div class="mr-row">
+        <div><span class="tk">XLV</span> <span style="color:var(--light)">US healthcare stocks</span></div>
+        <div class="mr-bars">
+          <div class="mr-bar"><span class="c-money" style="width:24.3%"></span><em>9.2% of capital</em></div>
+          <div class="mr-bar"><span class="c-risk" style="width:66.8%"></span><em>25.4% of risk</em></div>
+        </div>
+      </div>
+      <div class="mr-row">
+        <div><span class="tk">IEF</span> <span style="color:var(--light)">7–10y Treasuries</span></div>
+        <div class="mr-bars">
+          <div class="mr-bar"><span class="c-money" style="width:23.9%"></span><em>9.1% of capital</em></div>
+          <div class="mr-bar"><span class="c-risk" style="width:5.2%"></span><em>2.0% of risk</em></div>
+        </div>
+      </div>
+      <div class="mr-row">
+        <div><span class="tk">DBC</span> <span style="color:var(--light)">Broad commodities</span></div>
+        <div class="mr-bars">
+          <div class="mr-bar"><span class="c-money" style="width:17.4%"></span><em>6.6% of capital</em></div>
+          <div class="mr-bar"><span class="c-risk" style="width:53.1%"></span><em>20.2% of risk</em></div>
+        </div>
+      </div>
+      <div class="mr-row">
+        <div><span class="tk">VLU</span> <span style="color:var(--light)">US value stocks</span></div>
+        <div class="mr-bars">
+          <div class="mr-bar"><span class="c-money" style="width:17.1%"></span><em>6.5% of capital</em></div>
+          <div class="mr-bar"><span class="c-risk" style="width:21.8%"></span><em>8.3% of risk</em></div>
+        </div>
+      </div>
+      <div class="mr-row">
+        <div><span class="tk">XLE</span> <span style="color:var(--light)">US energy stocks</span></div>
+        <div class="mr-bars">
+          <div class="mr-bar"><span class="c-money" style="width:16.7%"></span><em>6.3% of capital</em></div>
+          <div class="mr-bar"><span class="c-risk" style="width:80.8%"></span><em>30.7% of risk</em></div>
+        </div>
+      </div>
+      <div class="mr-row">
+        <div><span class="tk">SPY</span> <span style="color:var(--light)">S&amp;P 500</span></div>
+        <div class="mr-bars">
+          <div class="mr-bar"><span class="c-money" style="width:12.0%"></span><em>4.5% of capital</em></div>
+          <div class="mr-bar"><span class="c-risk" style="width:10.1%"></span><em>3.8% of risk</em></div>
+        </div>
+      </div>
+      <div class="mr-row">
+        <div><span class="tk">EEM</span> <span style="color:var(--light)">Emerging markets</span></div>
+        <div class="mr-bars">
+          <div class="mr-bar"><span class="c-money" style="width:6.3%"></span><em>2.4% of capital</em></div>
+          <div class="mr-bar"><span class="c-risk" style="width:3.8%"></span><em>1.4% of risk</em></div>
+        </div>
+      </div>
+      <p class="bars-note">Chinese equities (0.1%), gold and long-dated Treasuries (both 0%) are omitted. Share of risk is each asset's contribution to portfolio volatility; the shares sum to 100%. As of October 5, 2026. Source: Merlin Intelligence.</p>
+    </div>
+    <div class="group-sum">
+      <div class="group-box">
+        <h4>Capital preservation sleeve</h4>
+        <p>Short-term Treasuries, the US dollar, and intermediate Treasuries hold <b>64.3%</b> of capital but account for only <b>10.2%</b> of total portfolio volatility.</p>
+      </div>
+      <div class="group-box">
+        <h4>Growth &amp; inflation sleeve</h4>
+        <p>Equities and broad commodities hold <b>35.7%</b> of capital and generate <b>89.8%</b> of total portfolio risk, driven primarily by energy and healthcare equities.</p>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <p>
+      The portfolio's current posture conveys three unambiguous macroeconomic signals:
+    </p>
+    <p>
+      First, liquidity and short-duration yields remain highly attractive. A 31.4% allocation sits in short-term Treasuries (<span class="tk">SHV</span>, initiated in the September 29 review), harvesting an unencumbered risk-free cash yield with zero duration risk while awaiting clearer risk-premia opportunities. Second, sovereign duration is being penalized across the term structure. In constant-maturity fixed income ETFs, continuous contract roll under upward yield drift generates capital losses that current coupons fail to offset<sup class="ref-cite"><a href="#ref-4">[4]</a></sup>. This dynamic accounts for intermediate Treasuries' (<span class="tk">IEF</span>) negative total return year-to-date and the complete divestment of long-dated paper (<span class="tk">TLT</span>) as 30-year yields reached 5.62% amid heavy sovereign and corporate debt issuance pressure<sup class="ref-cite"><a href="#ref-5">[5]</a></sup>. The strategy retains a modest 9.1% allocation to intermediate Treasuries solely for correlation diversification while strictly bounding duration risk. Third, rewarded risk premia are concentrated in real asset inflation hedges and non-cyclical cash flows: energy equities (<span class="tk">XLE</span>), broad commodities (<span class="tk">DBC</span>), and defensive healthcare (<span class="tk">XLV</span>).
+    </p>
+  </div>
+  <div class="wrap--wide">
+    <figure class="macro-figure">
+<svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;background:#FFFFFF;border:0.5px solid var(--rule);font-family:'Space Mono',monospace;">
+  <style>
+    .axis-txt { font-size: 10px; fill: #8A7F74; }
+    .panel-hdr { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; fill: #14120F; }
+    .grid-line { stroke: rgba(195,185,172,0.4); stroke-width: 0.6; stroke-dasharray: 4,4; }
+    .zero-line { stroke: #C3B9AC; stroke-width: 1.2; }
+    .leg-title { font-family: 'Playfair Display', serif; font-size: 11px; font-weight: 600; fill: #14120F; }
+  </style>
+
+  <!-- Panel 1: Nominal Capital Allocation Evolution -->
+  <text x="65" y="30" class="panel-hdr">Panel A · Share of Capital Across 8 Reviews (Nominal Simplex = 100%)</text>
+  <line x1="65" y1="260.0" x2="755" y2="260.0" class="zero-line"/><text x="57" y="264.0" text-anchor="end" class="axis-txt">0%</text><line x1="65" y1="207.5" x2="755" y2="207.5" class="grid-line"/><text x="57" y="211.5" text-anchor="end" class="axis-txt">25%</text><line x1="65" y1="155.0" x2="755" y2="155.0" class="grid-line"/><text x="57" y="159.0" text-anchor="end" class="axis-txt">50%</text><line x1="65" y1="102.5" x2="755" y2="102.5" class="grid-line"/><text x="57" y="106.5" text-anchor="end" class="axis-txt">75%</text><line x1="65" y1="50.0" x2="755" y2="50.0" class="grid-line"/><text x="57" y="54.0" text-anchor="end" class="axis-txt">100%</text>
+  <rect x="81.1" y="257.0" width="54" height="3.0" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 1.4%</title></rect><rect x="81.1" y="184.6" width="54" height="72.4" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 34.5%</title></rect><text x="108.1" y="224.3" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 34%</text><rect x="81.1" y="177.5" width="54" height="7.1" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 3.4%</title></rect><rect x="81.1" y="168.8" width="54" height="8.7" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: 4.2%</title></rect><rect x="81.1" y="157.3" width="54" height="11.6" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 5.5%</title></rect><rect x="81.1" y="151.5" width="54" height="5.7" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 2.7%</title></rect><rect x="81.1" y="131.3" width="54" height="20.2" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 9.6%</title></rect><text x="108.1" y="144.9" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 10%</text><rect x="81.1" y="89.9" width="54" height="41.3" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 19.7%</title></rect><text x="108.1" y="114.1" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 20%</text><rect x="81.1" y="74.4" width="54" height="15.5" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 7.4%</title></rect><rect x="81.1" y="50.0" width="54" height="24.4" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 11.6%</title></rect><text x="108.1" y="65.7" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 12%</text><rect x="167.4" y="257.0" width="54" height="3.0" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 1.4%</title></rect><rect x="167.4" y="185.6" width="54" height="71.4" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 34.0%</title></rect><text x="194.4" y="224.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 34%</text><rect x="167.4" y="178.8" width="54" height="6.8" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 3.2%</title></rect><rect x="167.4" y="174.0" width="54" height="4.8" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: 2.3%</title></rect><rect x="167.4" y="161.9" width="54" height="12.1" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 5.7%</title></rect><rect x="167.4" y="151.9" width="54" height="10.0" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 4.8%</title></rect><rect x="167.4" y="130.8" width="54" height="21.1" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 10.1%</title></rect><text x="194.4" y="144.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 10%</text><rect x="167.4" y="89.6" width="54" height="41.2" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 19.6%</title></rect><text x="194.4" y="113.7" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 20%</text><rect x="167.4" y="74.3" width="54" height="15.3" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 7.3%</title></rect><rect x="167.4" y="50.0" width="54" height="24.3" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 11.6%</title></rect><text x="194.4" y="65.6" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 12%</text><rect x="253.6" y="256.8" width="54" height="3.2" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 1.5%</title></rect><rect x="253.6" y="185.0" width="54" height="71.9" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 34.2%</title></rect><text x="280.6" y="224.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 34%</text><rect x="253.6" y="178.1" width="54" height="6.9" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 3.3%</title></rect><rect x="253.6" y="173.3" width="54" height="4.8" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: 2.3%</title></rect><rect x="253.6" y="169.7" width="54" height="3.6" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 1.7%</title></rect><rect x="253.6" y="157.5" width="54" height="12.2" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 5.8%</title></rect><rect x="253.6" y="147.3" width="54" height="10.2" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 4.8%</title></rect><rect x="253.6" y="128.0" width="54" height="19.3" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 9.2%</title></rect><text x="280.6" y="141.2" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 9%</text><rect x="253.6" y="87.0" width="54" height="41.0" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 19.5%</title></rect><text x="280.6" y="111.0" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 20%</text><rect x="253.6" y="71.6" width="54" height="15.4" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 7.3%</title></rect><rect x="253.6" y="50.0" width="54" height="21.7" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 10.3%</title></rect><text x="280.6" y="64.3" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 10%</text><rect x="339.9" y="256.9" width="54" height="3.1" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 1.5%</title></rect><rect x="339.9" y="186.9" width="54" height="69.9" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 33.3%</title></rect><text x="366.9" y="225.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 33%</text><rect x="339.9" y="183.7" width="54" height="3.2" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 1.5%</title></rect><rect x="339.9" y="180.2" width="54" height="3.5" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 1.7%</title></rect><rect x="339.9" y="165.1" width="54" height="15.1" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 7.2%</title></rect><rect x="339.9" y="145.7" width="54" height="19.4" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 9.3%</title></rect><text x="366.9" y="158.9" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLE 9%</text><rect x="339.9" y="126.3" width="54" height="19.4" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 9.2%</title></rect><text x="366.9" y="139.5" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 9%</text><rect x="339.9" y="85.0" width="54" height="41.2" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 19.6%</title></rect><text x="366.9" y="109.2" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 20%</text><rect x="339.9" y="69.6" width="54" height="15.4" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 7.3%</title></rect><rect x="339.9" y="50.0" width="54" height="19.7" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 9.4%</title></rect><text x="366.9" y="63.3" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 9%</text><rect x="426.1" y="256.8" width="54" height="3.2" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 1.5%</title></rect><rect x="426.1" y="186.6" width="54" height="70.2" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 33.5%</title></rect><text x="453.1" y="225.2" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 33%</text><rect x="426.1" y="183.3" width="54" height="3.3" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 1.6%</title></rect><rect x="426.1" y="178.5" width="54" height="4.8" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: 2.3%</title></rect><rect x="426.1" y="175.0" width="54" height="3.4" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 1.6%</title></rect><rect x="426.1" y="157.9" width="54" height="17.1" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 8.2%</title></rect><text x="453.1" y="170.0" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">DBC 8%</text><rect x="426.1" y="138.7" width="54" height="19.2" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 9.1%</title></rect><text x="453.1" y="151.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLE 9%</text><rect x="426.1" y="130.2" width="54" height="8.5" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 4.0%</title></rect><rect x="426.1" y="89.2" width="54" height="41.1" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 19.6%</title></rect><text x="453.1" y="113.2" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 20%</text><rect x="426.1" y="73.9" width="54" height="15.3" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 7.3%</title></rect><rect x="426.1" y="67.7" width="54" height="6.2" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 2.9%</title></rect><rect x="426.1" y="50.0" width="54" height="17.7" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 8.4%</title></rect><text x="453.1" y="62.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 8%</text><rect x="512.4" y="256.8" width="54" height="3.2" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 1.5%</title></rect><rect x="512.4" y="185.8" width="54" height="70.9" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 33.8%</title></rect><text x="539.4" y="224.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 34%</text><rect x="512.4" y="182.5" width="54" height="3.3" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 1.6%</title></rect><rect x="512.4" y="177.6" width="54" height="4.9" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: 2.3%</title></rect><rect x="512.4" y="177.0" width="54" height="0.6" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 0.3%</title></rect><rect x="512.4" y="146.1" width="54" height="30.8" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 14.7%</title></rect><text x="539.4" y="165.1" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">DBC 15%</text><rect x="512.4" y="130.4" width="54" height="15.7" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 7.5%</title></rect><rect x="512.4" y="121.8" width="54" height="8.6" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 4.1%</title></rect><rect x="512.4" y="81.0" width="54" height="40.8" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 19.4%</title></rect><text x="539.4" y="104.9" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 19%</text><rect x="512.4" y="65.4" width="54" height="15.6" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 7.4%</title></rect><rect x="512.4" y="59.0" width="54" height="6.4" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 3.0%</title></rect><rect x="512.4" y="50.0" width="54" height="9.0" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 4.3%</title></rect><rect x="598.6" y="194.1" width="54" height="65.9" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 31.4%</title></rect><text x="625.6" y="230.5" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">SHV 31%</text><rect x="598.6" y="144.4" width="54" height="49.7" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 23.7%</title></rect><text x="625.6" y="172.7" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 24%</text><rect x="598.6" y="122.5" width="54" height="21.9" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 10.4%</title></rect><text x="625.6" y="136.9" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">IEF 10%</text><rect x="598.6" y="113.7" width="54" height="8.7" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 4.2%</title></rect><rect x="598.6" y="100.6" width="54" height="13.2" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 6.3%</title></rect><rect x="598.6" y="81.5" width="54" height="19.0" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 9.1%</title></rect><text x="625.6" y="94.5" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 9%</text><rect x="598.6" y="67.9" width="54" height="13.7" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 6.5%</title></rect><rect x="598.6" y="58.4" width="54" height="9.5" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 4.5%</title></rect><rect x="598.6" y="53.4" width="54" height="5.0" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 2.4%</title></rect><rect x="598.6" y="50.0" width="54" height="3.4" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 1.6%</title></rect><rect x="684.9" y="194.1" width="54" height="65.9" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 31.4%</title></rect><text x="711.9" y="230.5" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">SHV 31%</text><rect x="684.9" y="144.1" width="54" height="50.0" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 23.8%</title></rect><text x="711.9" y="172.6" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 24%</text><rect x="684.9" y="124.9" width="54" height="19.1" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 9.1%</title></rect><text x="711.9" y="138.0" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">IEF 9%</text><rect x="684.9" y="111.1" width="54" height="13.9" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 6.6%</title></rect><rect x="684.9" y="97.8" width="54" height="13.3" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 6.3%</title></rect><rect x="684.9" y="78.4" width="54" height="19.4" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 9.2%</title></rect><text x="711.9" y="91.6" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 9%</text><rect x="684.9" y="64.7" width="54" height="13.7" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 6.5%</title></rect><rect x="684.9" y="55.1" width="54" height="9.6" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 4.5%</title></rect><rect x="684.9" y="50.1" width="54" height="5.0" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 2.4%</title></rect><rect x="684.9" y="50.0" width="54" height="0.1" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 0.1%</title></rect>
+  <text x="108.1" y="276" text-anchor="middle" class="axis-txt" font-weight="600">Aug 18</text><text x="194.4" y="276" text-anchor="middle" class="axis-txt" font-weight="600">Aug 25</text><text x="280.6" y="276" text-anchor="middle" class="axis-txt" font-weight="600">Sep 01</text><text x="366.9" y="276" text-anchor="middle" class="axis-txt" font-weight="600">Sep 08</text><text x="453.1" y="276" text-anchor="middle" class="axis-txt" font-weight="600">Sep 15</text><text x="539.4" y="276" text-anchor="middle" class="axis-txt" font-weight="600">Sep 22</text><text x="625.6" y="276" text-anchor="middle" class="axis-txt" font-weight="600">Sep 29</text><text x="711.9" y="276" text-anchor="middle" class="axis-txt" font-weight="600">Oct 05</text>
+
+  <!-- Panel 2: Euler Marginal Risk Contribution Evolution -->
+  <text x="65" y="325" class="panel-hdr">Panel B · Share of Risk Contribution Across 8 Reviews (Euler %RC = 100%)</text>
+  <line x1="65" y1="555.0" x2="755" y2="555.0" class="zero-line"/><text x="57" y="559.0" text-anchor="end" class="axis-txt">0%</text><line x1="65" y1="502.5" x2="755" y2="502.5" class="grid-line"/><text x="57" y="506.5" text-anchor="end" class="axis-txt">25%</text><line x1="65" y1="450.0" x2="755" y2="450.0" class="grid-line"/><text x="57" y="454.0" text-anchor="end" class="axis-txt">50%</text><line x1="65" y1="397.5" x2="755" y2="397.5" class="grid-line"/><text x="57" y="401.5" text-anchor="end" class="axis-txt">75%</text><line x1="65" y1="345.0" x2="755" y2="345.0" class="grid-line"/><text x="57" y="349.0" text-anchor="end" class="axis-txt">100%</text>
+  <rect x="81.1" y="532.8" width="54" height="22.2" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 10.6% RC</title></rect><text x="108.1" y="547.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">UUP 11%</text><rect x="81.1" y="532.2" width="54" height="0.6" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 0.3% RC</title></rect><rect x="81.1" y="530.4" width="54" height="1.8" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: 0.9% RC</title></rect><rect x="81.1" y="529.1" width="54" height="1.3" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 0.6% RC</title></rect><rect x="81.1" y="523.5" width="54" height="5.6" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 2.7% RC</title></rect><rect x="81.1" y="477.8" width="54" height="45.7" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 21.8% RC</title></rect><text x="108.1" y="504.2" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 22%</text><rect x="81.1" y="418.0" width="54" height="59.7" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 28.4% RC</title></rect><text x="108.1" y="451.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 28%</text><rect x="81.1" y="394.8" width="54" height="23.2" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 11.1% RC</title></rect><text x="108.1" y="409.9" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">SPY 11%</text><rect x="81.1" y="345.0" width="54" height="49.8" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 23.7% RC</title></rect><text x="108.1" y="373.4" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 24%</text><rect x="167.4" y="551.4" width="54" height="3.6" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 1.7% RC</title></rect><rect x="167.4" y="555.0" width="54" height="0.0" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: -0.0% RC</title></rect><rect x="167.4" y="551.0" width="54" height="0.4" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: 0.2% RC</title></rect><rect x="167.4" y="537.6" width="54" height="13.4" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 6.4% RC</title></rect><rect x="167.4" y="518.9" width="54" height="18.7" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 8.9% RC</title></rect><text x="194.4" y="531.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLE 9%</text><rect x="167.4" y="456.6" width="54" height="62.4" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 29.7% RC</title></rect><text x="194.4" y="491.2" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 30%</text><rect x="167.4" y="406.6" width="54" height="49.9" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 23.8% RC</title></rect><text x="194.4" y="435.1" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 24%</text><rect x="167.4" y="388.0" width="54" height="18.6" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 8.9% RC</title></rect><text x="194.4" y="400.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">SPY 9%</text><rect x="167.4" y="344.9" width="54" height="43.1" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 20.5% RC</title></rect><text x="194.4" y="370.0" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 21%</text><rect x="253.6" y="547.9" width="54" height="7.1" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 3.4% RC</title></rect><rect x="253.6" y="555.0" width="54" height="0.1" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: -0.0% RC</title></rect><rect x="253.6" y="547.1" width="54" height="0.8" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: 0.4% RC</title></rect><rect x="253.6" y="542.7" width="54" height="4.4" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 2.1% RC</title></rect><rect x="253.6" y="533.1" width="54" height="9.6" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 4.6% RC</title></rect><rect x="253.6" y="517.6" width="54" height="15.5" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 7.4% RC</title></rect><rect x="253.6" y="458.3" width="54" height="59.3" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 28.2% RC</title></rect><text x="280.6" y="491.5" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 28%</text><rect x="253.6" y="404.0" width="54" height="54.3" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 25.9% RC</title></rect><text x="280.6" y="434.7" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 26%</text><rect x="253.6" y="386.2" width="54" height="17.8" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 8.5% RC</title></rect><rect x="253.6" y="345.0" width="54" height="41.2" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 19.6% RC</title></rect><text x="280.6" y="369.1" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 20%</text><rect x="339.9" y="540.1" width="54" height="14.9" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 7.1% RC</title></rect><rect x="339.9" y="555.0" width="54" height="0.7" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: -0.3% RC</title></rect><rect x="339.9" y="536.1" width="54" height="4.0" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 1.9% RC</title></rect><rect x="339.9" y="517.1" width="54" height="19.0" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 9.0% RC</title></rect><text x="366.9" y="530.1" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">DBC 9%</text><rect x="339.9" y="474.1" width="54" height="43.0" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 20.5% RC</title></rect><text x="366.9" y="499.1" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLE 20%</text><rect x="339.9" y="419.6" width="54" height="54.5" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 25.9% RC</title></rect><text x="366.9" y="450.3" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 26%</text><rect x="339.9" y="381.4" width="54" height="38.2" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 18.2% RC</title></rect><text x="366.9" y="404.0" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 18%</text><rect x="339.9" y="372.4" width="54" height="9.1" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 4.3% RC</title></rect><rect x="339.9" y="344.3" width="54" height="28.0" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 13.3% RC</title></rect><text x="366.9" y="361.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 13%</text><rect x="426.1" y="555.0" width="54" height="0.0" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 0.0% RC</title></rect><rect x="426.1" y="542.5" width="54" height="12.5" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 5.9% RC</title></rect><rect x="426.1" y="555.0" width="54" height="0.4" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: -0.2% RC</title></rect><rect x="426.1" y="555.4" width="54" height="1.4" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: -0.7% RC</title></rect><rect x="426.1" y="536.7" width="54" height="5.8" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 2.8% RC</title></rect><rect x="426.1" y="519.3" width="54" height="17.4" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 8.3% RC</title></rect><rect x="426.1" y="466.4" width="54" height="52.8" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 25.2% RC</title></rect><text x="453.1" y="496.3" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLE 25%</text><rect x="426.1" y="452.1" width="54" height="14.3" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 6.8% RC</title></rect><rect x="426.1" y="405.2" width="54" height="46.9" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 22.3% RC</title></rect><text x="453.1" y="432.1" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 22%</text><rect x="426.1" y="386.9" width="54" height="18.3" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 8.7% RC</title></rect><text x="453.1" y="399.6" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">SPY 9%</text><rect x="426.1" y="375.5" width="54" height="11.4" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 5.5% RC</title></rect><rect x="426.1" y="343.3" width="54" height="32.2" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 15.3% RC</title></rect><text x="453.1" y="362.9" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">MCHI 15%</text><rect x="512.4" y="555.0" width="54" height="0.0" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 0.0% RC</title></rect><rect x="512.4" y="555.0" width="54" height="2.0" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: -0.9% RC</title></rect><rect x="512.4" y="557.0" width="54" height="0.2" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: -0.1% RC</title></rect><rect x="512.4" y="557.2" width="54" height="1.7" fill="#7C3AED" stroke="#FFFFFF" stroke-width="0.8"><title>TLT: -0.8% RC</title></rect><rect x="512.4" y="554.6" width="54" height="0.4" fill="#D97706" stroke="#FFFFFF" stroke-width="0.8"><title>GLD: 0.2% RC</title></rect><rect x="512.4" y="469.0" width="54" height="85.6" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 40.7% RC</title></rect><text x="539.4" y="515.3" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">DBC 41%</text><rect x="512.4" y="410.0" width="54" height="59.0" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 28.1% RC</title></rect><text x="539.4" y="443.0" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLE 28%</text><rect x="512.4" y="402.9" width="54" height="7.1" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 3.4% RC</title></rect><rect x="512.4" y="367.8" width="54" height="35.1" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 16.7% RC</title></rect><text x="539.4" y="388.9" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 17%</text><rect x="512.4" y="355.6" width="54" height="12.2" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 5.8% RC</title></rect><rect x="512.4" y="349.1" width="54" height="6.6" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 3.1% RC</title></rect><rect x="512.4" y="341.1" width="54" height="8.0" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 3.8% RC</title></rect><rect x="598.6" y="554.7" width="54" height="0.3" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 0.1% RC</title></rect><rect x="598.6" y="552.6" width="54" height="2.0" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 1.0% RC</title></rect><rect x="598.6" y="541.1" width="54" height="11.6" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 5.5% RC</title></rect><rect x="598.6" y="525.1" width="54" height="15.9" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 7.6% RC</title></rect><rect x="598.6" y="474.9" width="54" height="50.2" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 23.9% RC</title></rect><text x="625.6" y="503.5" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLE 24%</text><rect x="598.6" y="399.1" width="54" height="75.8" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 36.1% RC</title></rect><text x="625.6" y="440.5" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 36%</text><rect x="598.6" y="373.2" width="54" height="25.9" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 12.3% RC</title></rect><text x="625.6" y="389.6" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">VLU 12%</text><rect x="598.6" y="358.4" width="54" height="14.8" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 7.0% RC</title></rect><rect x="598.6" y="351.2" width="54" height="7.2" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 3.4% RC</title></rect><rect x="598.6" y="345.0" width="54" height="6.2" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 3.0% RC</title></rect><rect x="684.9" y="554.9" width="54" height="0.1" fill="#64748B" stroke="#FFFFFF" stroke-width="0.8"><title>SHV: 0.1% RC</title></rect><rect x="684.9" y="537.9" width="54" height="16.9" fill="#059669" stroke="#FFFFFF" stroke-width="0.8"><title>UUP: 8.1% RC</title></rect><rect x="684.9" y="533.8" width="54" height="4.2" fill="#0284C7" stroke="#FFFFFF" stroke-width="0.8"><title>IEF: 2.0% RC</title></rect><rect x="684.9" y="491.4" width="54" height="42.4" fill="#B45309" stroke="#FFFFFF" stroke-width="0.8"><title>DBC: 20.2% RC</title></rect><text x="711.9" y="516.1" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">DBC 20%</text><rect x="684.9" y="426.9" width="54" height="64.5" fill="#F59E0B" stroke="#FFFFFF" stroke-width="0.8"><title>XLE: 30.7% RC</title></rect><text x="711.9" y="462.7" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLE 31%</text><rect x="684.9" y="373.6" width="54" height="53.3" fill="#10B981" stroke="#FFFFFF" stroke-width="0.8"><title>XLV: 25.4% RC</title></rect><text x="711.9" y="403.8" text-anchor="middle" fill="#FFFFFF" font-size="8.5" font-weight="700">XLV 25%</text><rect x="684.9" y="356.2" width="54" height="17.4" fill="#6366F1" stroke="#FFFFFF" stroke-width="0.8"><title>VLU: 8.3% RC</title></rect><rect x="684.9" y="348.2" width="54" height="8.0" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.8"><title>SPY: 3.8% RC</title></rect><rect x="684.9" y="345.2" width="54" height="3.0" fill="#0D9488" stroke="#FFFFFF" stroke-width="0.8"><title>EEM: 1.4% RC</title></rect><rect x="684.9" y="345.0" width="54" height="0.2" fill="#E11D48" stroke="#FFFFFF" stroke-width="0.8"><title>MCHI: 0.1% RC</title></rect>
+  <text x="108.1" y="571" text-anchor="middle" class="axis-txt" font-weight="600">Aug 18</text><text x="194.4" y="571" text-anchor="middle" class="axis-txt" font-weight="600">Aug 25</text><text x="280.6" y="571" text-anchor="middle" class="axis-txt" font-weight="600">Sep 01</text><text x="366.9" y="571" text-anchor="middle" class="axis-txt" font-weight="600">Sep 08</text><text x="453.1" y="571" text-anchor="middle" class="axis-txt" font-weight="600">Sep 15</text><text x="539.4" y="571" text-anchor="middle" class="axis-txt" font-weight="600">Sep 22</text><text x="625.6" y="571" text-anchor="middle" class="axis-txt" font-weight="600">Sep 29</text><text x="711.9" y="571" text-anchor="middle" class="axis-txt" font-weight="600">Oct 05</text>
+
+  <!-- Legend Header & Items -->
+  <text x="775" y="48" class="leg-title">Asset Sleeves</text>
+  <rect x="775" y="65" width="12" height="12" fill="#E11D48" stroke="none"/><text x="793" y="74.5" font-size="9" fill="#14120F" font-weight="600">MCHI <tspan fill="#8A7F74" font-weight="400">(China Equities)</tspan></text><rect x="775" y="86" width="12" height="12" fill="#0D9488" stroke="none"/><text x="793" y="95.5" font-size="9" fill="#14120F" font-weight="600">EEM <tspan fill="#8A7F74" font-weight="400">(Emerging Mkts)</tspan></text><rect x="775" y="107" width="12" height="12" fill="#1E40AF" stroke="none"/><text x="793" y="116.5" font-size="9" fill="#14120F" font-weight="600">SPY <tspan fill="#8A7F74" font-weight="400">(S&P 500)</tspan></text><rect x="775" y="128" width="12" height="12" fill="#6366F1" stroke="none"/><text x="793" y="137.5" font-size="9" fill="#14120F" font-weight="600">VLU <tspan fill="#8A7F74" font-weight="400">(Value Equities)</tspan></text><rect x="775" y="149" width="12" height="12" fill="#10B981" stroke="none"/><text x="793" y="158.5" font-size="9" fill="#14120F" font-weight="600">XLV <tspan fill="#8A7F74" font-weight="400">(Healthcare)</tspan></text><rect x="775" y="170" width="12" height="12" fill="#F59E0B" stroke="none"/><text x="793" y="179.5" font-size="9" fill="#14120F" font-weight="600">XLE <tspan fill="#8A7F74" font-weight="400">(Energy Equities)</tspan></text><rect x="775" y="191" width="12" height="12" fill="#B45309" stroke="none"/><text x="793" y="200.5" font-size="9" fill="#14120F" font-weight="600">DBC <tspan fill="#8A7F74" font-weight="400">(Commodities)</tspan></text><rect x="775" y="212" width="12" height="12" fill="#D97706" stroke="none"/><text x="793" y="221.5" font-size="9" fill="#14120F" font-weight="600">GLD <tspan fill="#8A7F74" font-weight="400">(Gold)</tspan></text><rect x="775" y="233" width="12" height="12" fill="#7C3AED" stroke="none"/><text x="793" y="242.5" font-size="9" fill="#14120F" font-weight="600">TLT <tspan fill="#8A7F74" font-weight="400">(20y+ Treasuries)</tspan></text><rect x="775" y="254" width="12" height="12" fill="#0284C7" stroke="none"/><text x="793" y="263.5" font-size="9" fill="#14120F" font-weight="600">IEF <tspan fill="#8A7F74" font-weight="400">(7-10y Treasuries)</tspan></text><rect x="775" y="275" width="12" height="12" fill="#059669" stroke="none"/><text x="793" y="284.5" font-size="9" fill="#14120F" font-weight="600">UUP <tspan fill="#8A7F74" font-weight="400">(US Dollar)</tspan></text><rect x="775" y="296" width="12" height="12" fill="#64748B" stroke="none"/><text x="793" y="305.5" font-size="9" fill="#14120F" font-weight="600">SHV <tspan fill="#8A7F74" font-weight="400">(Cash (T-Bills))</tspan></text>
+</svg>
+      <figcaption class="macro-caption">
+        <span class="fig-tag">Display 2 —</span> Allocation and Euler risk contribution dynamics across the trailing eight weekly reviews (August 18 – October 5, 2026). Top panel: nominal capital share (simplex = 100%). Bottom panel: Euler marginal risk contribution (%RC = 100%). The late-September rotation into short-term cash reduced portfolio volatility to ~2.5% annualized. Simulated results net of 6 bps transaction friction. Source: Merlin Intelligence.
+      </figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
+    <p>Across this eight-week sequence, the portfolio traversed four transient cross-asset equilibrium phases:</p>
+    <div class="timeline">
+      <div>
+        <span class="when">Late August</span>
+        <p><strong>Value equity and dollar liquidity.</strong> A third of portfolio capital in the US dollar (<span class="tk">UUP</span>) and 20% in value equities (<span class="tk">VLU</span>), balanced with healthcare and emerging market exposures.</p>
+      </div>
+      <div>
+        <span class="when">Early September</span>
+        <p><strong>Initial inflation hedging.</strong> Tactical entries into gold and broad commodities emerge as geopolitical friction and cross-asset correlation risks rise.</p>
+      </div>
+      <div>
+        <span class="when">Mid to late September</span>
+        <p><strong>Energy dislocation response.</strong> Following supply disruptions lifting crude prices above $90/bbl, energy equities (<span class="tk">XLE</span>) and broad commodities (<span class="tk">DBC</span>) expanded; at peak exposure, commodities represented 40.7% of total portfolio risk.</p>
+      </div>
+      <div>
+        <span class="when">End of September – early October</span>
+        <p><strong>De-risking into cash equivalents.</strong> With the US 30-year yield breaching 5.62% alongside heavy corporate debt issuance, capital shifted to 31.4% short Treasuries (<span class="tk">SHV</span>), and gold was fully liquidated.</p>
+      </div>
+    </div>
+    <p>
+      The full divestment from gold (<span class="tk">GLD</span>) warrants explicit commentary. Rising real yields alongside dollar strength sharply elevated the opportunity cost of holding non-yielding precious metals, whereas energy equities and commodities provided tangible inflation-hedging properties combined with positive carry. Crucially, this reflects a tactical re-optimization over the model's weekly review horizon, adapting to real interest rate and currency dynamics. As demonstrated in the multi-horizon attribution below, gold has historically been one of the highest net contributors to the strategy's overall Calmar ratio.
+    </p>
+  </div>
+</section>
+
+<!-- ── Attribution ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">Multi-Horizon Performance Attribution</span>
+    <h2 class="section-title">Shapley decomposition of<br><em>downside-adjusted returns.</em></h2>
+    <p>
+      To isolate each asset's contribution to risk-adjusted compounding without ordering bias, we employ the Shapley value decomposition<sup class="ref-cite"><a href="#ref-6">[6]</a></sup> from cooperative game theory. By evaluating an asset's marginal contribution across all 4,096 possible portfolio sub-coalitions ($2^{12}$), the Shapley formulation provides an axiomatic, path-independent attribution of net Calmar ratio across asset classes.
+    </p>
+  </div>
+  <div class="wrap--wide">
+    <figure class="macro-figure">
+<svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;background:#FFFFFF;border:0.5px solid var(--rule);font-family:'Space Mono',monospace;">
+  <!-- 4-Panel Multi-Horizon Shapley Attribution -->
+  <text x="60" y="56" font-family="'Playfair Display', serif" font-size="12" font-weight="600" fill="#14120F">8-Year Modern Regime (2018–2026)</text><text x="445" y="56" text-anchor="end" font-size="10" font-weight="700" fill="#A27844">Grand Calmar: +1.16</text><line x1="60" y1="194.2" x2="445" y2="194.2" stroke="#C3B9AC" stroke-width="1"/><rect x="64.5" y="101.2" width="23.1" height="93.0" fill="#D97706" stroke="none"><title>GLD: +0.400 (+33.7%)</title></rect><text x="76.0" y="98.2" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.40</text><text x="76.0" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">GLD</text><rect x="96.6" y="105.4" width="23.1" height="88.8" fill="#64748B" stroke="none"><title>SHV: +0.382 (+32.2%)</title></rect><text x="108.1" y="102.4" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.38</text><text x="108.1" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">SHV</text><rect x="128.7" y="117.4" width="23.1" height="76.9" fill="#059669" stroke="none"><title>UUP: +0.331 (+27.9%)</title></rect><text x="140.2" y="114.4" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.33</text><text x="140.2" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">UUP</text><rect x="160.7" y="170.9" width="23.1" height="23.4" fill="#0D9488" stroke="none"><title>EEM: +0.100 (+8.5%)</title></rect><text x="172.3" y="167.9" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.10</text><text x="172.3" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">EEM</text><rect x="192.8" y="173.7" width="23.1" height="20.5" fill="#1E40AF" stroke="none"><title>SPY: +0.088 (+7.4%)</title></rect><text x="204.4" y="170.7" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.09</text><text x="204.4" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">SPY</text><rect x="224.9" y="176.8" width="23.1" height="17.4" fill="#0284C7" stroke="none"><title>IEF: +0.075 (+6.3%)</title></rect><text x="236.5" y="173.8" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.07</text><text x="236.5" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">IEF</text><rect x="257.0" y="182.1" width="23.1" height="12.2" fill="#6366F1" stroke="none"><title>VLU: +0.052 (+4.4%)</title></rect><text x="268.5" y="179.1" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.05</text><text x="268.5" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">VLU</text><rect x="289.1" y="182.3" width="23.1" height="12.0" fill="#F59E0B" stroke="none"><title>XLE: +0.051 (+4.3%)</title></rect><text x="300.6" y="179.3" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.05</text><text x="300.6" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">XLE</text><rect x="321.2" y="194.2" width="23.1" height="1.2" fill="#10B981" stroke="none"><title>XLV: -0.005 (-0.4%)</title></rect><text x="332.7" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">XLV</text><rect x="353.2" y="194.2" width="23.1" height="2.1" fill="#E11D48" stroke="none"><title>MCHI: -0.009 (-0.8%)</title></rect><text x="364.8" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">MCHI</text><rect x="385.3" y="194.2" width="23.1" height="26.2" fill="#B45309" stroke="none"><title>DBC: -0.113 (-9.5%)</title></rect><text x="396.9" y="229.5" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.11</text><text x="396.9" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">DBC</text><rect x="417.4" y="194.2" width="23.1" height="39.0" fill="#7C3AED" stroke="none"><title>TLT: -0.168 (-14.2%)</title></rect><text x="429.0" y="242.2" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.17</text><text x="429.0" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">TLT</text><text x="485" y="56" font-family="'Playfair Display', serif" font-size="12" font-weight="600" fill="#14120F">Trailing 3-Year Cycle (2023–2026)</text><text x="870" y="56" text-anchor="end" font-size="10" font-weight="700" fill="#A27844">Grand Calmar: +4.22</text><line x1="485" y1="221.9" x2="870" y2="221.9" stroke="#C3B9AC" stroke-width="1"/><rect x="489.5" y="106.8" width="23.1" height="115.1" fill="#64748B" stroke="none"><title>SHV: +6.070 (+137.5%)</title></rect><text x="501.0" y="103.8" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+6.07</text><text x="501.0" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">SHV</text><rect x="521.6" y="184.2" width="23.1" height="37.6" fill="#D97706" stroke="none"><title>GLD: +1.985 (+45.0%)</title></rect><text x="533.1" y="181.2" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+1.98</text><text x="533.1" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">GLD</text><rect x="553.7" y="221.9" width="23.1" height="1.1" fill="#1E40AF" stroke="none"><title>SPY: -0.058 (-1.3%)</title></rect><text x="565.2" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">SPY</text><rect x="585.7" y="221.9" width="23.1" height="1.7" fill="#0D9488" stroke="none"><title>EEM: -0.091 (-2.1%)</title></rect><text x="597.3" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">EEM</text><rect x="617.8" y="221.9" width="23.1" height="2.6" fill="#F59E0B" stroke="none"><title>XLE: -0.139 (-3.1%)</title></rect><text x="629.4" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">XLE</text><rect x="649.9" y="221.9" width="23.1" height="2.8" fill="#6366F1" stroke="none"><title>VLU: -0.146 (-3.3%)</title></rect><text x="661.5" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">VLU</text><rect x="682.0" y="221.9" width="23.1" height="6.1" fill="#059669" stroke="none"><title>UUP: -0.322 (-7.3%)</title></rect><text x="693.5" y="237.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.32</text><text x="693.5" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">UUP</text><rect x="714.1" y="221.9" width="23.1" height="6.2" fill="#10B981" stroke="none"><title>XLV: -0.326 (-7.4%)</title></rect><text x="725.6" y="237.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.33</text><text x="725.6" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">XLV</text><rect x="746.2" y="221.9" width="23.1" height="7.4" fill="#B45309" stroke="none"><title>DBC: -0.393 (-8.9%)</title></rect><text x="757.7" y="238.3" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.39</text><text x="757.7" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">DBC</text><rect x="778.2" y="221.9" width="23.1" height="8.5" fill="#0284C7" stroke="none"><title>IEF: -0.449 (-10.2%)</title></rect><text x="789.8" y="239.4" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.45</text><text x="789.8" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">IEF</text><rect x="810.3" y="221.9" width="23.1" height="15.7" fill="#7C3AED" stroke="none"><title>TLT: -0.826 (-18.7%)</title></rect><text x="821.9" y="246.5" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.83</text><text x="821.9" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">TLT</text><rect x="842.4" y="221.9" width="23.1" height="16.9" fill="#E11D48" stroke="none"><title>MCHI: -0.892 (-20.2%)</title></rect><text x="854.0" y="247.8" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.89</text><text x="854.0" y="257" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">MCHI</text><text x="60" y="351" font-family="'Playfair Display', serif" font-size="12" font-weight="600" fill="#14120F">Trailing 1-Year Horizon (2025–2026)</text><text x="445" y="351" text-anchor="end" font-size="10" font-weight="700" fill="#A27844">Grand Calmar: +7.90</text><line x1="60" y1="499.3" x2="445" y2="499.3" stroke="#C3B9AC" stroke-width="1"/><rect x="64.5" y="398.3" width="23.1" height="101.0" fill="#D97706" stroke="none"><title>GLD: +2.432 (+30.8%)</title></rect><text x="76.0" y="395.3" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+2.43</text><text x="76.0" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">GLD</text><rect x="96.6" y="402.1" width="23.1" height="97.2" fill="#64748B" stroke="none"><title>SHV: +2.339 (+29.6%)</title></rect><text x="108.1" y="399.1" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+2.34</text><text x="108.1" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">SHV</text><rect x="128.7" y="425.4" width="23.1" height="73.9" fill="#059669" stroke="none"><title>UUP: +1.778 (+22.5%)</title></rect><text x="140.2" y="422.4" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+1.78</text><text x="140.2" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">UUP</text><rect x="160.7" y="450.0" width="23.1" height="49.2" fill="#F59E0B" stroke="none"><title>XLE: +1.186 (+15.0%)</title></rect><text x="172.3" y="447.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+1.19</text><text x="172.3" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">XLE</text><rect x="192.8" y="466.0" width="23.1" height="33.3" fill="#0D9488" stroke="none"><title>EEM: +0.801 (+10.1%)</title></rect><text x="204.4" y="463.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.80</text><text x="204.4" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">EEM</text><rect x="224.9" y="473.1" width="23.1" height="26.1" fill="#6366F1" stroke="none"><title>VLU: +0.629 (+8.0%)</title></rect><text x="236.5" y="470.1" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.63</text><text x="236.5" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">VLU</text><rect x="257.0" y="479.0" width="23.1" height="20.3" fill="#10B981" stroke="none"><title>XLV: +0.488 (+6.2%)</title></rect><text x="268.5" y="476.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.49</text><text x="268.5" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">XLV</text><rect x="289.1" y="495.0" width="23.1" height="4.3" fill="#B45309" stroke="none"><title>DBC: +0.102 (+1.3%)</title></rect><text x="300.6" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">DBC</text><rect x="321.2" y="496.9" width="23.1" height="2.4" fill="#1E40AF" stroke="none"><title>SPY: +0.057 (+0.7%)</title></rect><text x="332.7" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">SPY</text><rect x="353.2" y="499.3" width="23.1" height="23.3" fill="#E11D48" stroke="none"><title>MCHI: -0.562 (-7.1%)</title></rect><text x="364.8" y="531.6" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.56</text><text x="364.8" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">MCHI</text><rect x="385.3" y="499.3" width="23.1" height="25.1" fill="#7C3AED" stroke="none"><title>TLT: -0.605 (-7.7%)</title></rect><text x="396.9" y="533.4" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.60</text><text x="396.9" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">TLT</text><rect x="417.4" y="499.3" width="23.1" height="31.0" fill="#0284C7" stroke="none"><title>IEF: -0.746 (-9.4%)</title></rect><text x="429.0" y="539.3" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.75</text><text x="429.0" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">IEF</text><text x="485" y="351" font-family="'Playfair Display', serif" font-size="12" font-weight="600" fill="#14120F">Year-to-Date (YTD 2026)</text><text x="870" y="351" text-anchor="end" font-size="10" font-weight="700" fill="#A27844">Grand Calmar: +8.58</text><line x1="485" y1="494.3" x2="870" y2="494.3" stroke="#C3B9AC" stroke-width="1"/><rect x="489.5" y="397.3" width="23.1" height="97.0" fill="#64748B" stroke="none"><title>SHV: +2.571 (+29.3%)</title></rect><text x="501.0" y="394.3" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+2.57</text><text x="501.0" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">SHV</text><rect x="521.6" y="413.0" width="23.1" height="81.3" fill="#059669" stroke="none"><title>UUP: +2.154 (+24.5%)</title></rect><text x="533.1" y="410.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+2.15</text><text x="533.1" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">UUP</text><rect x="553.7" y="433.2" width="23.1" height="61.0" fill="#F59E0B" stroke="none"><title>XLE: +1.617 (+18.4%)</title></rect><text x="565.2" y="430.2" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+1.62</text><text x="565.2" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">XLE</text><rect x="585.7" y="437.8" width="23.1" height="56.4" fill="#D97706" stroke="none"><title>GLD: +1.496 (+17.0%)</title></rect><text x="597.3" y="434.8" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+1.50</text><text x="597.3" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">GLD</text><rect x="617.8" y="444.3" width="23.1" height="50.0" fill="#0D9488" stroke="none"><title>EEM: +1.324 (+15.1%)</title></rect><text x="629.4" y="441.3" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+1.32</text><text x="629.4" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">EEM</text><rect x="649.9" y="459.2" width="23.1" height="35.0" fill="#6366F1" stroke="none"><title>VLU: +0.928 (+10.6%)</title></rect><text x="661.5" y="456.2" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.93</text><text x="661.5" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">VLU</text><rect x="682.0" y="477.9" width="23.1" height="16.4" fill="#1E40AF" stroke="none"><title>SPY: +0.435 (+4.9%)</title></rect><text x="693.5" y="474.9" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.43</text><text x="693.5" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">SPY</text><rect x="714.1" y="487.9" width="23.1" height="6.4" fill="#10B981" stroke="none"><title>XLV: +0.170 (+1.9%)</title></rect><text x="725.6" y="484.9" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">+0.17</text><text x="725.6" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">XLV</text><rect x="746.2" y="490.0" width="23.1" height="4.3" fill="#B45309" stroke="none"><title>DBC: +0.114 (+1.3%)</title></rect><text x="757.7" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">DBC</text><rect x="778.2" y="494.3" width="23.1" height="19.9" fill="#E11D48" stroke="none"><title>MCHI: -0.528 (-6.0%)</title></rect><text x="789.8" y="523.2" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.53</text><text x="789.8" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">MCHI</text><rect x="810.3" y="494.3" width="23.1" height="21.4" fill="#7C3AED" stroke="none"><title>TLT: -0.568 (-6.5%)</title></rect><text x="821.9" y="524.7" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.57</text><text x="821.9" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">TLT</text><rect x="842.4" y="494.3" width="23.1" height="35.0" fill="#0284C7" stroke="none"><title>IEF: -0.927 (-10.6%)</title></rect><text x="854.0" y="538.3" text-anchor="middle" font-size="7.5" font-weight="700" fill="#14120F">-0.93</text><text x="854.0" y="552" text-anchor="middle" font-size="8.5" fill="#5A544E" font-weight="600">IEF</text>
+</svg>
+      <figcaption class="macro-caption">
+        <span class="fig-tag">Display 3 —</span> Multi-horizon Shapley attribution of net Calmar ratio across four investment horizons: 8-year modern cycle (2018–2026), trailing 3-year tightening cycle (2023–2026), trailing 1-year window (2025–2026), and year-to-date 2026. Simulated results net of 6 bps transaction friction. Past performance is not indicative of future results. Source: Merlin Intelligence.
+      </figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
+    <p>
+      Over the full eight-year sample, structural compounding efficiency is anchored by three foundational assets: short-term Treasuries (<span class="tk">SHV</span>), gold (<span class="tk">GLD</span>), and the US dollar (<span class="tk">UUP</span>). Cash equivalents provide essential downside convexity by eliminating drawdowns during market liquidations. Gold and the dollar provide counter-cyclical crisis alpha, consistently appreciating during equity market dislocations. In 2026, energy equities (<span class="tk">XLE</span>) and emerging market equities (<span class="tk">EEM</span>) have generated substantial positive attribution, rewarding the strategy for dynamically capturing the commodity repricing. Conversely, fixed-rate sovereign duration (<span class="tk">TLT</span>, <span class="tk">IEF</span>) has exerted a persistent negative drag across recent windows, reflecting the structural bear market in bonds.
+    </p>
+    <p>
+      The primary takeaway is that the assets driving portfolio efficiency rotate systematically with macro regimes. The optimization engine systematically identifies these regime shifts, providing allocators with an objective map of structural market transitions.
+    </p>
+  </div>
+</section>
+
+<!-- ── Numbers & caveats ── -->
+<section>
+  <div class="wrap">
+    <span class="sec-label">Empirical Results &amp; Methodological Scope</span>
+    <h2 class="section-title">Risk-adjusted performance across<br><em>three evaluation horizons.</em></h2>
+    <p>
+      Across the full eight-year sample, the trailing three-year tightening cycle, and year-to-date 2026, the performance profile demonstrates structural asymmetry: moderate upside participation relative to equities during momentum expansions, substantially contained peak drawdowns during corrections, and a consistently superior risk-to-drawdown ratio.
+    </p>
+  </div>
+  <div class="wrap--wide">
+    <div class="table-container">
+      <table class="macro-table">
+        <thead>
+          <tr>
+            <th>Net of transaction friction</th>
+            <th class="num">Annualized Return</th>
+            <th class="num">Annualized Volatility</th>
+            <th class="num">Maximum Drawdown</th>
+            <th class="num">Calmar Ratio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="5" style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--gold);">July 2018 – October 2026</td></tr>
+          <tr class="highlight-row"><td>This strategy</td><td class="num">7.6%</td><td class="num">4.7%</td><td class="num">−6.5%</td><td class="num">1.16</td></tr>
+          <tr><td>60/40 portfolio</td><td class="num">10.1%</td><td class="num">11.6%</td><td class="num">−21.0%</td><td class="num">0.48</td></tr>
+          <tr><td>S&amp;P 500</td><td class="num">16.1%</td><td class="num">19.1%</td><td class="num">−33.7%</td><td class="num">0.48</td></tr>
+          <tr><td colspan="5" style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--gold);">Last three years (Sept. 2023 – Sept. 2026)</td></tr>
+          <tr class="highlight-row"><td>This strategy</td><td class="num">10.8%</td><td class="num">4.0%</td><td class="num">−2.6%</td><td class="num">4.22</td></tr>
+          <tr><td>60/40 portfolio</td><td class="num">14.6%</td><td class="num">9.7%</td><td class="num">−10.6%</td><td class="num">1.37</td></tr>
+          <tr><td>S&amp;P 500</td><td class="num">22.2%</td><td class="num">15.3%</td><td class="num">−18.8%</td><td class="num">1.19</td></tr>
+          <tr><td colspan="5" style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--gold);">2026 to date (annualized)</td></tr>
+          <tr class="highlight-row"><td>This strategy</td><td class="num">14.3%</td><td class="num">5.2%</td><td class="num">−1.7%</td><td class="num">8.58</td></tr>
+          <tr><td>60/40 portfolio</td><td class="num">7.9%</td><td class="num">9.0%</td><td class="num">−6.0%</td><td class="num">1.31</td></tr>
+          <tr><td>S&amp;P 500</td><td class="num">17.9%</td><td class="num">13.2%</td><td class="num">−8.9%</td><td class="num">2.02</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="bars-note" style="margin-top:-1rem;">Simulated results net of 6 bps transaction friction per trade leg. Past performance does not guarantee future results. Calmar ratios are calculated as annualized compound return divided by absolute maximum peak-to-trough drawdown from unrounded daily return series. As of October 5, 2026. Source: Merlin Intelligence.</p>
+  </div>
+  <div class="wrap">
+    <p>
+      Several methodological parameters characterize the strategy's empirical profile. The framework prioritizes capital preservation, volatility containment, and strict drawdown bounds, producing strong compounding convexity across turbulent regimes alongside controlled participation during equity expansions. All reported metrics represent an out-of-sample walk-forward simulation across historical market data, incorporating realistic 6 bps execution friction. In addition, annualized 2026 metrics reflect a trailing nine-month evaluation window, providing empirical evidence of regime adaptability while operating within the broader eight-year historical cycle.
+    </p>
+    <h3 class="subhead">Research Roadmap</h3>
+    <p>
+      With the quantitative foundation and equilibrium framework established, subsequent publications in this weekly research series will leverage the portfolio's real-time equilibrium weights each week to observe and diagnose cross-asset market conditions: tracking regime inflection points, decoding yield curve repricing, and continuously benchmarking model signals against subsequent realized market outcomes. A macroeconomic barometer is valuable only if its regime signals are continuously benchmarked against evolving market realities.
+    </p>
+    <!-- ── Selected References & Methodological Sources ── -->
+    <div class="references-block" id="references">
+      <h3 class="subhead">References &amp; Methodological Sources</h3>
+      <ol class="ref-list">
+        <li id="ref-1">
+          <strong>Young, Terry W. (1991).</strong> <em>"Calmar Ratio: A Smoother Tool."</em> <span>Futures</span>, Vol. 20, No. 1, pp. 40–41.
+          <span class="ref-meta">Formal mathematical definition of the Calmar ratio: annualized compounded return divided by absolute maximum peak-to-trough drawdown.</span>
+        </li>
+        <li id="ref-2">
+          <strong>Fraser Jenkins, Inigo, Harmsworth, Alla, Stancikas, Robertas, and Hughes, Maureen (2026).</strong> <em>"The Everything Trade: Asset Allocation in an Era of Correlated Markets and Structural Realignment."</em> <span>AllianceBernstein (AB) Institutional Research</span>, Strategic Solutions Group, London / New York.
+          <span class="ref-meta">Multi-asset portfolio construction, cross-asset correlation dynamics, and factor diversification (energy, healthcare, value tilts, and commodities) amid concentrated macro regimes.</span>
+        </li>
+        <li id="ref-3">
+          <strong>Tasche, Dirk (2008).</strong> <em>"Euler Allocation: An Introduction."</em> In <span>Financial Risk Measurement and Capital Allocation</span>, Mathematical Finance Series, Springer-Verlag. <em>See also:</em> <strong>Qian, Edward (2005)</strong>, <em>"Risk Parity Portfolios,"</em> PanAgora Asset Management; <strong>Maillard, Sébastien, Roncalli, Thierry, and Teïletche, Jérôme (2010)</strong>, <em>"The Properties of Equally Weighted Risk Contributing Portfolios,"</em> <span>The Journal of Portfolio Management</span>, Vol. 36, No. 4, pp. 60–70.
+          <span class="ref-meta">Analytical framework for Euler marginal risk contribution (MRC) and percentage risk contribution (%RC) under homogeneous degree-1 portfolio risk functions.</span>
+        </li>
+        <li id="ref-4">
+          <strong>Fraser Jenkins, Inigo et al. (2026).</strong> <em>"An Invidious Choice? Towards Bond Market Crisis or Yield Curve Control."</em> <span>AllianceBernstein (AB) Institutional Research</span>, London / New York.
+          <span class="ref-meta">Analysis of sovereign duration risk, term premium repricing, constant-maturity ETF roll drag, and the limitations of government bonds as passive strategic hedges.</span>
+        </li>
+        <li id="ref-5">
+          <strong>d’Assier, Olivier (2026).</strong> <em>"A Global Debt Crisis in the Making? Sovereign Yield Curves, Quasi-QE, and Safe-Haven Fragmentation."</em> <span>SimCorp / Axioma Applied Research</span>, New York / Singapore.
+          <span class="ref-meta">Balance-sheet capacity constraints, sovereign curve steepening, and crowding-out dynamics between government refinancing supply and private credit markets.</span>
+        </li>
+        <li id="ref-6">
+          <strong>Shapley, Lloyd S. (1953).</strong> <em>"A Value for n-Person Games."</em> In H.W. Kuhn and A.W. Tucker (Eds.), <span>Contributions to the Theory of Games</span>, Vol. II, Annals of Mathematics Studies No. 28, pp. 307–317, Princeton University Press.
+          <span class="ref-meta">Axiomatic cooperative game theory solution providing unconfounded, path-independent marginal attribution across sub-coalitions.</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="note-box disclaimer">
+      <strong>Regulatory &amp; Compliance Disclosure</strong>
+      This research paper is prepared for institutional, professional, and educational audiences only. It does not constitute investment advice, financial analysis, an endorsement, or an offer or solicitation to buy or sell any financial instrument. All performance figures are hypothetical and backtested using historical data, modeled net of an assumed 0.06% one-way execution friction per transaction, and do not account for custodial fees, management fees, taxes, or actual execution slippage. Hypothetical and simulated performance has inherent limitations and is not indicative of future performance. Capital is subject to risk of loss.
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="wrap--wide">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Merlin Intelligence</span>
+      <span class="footer-copy">
+        <a href="manifesto.html">manifesto</a>
+        &nbsp;|&nbsp;
+        <a href="team.html">founding team</a>
+        &nbsp;|&nbsp;
+        <a href="signals.html">signal series</a>
+        &nbsp;|&nbsp;
+        <a href="macro-research.html">global macro research</a>
+        &nbsp;|&nbsp;
+        <a href="open-source.html">open source</a>
+        &nbsp;|&nbsp;
+        <a href="https://github.com/merlin-intelligence" target="_blank" rel="noopener">github / merlin-intelligence</a>
+        &nbsp;|&nbsp;
+        <a href="legal-notice.html">legal notice</a>
+      </span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
