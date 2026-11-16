@@ -1,33 +1,33 @@
 # Merlin Intelligence
 
-> Merlin Intelligence (`https://merlin-intelligence.eu`) is an open-source collective and research practice dedicated to quantitative macroeconomics, geoeconomic intelligence, and sovereign knowledge infrastructure (OWL/SKOS ontologies, spectral graph singularity detection, and governed Graph-RAG architectures).
+> Merlin Intelligence (`https://www.merlin-intelligence.eu`) is an open-source collective and research practice dedicated to quantitative macroeconomics, geoeconomic intelligence, and sovereign knowledge infrastructure (OWL/SKOS ontologies, spectral graph singularity detection, and governed Graph-RAG architectures).
 
 ## Co-Founders
 
-- [François Oustry](https://merlin-intelligence.eu/team/francois-oustry.html): Co-founder · Decision Intelligence & Sovereign AI. Applied mathematician (ENSTA Paris, PhD DGA, Courant Institute NYU, INRIA), founder of Raise Partner and co-founder of Suzugia (acquired by AllianceBernstein), creator of `eigenmind`.
-- [Marion Schaeffer](https://merlin-intelligence.eu/team/marion-schaeffer.html): Co-founder · Knowledge Architecture & AI. Applied mathematician and AI researcher (PhD in Artificial Intelligence, cognitive science), specialist in Ontology Learning, formal knowledge representation (`OWL/RDFS/SKOS`), and explainable agentic systems (`olaf`).
+- [Marion Schaeffer](https://www.merlin-intelligence.eu/team/marion-schaeffer.html): Co-founder · Knowledge Architecture & AI. Applied mathematician and AI researcher (PhD in Artificial Intelligence, cognitive science), specialist in Ontology Learning, formal knowledge representation (`OWL/RDFS/SKOS`), and explainable agentic systems (`olaf`).
+- [François Oustry](https://www.merlin-intelligence.eu/team/francois-oustry.html): Co-founder · Decision Intelligence & Sovereign AI. Applied mathematician (ENSTA Paris, PhD DGA, Courant Institute NYU, INRIA), founder of Raise Partner and co-founder of Suzugia (acquired by AllianceBernstein), creator of `eigenmind`.
 
 ## Core Hubs
 
-- [Global Macro Research — Equilibrium Portfolio Series](https://merlin-intelligence.eu/pages/macro-research.html): Decodes cross-asset macroeconomic regimes via a walk-forward meta-allocator (1-of-60 deterministic-yet-adaptive convex optimization agents over 12 liquid ETFs), Euler marginal risk decomposition, Shapley attribution, and formal OWL/SKOS causal ontologies.
-- [The Signal Series](https://merlin-intelligence.eu/pages/signals.html): Geoeconomic and systemic stability briefings mapping supply-chain corridors, sovereign debt/energy architectures, and AI control theory before consensus forms.
-- [Open-Source Sovereign AI Stack](https://merlin-intelligence.eu/pages/open-source.html): MIT-licensed engines including `eigenmind` (spectral graph & Lovász singularity detection), `olaf` (Ontology Learning Agentic Framework MCP server built on Oxigraph + Qdrant), and `CogMaps`.
-- [Manifesto — Singularities, Cognitive Assets and Value Creation](https://merlin-intelligence.eu/pages/manifesto.html)
-- [Founding Team](https://merlin-intelligence.eu/pages/team.html)
+- [Global Macro Research — Equilibrium Portfolio Series](https://www.merlin-intelligence.eu/pages/macro-research.html): Decodes cross-asset macroeconomic regimes via a walk-forward meta-allocator (1-of-60 deterministic-yet-adaptive convex optimization agents over 12 liquid ETFs), Euler marginal risk decomposition, Shapley attribution, and formal OWL/SKOS causal ontologies.
+- [The Signal Series](https://www.merlin-intelligence.eu/pages/signals.html): Geoeconomic and systemic stability briefings mapping supply-chain corridors, sovereign debt/energy architectures, and AI control theory before consensus forms.
+- [Open-Source Sovereign AI Stack](https://www.merlin-intelligence.eu/pages/open-source.html): MIT-licensed engines including `eigenmind` (spectral graph & Lovász singularity detection), `olaf` (Ontology Learning Agentic Framework MCP server built on Oxigraph + Qdrant), and `CogMaps`.
+- [Manifesto — Singularities, Cognitive Assets and Value Creation](https://www.merlin-intelligence.eu/pages/manifesto.html)
+- [Founding Team](https://www.merlin-intelligence.eu/pages/team.html)
 
 ## Global Macro Research Publications
 
-- [Patience Is Priced, Scarcity Is Scarce, and Beta Is Rationed](https://merlin-intelligence.eu/articles/macro-research-2026-11-06.html) (Equilibrium Portfolio Series · Part 2 · November 6, 2026): Analyzes why two-thirds of equilibrium capital sits in front-end Treasury bills (`SHV`), US dollars (`UUP`), and intermediate bonds (`IEF`) while two-thirds of Euler risk concentrates in physical scarcity (`DBC`, `XLE`) and defensive healthcare (`XLV`).
-- [Tightening Bounds, Compressing Risk: The Portfolio's Shift to Liquidity, and the Macro Fractures Behind the Move](https://merlin-intelligence.eu/articles/macro-research-2026-10-14.html) (Macro Monitor · October 14, 2026): Documents the late-September walk-forward transition into a cautious allocator agent (`SHV` 31.1%, 2.67% annualized vol) mapped via a 2-hop OWL/SKOS macroeconomic ontology subgraph.
-- [When a Portfolio Becomes a Market Barometer](https://merlin-intelligence.eu/articles/macro-research-2026-10-06.html) (Equilibrium Portfolio Series · Introduction · October 6, 2026): Foundational methodology paper establishing how a long-only cross-asset strategy engineered for Calmar ratio and drawdown containment (-6.5% 8Y MaxDD, 4.22 3Y Calmar) acts as an observable macroeconomic state variable.
+- [Patience Is Priced, Scarcity Is Scarce, and Beta Is Rationed](https://www.merlin-intelligence.eu/articles/macro-research-2026-11-06.html) (Equilibrium Portfolio Series · Part 2 · November 6, 2026): Analyzes why two-thirds of equilibrium capital sits in front-end Treasury bills (`SHV`), US dollars (`UUP`), and intermediate bonds (`IEF`) while two-thirds of Euler risk concentrates in physical scarcity (`DBC`, `XLE`) and defensive healthcare (`XLV`).
+- [Tightening Bounds, Compressing Risk: The Portfolio's Shift to Liquidity, and the Macro Fractures Behind the Move](https://www.merlin-intelligence.eu/articles/macro-research-2026-10-14.html) (Macro Monitor · October 14, 2026): Documents the late-September walk-forward transition into a cautious allocator agent (`SHV` 31.1%, 2.67% annualized vol) mapped via a 2-hop OWL/SKOS macroeconomic ontology subgraph.
+- [When a Portfolio Becomes a Market Barometer](https://www.merlin-intelligence.eu/articles/macro-research-2026-10-06.html) (Equilibrium Portfolio Series · Introduction · October 6, 2026): Foundational methodology paper establishing how a long-only cross-asset strategy engineered for Calmar ratio and drawdown containment (-6.5% 8Y MaxDD, 4.22 3Y Calmar) acts as an observable macroeconomic state variable.
 
 ## Signal Series Briefings
 
-- [Colombia and the Geometry of Sovereign Presence](https://merlin-intelligence.eu/articles/article_colombia_geoeconomics.html) (Signal Series · No. 5 · September 2026)
-- [The AI Grey Rhino: Engineering Closed-Loop Stability Across Models, Governance, and Sovereign Accords](https://merlin-intelligence.eu/articles/merlin_signal_04_grey_rhino.html) (Signal Series · No. 4 · September 2026)
-- [The Asymmetric Shock: Why 2026 Is Not 2022](https://merlin-intelligence.eu/articles/merlin_signal_03_asymmetric_shock.html) (Signal Series · No. 3 · August 2026)
-- [Green Finance Is Europe's Next Capital-Market Reform](https://merlin-intelligence.eu/articles/article_green_finance_resilience.html) (Signal Series · No. 2 · July 2026)
-- [Qatar and the Geometry of Gulf Order](https://merlin-intelligence.eu/articles/article_qatar.html) (Signal Series · No. 1 · June 2026)
+- [Colombia and the Geometry of Sovereign Presence](https://www.merlin-intelligence.eu/articles/article_colombia_geoeconomics.html) (Signal Series · No. 5 · September 2026)
+- [The AI Grey Rhino: Engineering Closed-Loop Stability Across Models, Governance, and Sovereign Accords](https://www.merlin-intelligence.eu/articles/merlin_signal_04_grey_rhino.html) (Signal Series · No. 4 · September 2026)
+- [The Asymmetric Shock: Why 2026 Is Not 2022](https://www.merlin-intelligence.eu/articles/merlin_signal_03_asymmetric_shock.html) (Signal Series · No. 3 · August 2026)
+- [Green Finance Is Europe's Next Capital-Market Reform](https://www.merlin-intelligence.eu/articles/article_green_finance_resilience.html) (Signal Series · No. 2 · July 2026)
+- [Qatar and the Geometry of Gulf Order](https://www.merlin-intelligence.eu/articles/article_qatar.html) (Signal Series · No. 1 · June 2026)
 
 ## Open-Source Repositories
 

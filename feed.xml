@@ -2,23 +2,23 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Merlin Intelligence — Global Macro Research &amp; Signal Series</title>
   <subtitle>Quantitative macroeconomic barometers, Euler risk allocation monitors, and geoeconomic intelligence briefings.</subtitle>
-  <link href="https://merlin-intelligence.eu/feed.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://merlin-intelligence.eu/" rel="alternate" type="text/html"/>
-  <id>https://merlin-intelligence.eu/</id>
+  <link href="https://www.merlin-intelligence.eu/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.merlin-intelligence.eu/" rel="alternate" type="text/html"/>
+  <id>https://www.merlin-intelligence.eu/</id>
   <updated>2026-11-06T09:00:00Z</updated>
   <author>
-    <name>François Oustry</name>
-    <uri>https://merlin-intelligence.eu/team/francois-oustry.html</uri>
+    <name>Marion Schaeffer</name>
+    <uri>https://www.merlin-intelligence.eu/team/marion-schaeffer.html</uri>
   </author>
   <author>
-    <name>Marion Schaeffer</name>
-    <uri>https://merlin-intelligence.eu/team/marion-schaeffer.html</uri>
+    <name>François Oustry</name>
+    <uri>https://www.merlin-intelligence.eu/team/francois-oustry.html</uri>
   </author>
 
   <entry>
     <title>Patience Is Priced, Scarcity Is Scarce, and Beta Is Rationed</title>
-    <link href="https://merlin-intelligence.eu/articles/macro-research-2026-11-06.html" rel="alternate" type="text/html"/>
-    <id>https://merlin-intelligence.eu/articles/macro-research-2026-11-06.html</id>
+    <link href="https://www.merlin-intelligence.eu/articles/macro-research-2026-11-06.html" rel="alternate" type="text/html"/>
+    <id>https://www.merlin-intelligence.eu/articles/macro-research-2026-11-06.html</id>
     <published>2026-11-06T09:00:00Z</published>
     <updated>2026-11-06T09:00:00Z</updated>
     <category term="Global Macro Research"/>
@@ -27,8 +27,8 @@
 
   <entry>
     <title>Tightening Bounds, Compressing Risk: The Portfolio's Shift to Liquidity, and the Macro Fractures Behind the Move</title>
-    <link href="https://merlin-intelligence.eu/articles/macro-research-2026-10-14.html" rel="alternate" type="text/html"/>
-    <id>https://merlin-intelligence.eu/articles/macro-research-2026-10-14.html</id>
+    <link href="https://www.merlin-intelligence.eu/articles/macro-research-2026-10-14.html" rel="alternate" type="text/html"/>
+    <id>https://www.merlin-intelligence.eu/articles/macro-research-2026-10-14.html</id>
     <published>2026-10-14T09:00:00Z</published>
     <updated>2026-11-02T09:00:00Z</updated>
     <category term="Global Macro Research"/>
@@ -37,8 +37,8 @@
 
   <entry>
     <title>When a Portfolio Becomes a Market Barometer</title>
-    <link href="https://merlin-intelligence.eu/articles/macro-research-2026-10-06.html" rel="alternate" type="text/html"/>
-    <id>https://merlin-intelligence.eu/articles/macro-research-2026-10-06.html</id>
+    <link href="https://www.merlin-intelligence.eu/articles/macro-research-2026-10-06.html" rel="alternate" type="text/html"/>
+    <id>https://www.merlin-intelligence.eu/articles/macro-research-2026-10-06.html</id>
     <published>2026-10-06T09:00:00Z</published>
     <updated>2026-11-02T09:00:00Z</updated>
     <category term="Global Macro Research"/>
@@ -47,8 +47,8 @@
 
   <entry>
     <title>Colombia and the Geometry of Sovereign Presence</title>
-    <link href="https://merlin-intelligence.eu/articles/article_colombia_geoeconomics.html" rel="alternate" type="text/html"/>
-    <id>https://merlin-intelligence.eu/articles/article_colombia_geoeconomics.html</id>
+    <link href="https://www.merlin-intelligence.eu/articles/article_colombia_geoeconomics.html" rel="alternate" type="text/html"/>
+    <id>https://www.merlin-intelligence.eu/articles/article_colombia_geoeconomics.html</id>
     <published>2026-09-28T09:00:00Z</published>
     <updated>2026-09-28T09:00:00Z</updated>
     <category term="Signal Series"/>
@@ -57,8 +57,8 @@
 
   <entry>
     <title>The AI Grey Rhino: Engineering Closed-Loop Stability Across Models, Governance, and Sovereign Accords</title>
-    <link href="https://merlin-intelligence.eu/articles/merlin_signal_04_grey_rhino.html" rel="alternate" type="text/html"/>
-    <id>https://merlin-intelligence.eu/articles/merlin_signal_04_grey_rhino.html</id>
+    <link href="https://www.merlin-intelligence.eu/articles/merlin_signal_04_grey_rhino.html" rel="alternate" type="text/html"/>
+    <id>https://www.merlin-intelligence.eu/articles/merlin_signal_04_grey_rhino.html</id>
     <published>2026-09-16T09:00:00Z</published>
     <updated>2026-09-16T09:00:00Z</updated>
     <category term="Signal Series"/>
@@ -67,8 +67,8 @@
 
   <entry>
     <title>The Asymmetric Shock: Why 2026 Is Not 2022</title>
-    <link href="https://merlin-intelligence.eu/articles/merlin_signal_03_asymmetric_shock.html" rel="alternate" type="text/html"/>
-    <id>https://merlin-intelligence.eu/articles/merlin_signal_03_asymmetric_shock.html</id>
+    <link href="https://www.merlin-intelligence.eu/articles/merlin_signal_03_asymmetric_shock.html" rel="alternate" type="text/html"/>
+    <id>https://www.merlin-intelligence.eu/articles/merlin_signal_03_asymmetric_shock.html</id>
     <published>2026-08-20T09:00:00Z</published>
     <updated>2026-08-20T09:00:00Z</updated>
     <category term="Signal Series"/>
@@ -77,8 +77,8 @@
 
   <entry>
     <title>Green Finance Is Europe's Next Capital-Market Reform</title>
-    <link href="https://merlin-intelligence.eu/articles/article_green_finance_resilience.html" rel="alternate" type="text/html"/>
-    <id>https://merlin-intelligence.eu/articles/article_green_finance_resilience.html</id>
+    <link href="https://www.merlin-intelligence.eu/articles/article_green_finance_resilience.html" rel="alternate" type="text/html"/>
+    <id>https://www.merlin-intelligence.eu/articles/article_green_finance_resilience.html</id>
     <published>2026-07-15T09:00:00Z</published>
     <updated>2026-07-15T09:00:00Z</updated>
     <category term="Signal Series"/>
@@ -87,8 +87,8 @@
 
   <entry>
     <title>Qatar and the Geometry of Gulf Order</title>
-    <link href="https://merlin-intelligence.eu/articles/article_qatar.html" rel="alternate" type="text/html"/>
-    <id>https://merlin-intelligence.eu/articles/article_qatar.html</id>
+    <link href="https://www.merlin-intelligence.eu/articles/article_qatar.html" rel="alternate" type="text/html"/>
+    <id>https://www.merlin-intelligence.eu/articles/article_qatar.html</id>
     <published>2026-06-20T09:00:00Z</published>
     <updated>2026-06-20T09:00:00Z</updated>
     <category term="Signal Series"/>
