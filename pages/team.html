@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Merlin Intelligence — Founding Team. Marion Schaeffer, François Oustry, Margaux Lherron-Desnos.">
+<meta name="description" content="Merlin Intelligence — Founding Team. Marion Schaeffer (Knowledge Architecture & AI) and François Oustry (Decision Intelligence & Sovereign AI).">
+<link rel="canonical" href="https://merlin-intelligence.eu/pages/team.html">
+<link rel="alternate" type="application/atom+xml" title="Merlin Intelligence Research Feed" href="https://merlin-intelligence.eu/feed.xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://merlin-intelligence.eu/pages/team.html">
+<meta property="og:title" content="Founding Team — Marion Schaeffer & François Oustry — Merlin Intelligence">
+<meta property="og:description" content="Meet the co-founders of Merlin Intelligence: Marion Schaeffer (Knowledge Architecture & AI) and François Oustry (Decision Intelligence & Sovereign AI).">
+<meta property="og:image" content="https://merlin-intelligence.eu/assets/images/macro-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Founding Team — Merlin Intelligence">
+<meta name="twitter:description" content="Marion Schaeffer (Knowledge Architecture & AI) and François Oustry (Decision Intelligence & Sovereign AI).">
+<meta name="twitter:image" content="https://merlin-intelligence.eu/assets/images/macro-preview.png">
 <title>Merlin Intelligence — Founding Team</title>
 <link rel="icon" type="image/png" href="../assets/images/MI-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,8 +22,51 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": "https://merlin-intelligence.eu/pages/team.html",
+  "url": "https://merlin-intelligence.eu/pages/team.html",
+  "name": "Merlin Intelligence — Founding Team",
+  "about": {
+    "@type": "Organization",
+    "@id": "https://merlin-intelligence.eu/#organization",
+    "name": "Merlin Intelligence",
+    "url": "https://merlin-intelligence.eu/",
+    "founder": [
+      {
+        "@type": "Person",
+        "@id": "https://merlin-intelligence.eu/team/marion-schaeffer.html#person",
+        "name": "Marion Schaeffer",
+        "jobTitle": "Co-founder · Knowledge Architecture & AI",
+        "url": "https://merlin-intelligence.eu/team/marion-schaeffer.html",
+        "image": "https://merlin-intelligence.eu/assets/images/marion-schaeffer.jpg",
+        "sameAs": [
+          "https://www.linkedin.com/in/marion-schaeffer-33618810b/",
+          "https://github.com/merlin-intelligence"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://merlin-intelligence.eu/team/francois-oustry.html#person",
+        "name": "François Oustry",
+        "jobTitle": "Co-founder · Decision Intelligence & Sovereign AI",
+        "url": "https://merlin-intelligence.eu/team/francois-oustry.html",
+        "image": "https://merlin-intelligence.eu/assets/images/francois-oustry.jpg",
+        "sameAs": [
+          "https://www.linkedin.com/in/oustry/",
+          "https://fr.linkedin.com/in/oustry",
+          "https://github.com/merlin-intelligence"
+        ]
+      }
+    ]
+  }
+}
+</script>
+
 <style>
-.wrap      { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+.wrap      { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
 .wrap--wide{ max-width: 960px; margin: 0 auto; padding: 0 2rem; }
 
 /* Hero */
@@ -72,16 +126,46 @@
   padding: 4.5rem 0;
   border-top: 0.5px solid var(--rule);
 }
-.person-meta {
-  margin-bottom: 2rem;
+.person-header {
+  display: grid;
+  grid-template-columns: 176px 1fr;
+  gap: 2.4rem;
+  align-items: center;
+  margin-bottom: 2.2rem;
+}
+.person-portrait {
+  display: block;
+  border: 0.5px solid var(--rule);
+  background: var(--pale);
+  padding: 0.45rem;
+  box-shadow: 0 8px 24px rgba(20, 18, 15, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.person-portrait:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(20, 18, 15, 0.08);
+}
+.person-portrait img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  border: 0.5px solid rgba(195,185,172,0.5);
 }
 .person-name {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.7rem, 3.5vw, 2.2rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.3rem);
   font-weight: 400; line-height: 1.15;
   color: var(--ink);
   margin-bottom: 0.55rem;
 }
+.person-name a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.person-name a:hover { color: var(--gold); }
 .person-name em { font-style: italic; }
 .person-role {
   font-family: 'Space Mono', monospace;
@@ -89,7 +173,11 @@
   letter-spacing: 0.09em; text-transform: uppercase;
 }
 .person-links {
-  margin-top: 0.7rem;
+  margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  align-items: center;
 }
 .li-link {
   display: inline-flex; align-items: center; gap: 0.4rem;
@@ -97,10 +185,16 @@
   font-size: 0.62rem; color: var(--light);
   text-decoration: none; letter-spacing: 0.04em;
   text-transform: uppercase;
-  transition: color 0.2s;
+  border-bottom: 0.5px solid transparent;
+  padding-bottom: 0.08rem;
+  transition: color 0.2s, border-color 0.2s;
 }
-.li-link:hover { color: var(--gold); }
-.li-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+.li-link:hover { color: var(--gold); border-color: var(--gold); }
+.li-link--accent {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+.li-link svg { width: 13px; height: 13px; flex-shrink: 0; }
 .person-rule {
   width: 32px; height: 1px;
   background: var(--gold);
@@ -121,27 +215,34 @@ p:last-child { margin-bottom: 0; }
 .sidecard strong { font-style: normal; }
 
 /* Footer */
-.page-footer {
+footer {
   background: var(--dark);
-  border-top: 0.5px solid rgba(195,185,172,0.15);
-  padding: 4rem 0;
+  border-top: 0.5px solid rgba(195,185,172,0.2);
+  padding: 2.8rem 0;
 }
-.footer-back {
-  display: inline-flex; align-items: center;
+.footer-inner {
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 0.8rem;
+}
+.footer-copy {
   font-family: 'Space Mono', monospace;
-  font-size: 0.65rem; color: var(--gold);
-  text-decoration: none; letter-spacing: 0.05em;
-  text-transform: uppercase;
-  border-bottom: 0.5px solid var(--gold);
+  font-size: 0.60rem; color: #5A544E; letter-spacing: 0.04em;
+}
+.footer-copy a {
+  color: #8C827A; text-decoration: none;
+  border-bottom: 0.5px solid rgba(140,130,122,0.3);
   padding-bottom: 0.1rem;
-  margin-top: 1.4rem;
-  transition: opacity 0.2s;
 }
-.footer-back:hover { opacity: 0.72; }
-.footer-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.60rem; color: #5A544E;
-  letter-spacing: 0.04em; text-transform: uppercase;
+.footer-copy a:hover { color: var(--gold); border-color: var(--gold); }
+
+@media (max-width: 640px) {
+  .person-header {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .person-portrait {
+    max-width: 176px;
+  }
 }
 </style>
 </head>
@@ -174,18 +275,30 @@ p:last-child { margin-bottom: 0; }
 </div>
 
 <!-- Marion Schaeffer -->
-<section class="person">
+<section class="person" id="marion-schaeffer">
   <div class="wrap">
-    <div class="person-meta">
-      <div class="person-name">Marion Schaeffer</div>
-      <div class="person-role">Co-founder · Knowledge Architecture &amp; AI</div>
-      <div class="person-links">
-        <a href="https://www.linkedin.com/in/marion-schaeffer-33618810b/" class="li-link" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
-          LinkedIn
-        </a>
+    <div class="person-header">
+      <a href="../team/marion-schaeffer.html" class="person-portrait" aria-label="Marion Schaeffer profile">
+        <img src="../assets/images/marion-schaeffer.jpg" alt="Marion Schaeffer — Co-founder of Merlin Intelligence" width="640" height="800">
+      </a>
+      <div class="person-meta">
+        <h2 class="person-name"><a href="../team/marion-schaeffer.html">Marion Schaeffer</a></h2>
+        <div class="person-role">Co-founder · Knowledge Architecture &amp; AI</div>
+        <div class="person-links">
+          <a href="https://www.linkedin.com/in/marion-schaeffer-33618810b/" class="li-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/merlin-intelligence" class="li-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.02 11.02 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            GitHub
+          </a>
+          <a href="../team/marion-schaeffer.html" class="li-link li-link--accent">
+            Profile &amp; Bibliography →
+          </a>
+        </div>
+        <div class="person-rule"></div>
       </div>
-      <div class="person-rule"></div>
     </div>
 
     <p>
@@ -235,18 +348,30 @@ p:last-child { margin-bottom: 0; }
 </section>
 
 <!-- François Oustry -->
-<section class="person">
+<section class="person" id="francois-oustry">
   <div class="wrap">
-    <div class="person-meta">
-      <div class="person-name">François Oustry</div>
-      <div class="person-role">Co-founder · Decision Intelligence &amp; Sovereign AI</div>
-      <div class="person-links">
-        <a href="https://fr.linkedin.com/in/oustry" class="li-link" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
-          LinkedIn
-        </a>
+    <div class="person-header">
+      <a href="../team/francois-oustry.html" class="person-portrait" aria-label="François Oustry profile">
+        <img src="../assets/images/francois-oustry.jpg" alt="François Oustry — Co-founder of Merlin Intelligence" width="640" height="800">
+      </a>
+      <div class="person-meta">
+        <h2 class="person-name"><a href="../team/francois-oustry.html">François Oustry</a></h2>
+        <div class="person-role">Co-founder · Decision Intelligence &amp; Sovereign AI</div>
+        <div class="person-links">
+          <a href="https://fr.linkedin.com/in/oustry" class="li-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/merlin-intelligence" class="li-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.02 11.02 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            GitHub
+          </a>
+          <a href="../team/francois-oustry.html" class="li-link li-link--accent">
+            Profile &amp; Bibliography →
+          </a>
+        </div>
+        <div class="person-rule"></div>
       </div>
-      <div class="person-rule"></div>
     </div>
 
     <p>
@@ -298,13 +423,30 @@ p:last-child { margin-bottom: 0; }
   </div>
 </section>
 
-
-<div class="page-footer">
-  <div class="wrap">
-    <p class="footer-label">Merlin Intelligence · Founding Team · 2026</p>
-    <a href="../index.html" class="footer-back">← Back to merlin-intelligence.eu</a>
+<footer>
+  <div class="wrap--wide">
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2026 Merlin Intelligence</span>
+      <span class="footer-copy">
+        <a href="../index.html">home</a>
+        &nbsp;|&nbsp;
+        <a href="manifesto.html">manifesto</a>
+        &nbsp;|&nbsp;
+        <a href="team.html">founding team</a>
+        &nbsp;|&nbsp;
+        <a href="signals.html">signal series</a>
+        &nbsp;|&nbsp;
+        <a href="macro-research.html">global macro research</a>
+        &nbsp;|&nbsp;
+        <a href="open-source.html">open source</a>
+        &nbsp;|&nbsp;
+        <a href="https://github.com/merlin-intelligence" target="_blank" rel="noopener">github / merlin-intelligence</a>
+        &nbsp;|&nbsp;
+        <a href="legal-notice.html">legal notice</a>
+      </span>
+    </div>
   </div>
-</div>
+</footer>
 
 </body>
 </html>

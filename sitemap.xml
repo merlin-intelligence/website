@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Hub & Institutional Pages -->
+  <url>
+    <loc>https://merlin-intelligence.eu/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/pages/macro-research.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/pages/signals.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/pages/open-source.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/pages/team.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/pages/manifesto.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Dedicated Founder Entity Pages -->
+  <url>
+    <loc>https://merlin-intelligence.eu/team/francois-oustry.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/team/marion-schaeffer.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Global Macro Research — Equilibrium Portfolio Series -->
+  <url>
+    <loc>https://merlin-intelligence.eu/articles/macro-research-2026-11-06.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/articles/macro-research-2026-10-14.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/articles/macro-research-2026-10-06.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+  </url>
+
+  <!-- Signal Series — Geoeconomic & Systemic Briefings -->
+  <url>
+    <loc>https://merlin-intelligence.eu/articles/article_colombia_geoeconomics.html</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/articles/merlin_signal_04_grey_rhino.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/articles/merlin_signal_03_asymmetric_shock.html</loc>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/articles/article_green_finance_resilience.html</loc>
+    <lastmod>2026-07-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://merlin-intelligence.eu/articles/article_qatar.html</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <!-- Legal -->
+  <url>
+    <loc>https://merlin-intelligence.eu/pages/legal-notice.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+</urlset>
