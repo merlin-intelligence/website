@@ -57,3 +57,70 @@ nav .wrap--wide {
   font-size: 0.65rem; color: var(--light); letter-spacing: 0.04em;
   text-decoration: none;
 }
+
+/* ── Shared content components ─────────────────────── */
+/* Underlined inline links (author names, cross-references) */
+a.author-link {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 0.5px solid var(--gold);
+}
+a.author-link--inherit { color: inherit; }
+a.author-link--gold    { color: var(--gold); }
+a.author-link--strong  { font-weight: 600; }
+a.author-link--soft    { border-bottom-color: rgba(162,120,68,0.5); }
+a.link-gold            { color: var(--gold); }
+
+/* Monospace byline under article headlines */
+.byline-mono {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.66rem;
+  color: var(--light);
+  margin: -0.2rem 0 0.9rem;
+}
+
+/* Co-founders line under contact block (home) */
+.cofounders-line {
+  margin-top: 1.8rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.66rem;
+  color: #8C827A;
+  letter-spacing: 0.04em;
+}
+
+/* Pale callout box with label, used for cross-links between sections */
+.info-box {
+  margin-top: 2.6rem;
+  padding: 1.5rem 1.7rem;
+  background: var(--pale);
+  border: 0.5px solid var(--rule);
+}
+.info-box--lg { margin-top: 2.8rem; padding: 1.8rem 2rem; }
+.info-box__label {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.64rem;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.info-box__label--lg { font-size: 0.66rem; margin-bottom: 0.6rem; }
+.info-box__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  margin-bottom: 0.7rem;
+  color: var(--ink);
+}
+.info-box__text {
+  font-size: 0.90rem;
+  line-height: 1.62;
+  color: var(--light);
+  margin: 0;
+}
+.info-box__text--lead { font-size: 0.92rem; line-height: 1.65; margin-bottom: 0.9rem; }
+.info-box__text--ink  { color: var(--ink); }
+
+/* Extra spacing for a note box that follows another block */
+.note-box.note-box--spaced { margin-top: 1.4rem; }
